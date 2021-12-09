@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract constant &apos;LENGTH_ALPHABET&apos; from expression &apos;26&apos;&#x0D;&#x0A;- Original project: &apos;laMosca&apos;&#x0D;&#x0A;- Constant name: &apos;LENGTH_ALPHABET&apos;&#x0D;&#x0A;- Constant expression: &apos;26&apos;&#x0D;&#x0A;- Declared visibility: &apos;private&apos;" description="Extract constant &apos;LENGTH_ALPHABET&apos;" flags="786432" id="org.eclipse.jdt.ui.extract.constant" input="/src&lt;laMosca{Main.java" name="LENGTH_ALPHABET" qualify="false" replace="false" selection="4343 2" stamp="1638209796372" version="1.0" visibility="2"/>
+</session>

@@ -1,0 +1,45 @@
+1637605274540	Rename local variable 'fichero'
+1637605307463	Rename field 'FICHERO'
+1637605317016	Rename field 'FILE'
+1637677932700	Delete element
+1637677964990	Delete element
+1637678248092	Delete element
+1637678339744	Delete element
+1637678391588	Delete element
+1637678408955	Delete element
+1637678433422	Rename local variable 'finalSong'
+1637678437459	Delete element
+1637678456978	Rename local variable 'finalSong2'
+1637678480262	Delete element
+1637678544600	Delete element
+1637678547181	Delete element
+1637678773467	Delete element
+1637678813683	Delete element
+1637678839630	Delete element
+1637679077388	Delete element
+1637679135392	Delete element
+1637679156412	Delete element
+1637679282348	Delete element
+1637679380978	Delete element
+1637679445604	Delete element
+1637679483072	Delete element
+1637679780378	Delete element
+1637679813015	Delete element
+1637679866694	Delete element
+1637679897321	Delete element
+1637679916302	Delete element
+1637679944282	Delete element
+1637679975603	Delete element
+1637767462932	Delete element
+1637768396501	Delete element
+1637768435473	Rename field 'VOCALES'
+1637768518755	Delete element
+1637768630892	Delete element
+1637768730841	Delete element
+1637769684384	Delete element
+1637858273762	Rename local variable 'linea'
+1637858286879	Rename local variable 'letter'
+1637858294938	Rename local variable 'actualLetter'
+1637858802119	Rename method 'showStatisticsFile'
+1637859019849	Rename local variable 'fitxer'
+1637859043060	Extract constant 'STATISTICS_FILE'

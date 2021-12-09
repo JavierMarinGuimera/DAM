@@ -1,0 +1,59 @@
+Serie1
+Serie2
+Serie3
+Serie4
+end
+3 puertas
+25400
+bmw_0
+5 puertas
+26450
+bmw_1
+end
+Coupé
+29500
+bmw_10
+Cabrio
+36350
+bmw_11
+Active Tourer
+28650
+bmw_12
+Gran Tourer
+39500
+bmw_13
+Híbrido
+30150
+bmw_14
+end
+Berlina
+32600
+bmw_20
+Touring
+34500
+bmw_21
+Gran Turismo
+39900
+bmw_22
+Híbrido
+45300
+bmw_23
+end
+Coupé
+40700
+bmw_30
+Gran Coupe
+42700
+bmw_31
+Cabrio
+47550
+bmw_32
+Hibrido
+47300
+bmw_33
+end
+2277
+679
+1053
+2118
+887

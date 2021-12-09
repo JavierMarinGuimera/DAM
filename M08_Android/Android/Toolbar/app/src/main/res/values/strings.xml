@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Toolbar</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_settings">Setting</string>
+    <string name="hide_toolbar">Hide toolbar</string>
+    <string name="show_toolbar">Show toolbar</string>
+</resources>

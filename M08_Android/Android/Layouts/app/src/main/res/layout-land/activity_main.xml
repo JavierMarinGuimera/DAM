@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Owner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/owner29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pet"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/owner" />
+
+    <TextView
+        android:id="@+id/owner3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="__Age"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner5"
+        app:layout_constraintTop_toBottomOf="@+id/owner5" />
+
+    <TextView
+        android:id="@+id/owner12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="20"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner4"
+        app:layout_constraintStart_toStartOf="@+id/owner4"
+        app:layout_constraintTop_toTopOf="@+id/owner3" />
+
+    <TextView
+        android:id="@+id/owner13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="(88) 699 86 89"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner12"
+        app:layout_constraintStart_toStartOf="@+id/owner12"
+        app:layout_constraintTop_toTopOf="@+id/owner14" />
+
+    <TextView
+        android:id="@+id/owner14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Phone"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner3"
+        app:layout_constraintTop_toBottomOf="@+id/owner3" />
+
+    <TextView
+        android:id="@+id/owner15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="E-Mail"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner14"
+        app:layout_constraintTop_toBottomOf="@+id/owner14" />
+
+    <TextView
+        android:id="@+id/owner17"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="tin_tin@gmail.com"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner13"
+        app:layout_constraintStart_toStartOf="@+id/owner13"
+        app:layout_constraintTop_toTopOf="@+id/owner15" />
+
+    <TextView
+        android:id="@+id/owner16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/owner15" />
+
+    <TextView
+        android:id="@+id/owner18"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Reporter and adventurer 20 years old, Sharp intelilect, honest,  decent,  compassiontte and kind."
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/owner16"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/owner5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Name"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner"
+        app:layout_constraintTop_toBottomOf="@+id/owner" />
+
+    <TextView
+        android:id="@+id/owner19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Name"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/owner20"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="Milu"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/owner19"
+        app:layout_constraintTop_toTopOf="@+id/owner19" />
+
+    <TextView
+        android:id="@+id/owner21"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner20"
+        app:layout_constraintStart_toStartOf="@+id/owner20"
+        app:layout_constraintTop_toTopOf="@+id/owner22" />
+
+    <TextView
+        android:id="@+id/owner22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="__Age"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner19"
+        app:layout_constraintTop_toBottomOf="@+id/owner19" />
+
+    <TextView
+        android:id="@+id/owner23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Breed"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/owner22"
+        app:layout_constraintTop_toBottomOf="@+id/owner22" />
+
+    <TextView
+        android:id="@+id/owner24"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="White Wire Fox Terrier"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner21"
+        app:layout_constraintStart_toStartOf="@+id/owner21"
+        app:layout_constraintTop_toTopOf="@+id/owner23" />
+
+    <TextView
+        android:id="@+id/owner27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/owner23" />
+
+    <TextView
+        android:id="@+id/owner28"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Brave and fearless. Loyal friend, likes whiskey and biggest lust for bones."
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/owner24"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/owner4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="8dp"
+        android:text="Tin tin"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/owner5"
+        app:layout_constraintTop_toTopOf="@+id/owner5" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="165dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/owner4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/owner4"
+        app:srcCompat="@drawable/tintin" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginEnd="165dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:srcCompat="@drawable/milu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

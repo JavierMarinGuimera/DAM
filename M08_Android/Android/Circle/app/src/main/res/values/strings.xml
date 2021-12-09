@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Circle</string>
+    <string name="calculate">Calculate</string>
+    <string name="reset">Reset</string>
+    <string name="enterInput">Enter the radius to get the perimeter under.</string>
+    <string name="radio">Radio</string>
+</resources>
