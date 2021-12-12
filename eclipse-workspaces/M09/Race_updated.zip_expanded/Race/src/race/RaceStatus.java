@@ -8,13 +8,13 @@ public class RaceStatus {
 	
 	private List<Pilot> score = new ArrayList<>();
 	private boolean finish = false; 
-	private int racersThatEnded;
+	private int racers;
 	
 	public RaceStatus(List<Pilot> score, boolean finish, int racers) {
 		super();
 		this.score = score;
 		this.finish = finish;
-		this.setRacers(racers);
+		this.racers = racers;
 	}
 	
 	public synchronized List<Pilot> getScore() {
@@ -35,23 +35,22 @@ public class RaceStatus {
 	}
 
 	public synchronized int getRacers() {
-		return racersThatEnded;
+		return racers;
 	}
 
 	public synchronized void setRacers(int racers) {
-		this.racersThatEnded = racers;
+		this.racers = racers;
 	}
 
 	public void lap(Pilot pilot) {
 		pilot.setLaps(pilot.getLaps() - 1);
 		
-		System.out.println("Pilot: [" + pilot.getName() + ", laps = " + pilot.getLaps() + ", total race time: " + this.convertTime(pilot.getTime())+ "]");
-		
-		synchronized (this) {
-			if (pilot.getLaps() == 0) {			
-				this.setRacers(this.getRacers() - 1);
-				if (this.getRacers() == 0) {
-					this.setFinish(true);
+		if (pilot.getLaps() == 0) {			
+			synchronized (this) {
+				racers = (racers - 1);
+				score.add(pilot);
+				if (racers == 0) {
+					setFinish(true);
 				}
 			}
 		}
@@ -63,13 +62,20 @@ public class RaceStatus {
 		time = time - (mins * 60 * 1000);
 		int sec = time / 1000;
 		int milisec = (time % 1000)	;
-		return (mins + "\'" + sec + "\"" + milisec);
+		return String.format((mins > 0 ? mins + ":" : "") + "%02d:%03ds", sec, milisec);
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		String results = "[RACE RESULTS]\n";
+		int index = 1;
 		
+		for (Pilot pilot : score) {
+			results += String.format("%02d. %-10s | %12s", index, pilot.getName(), (index == 1 ? convertTime(pilot.getTime()) + "" : "+" + convertTime(pilot.getTime() - score.get(0).getTime()))) + "\n";
+			index++;
+		}
+		
+		return results;
 	}
 	
 }
