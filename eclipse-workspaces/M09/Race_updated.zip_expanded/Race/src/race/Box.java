@@ -1,13 +1,23 @@
 package race;
 
 public class Box implements Runnable {
+	private String teamName;
 	private RaceStatus raceStatus;
 	private Pilot pilotInBox;
 
-	public Box(RaceStatus raceStatus, Pilot pilotInBox) {
+	public Box(String name, RaceStatus raceStatus, Pilot pilotInBox) {
 		super();
+		this.teamName = name;
 		this.raceStatus = raceStatus;
 		this.pilotInBox = pilotInBox;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 
 	public RaceStatus getRaceStatus() {
@@ -28,9 +38,8 @@ public class Box implements Runnable {
 
 	public synchronized void setPilot(Pilot pilot) {
 		try {
-			System.out.println(pilot.getName() + " entered the box.");
+			System.out.println(this + pilot.toString() +" is in the box.");
 			this.pilotInBox = pilot;
-			notify();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,9 +47,8 @@ public class Box implements Runnable {
 	}
 
 	public synchronized void setPilotOut() {
-		System.out.println(pilotInBox.getName() + " just left the box. Go go goooooo!!!");
+		System.out.println(pilotInBox + " leaving the box.");
 		this.pilotInBox = null;
-		notify();
 	}
 
 	public boolean isFree() {
@@ -53,11 +61,14 @@ public class Box implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println(String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", "BOX(" + teamName + ") started!"));
+		
 		synchronized (this) {
 			while (!raceStatus.isFinish()) {
 				try {
 					// Waiting for the box to be occupied.
 					while (this.isFree() && !raceStatus.isFinish()) {
+						System.out.println(String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", this + " is free. \n"));
 						wait();
 					}
 					
@@ -66,11 +77,17 @@ public class Box implements Runnable {
 						break;
 					}
 					
-					// Refuel the pilot to continue the race.
+					// Refuel and notify the pilot to continue the race.
+					System.out.println(this + pilotInBox.toString() + " refuel.");
 					pilotInBox.refuel();
+					
+					synchronized (pilotInBox) {						
+						pilotInBox.notify();
+					}
 					
 					// Waiting the pilot to leave the box.
 					while (!isFree()) {
+						System.out.println(this + " waiting for the pilot: " + pilotInBox + " to leave the Box.");
 						wait();
 					}
 				} catch (InterruptedException e) {
@@ -79,5 +96,10 @@ public class Box implements Runnable {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "BOX(" + this.teamName + "): ";
 	}
 }

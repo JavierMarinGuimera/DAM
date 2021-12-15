@@ -11,18 +11,14 @@ public class Team {
 		super();
 		this.name = name;
 		
-		Box box = new Box(raceStatus, null);
+		Box box = new Box(name, raceStatus, null);
 		
 		this.box = box;
 		this.pilots = teamPilots;
 		
-		for (int i = 0; i < teamPilots.size(); i++) {			
-			teamPilots.get(i).setTeam(this);
+		for (Pilot pilot : teamPilots) {
+			pilot.setTeam(this);
 		}
-		
-		Thread boxThread = new Thread(this.box);
-		boxThread.setName(name + " box");
-		boxThread.start();
 	}
 
 	public String getName() {

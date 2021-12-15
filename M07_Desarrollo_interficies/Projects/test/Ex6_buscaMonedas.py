@@ -64,8 +64,10 @@ def comprobarCercanias(monedas, x, y):
     return monedasEncontradas
 
 
-def mostrarTablero(tablero):
+def mostrarTablero(tablero, totalMonedas):
     # ** FUNCIÓN PARA MOSTRAR EL ESTADO DEL TABLERO **
+    print("\nResultado: Faltan todavía " +
+          str(totalMonedas) + " monedas por encontrar. \n")
 
     for i in range(DIMENSION + 1):
         linea = ""
@@ -107,12 +109,16 @@ def comenzarJuego():
 
     tablero = crearTablero()
     monedas = esconderMonedas()
-    totalMonedas = (round((DIMENSION ** 2) * (PORCENTAGE_OCUPADAS / 100))) + 1
+    print("\nHay un total de " + str(round((DIMENSION ** 2) * (PORCENTAGE_OCUPADAS / 100))) +
+          " monedas, pero debes encontrar solo " + str(round((DIMENSION ** 2) * (PORCENTAGE_OCUPADAS / 100) / 2) + 1) + " para ganar.")
+    totalMonedas = (
+        round((DIMENSION ** 2) * (PORCENTAGE_OCUPADAS / 100) / 2)) + 1
 
     while True:
-        print(monedas)
-        mostrarTablero(tablero)
-        if len(monedas) == 0:
+        mostrarTablero(tablero, totalMonedas)
+
+        if (totalMonedas == 0):
+            print("¡Has ganado! \n")
             break
 
         casilla = input(
@@ -122,18 +128,18 @@ def comenzarJuego():
             casillaList = getCasillaList(casilla)
             if comprobarCasilla(casillaList):
                 modificarTablero(tablero, monedas, casillaList)
-                totalMonedas -= 1
-                print("\nResultado:\n")
+                if (tablero[ALFABETO.index(casillaList[0].upper())][int(casillaList[1]) - 1] == "XX"):
+                    totalMonedas -= 1
             else:
-                print("\nCasilla errónea!\n")
+                print("\nCasilla errónea!")
 
         else:
-            print("\nHasta otra!\n")
+            print("\n¡Hasta otra!\n")
             break
 
 
 # Programa principal:
-DIMENSION = 5
+DIMENSION = 20
 PORCENTAGE_OCUPADAS = 20
 ALFABETO = "ABCDEFGHIJKLMNOPQRST"
 

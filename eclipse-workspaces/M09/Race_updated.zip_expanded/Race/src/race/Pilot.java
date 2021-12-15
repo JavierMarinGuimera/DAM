@@ -73,8 +73,7 @@ public class Pilot implements Runnable {
 
 	public synchronized void refuel() {
 		fuelTank = MAX_TANK;
-		System.out.println(name + " has his tank full.");
-		notify();
+		System.out.println(this + " refuelled!!!");
 	}
 
 	@Override
@@ -86,37 +85,61 @@ public class Pilot implements Runnable {
 					totalTime = MINUT + (int) (Math.random() * MINUT_DIFF);
 					Thread.sleep(totalTime);
 					
-					fuelTank -= 4;
+					fuelTank -= (int) (Math.random() * 7);
 					
 					if (fuelTank < 5) {
-						System.out.println(getName() + " of the team " + team.getName().toUpperCase() + " has to refuel the car!");
+						System.out.println(this + " need refueling.");
 						
-						if (team.getBox().isFree()) {
-							synchronized (this) {								
-								team.getBox().setPilot(this);
+						Box box = team.getBox();
+						
+						if (box.isFree()) {
+							System.out.println(this + " getting into the box.");
+							
+							synchronized (this) {							
+								box.setPilot(this);
 								
 								while (fuelTank != MAX_TANK) {	
-									System.out.println(getName() + " is waiting the refuel.");
-									wait();
+									System.out.println(this + " is waiting for refueling...");
+									
+									synchronized (box) {										
+										box.notify();
+									}
+									
+									this.wait();
 								}
-								team.getBox().setPilotOut();
+								
+								box.setPilotOut();
+								
+								synchronized (box) {										
+									box.notify();
+								}
+								
+								totalTime += 500;
 							}
 						} else {
-							System.out.println(getName() + " tried to enter the box. Gonna do another lap. ---------------------------- \n");
+							System.out.println(this + " BOX BUSY!!");
 						}
 					}
 					
 					time += totalTime;
 					
 					raceStatus.lap(this);
-				} else {
 					
+					System.out.println(this + " HAS MADE A LAP. Still has " + fuelTank + " fuel left. Go go gooo!!! \n");
+				} else {
+					laps--;
+					
+					System.out.println("Finished the race but its still racing. Has made " + -(laps) + " extra laps!");
 				}
-				System.out.println(name.toUpperCase() + " HAS MADE A LAP. Still has " + fuelTank + " fuel left. Go go gooo!!! \n");
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Pilot: [" + name + "(" + team.getName() + ") laps=" + (laps > 0 ? laps : -(laps)) + " fuel=" + fuelTank + "]";
 	}
 
 }

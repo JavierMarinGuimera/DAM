@@ -1,11 +1,11 @@
 package race;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Race {
+	public static final int PADDING_TO_CENTER = 15;
+	public static final int LAP_INFO_PADDING = 3;
 	
 	private static final int MAX_LAPS = 10;
 	private static String[] TEAM_NAMES = {"Mercedes", "Red Bull", "McLaren", "Renault"};
@@ -18,20 +18,21 @@ public class Race {
 		} else {
 			List<Pilot> pilots = new ArrayList<>();
 			List<Thread> pilotsThreads = new ArrayList<Thread>();
-			Map<String, Team> teamsPilots = new HashMap<>();
+			List<Thread> boxesThreads = new ArrayList<Thread>();
 			RaceStatus raceStatus = new RaceStatus(new ArrayList<Pilot>(), false, racers);
 			
 			createPilots(pilots, pilotsThreads, raceStatus);
-			createBoxesAndTeams(pilots, raceStatus, teamsPilots);
+			createBoxesAndTeams(pilots, raceStatus, boxesThreads);
 			
-			startAndWaitThreads(pilotsThreads);
+			startAndWaitThreads(pilotsThreads, boxesThreads);
 			
 			System.out.println(raceStatus);
 		}
-		
 	}
 	
 	private static void createPilots(List<Pilot> pilots, List<Thread> pilotsThreads, RaceStatus raceStatus) {
+		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s", "", "Preparing the " + racers + " pilots! \n"));
+		
 		for (int i = 0; i < racers; i++) {
 			Pilot pilot = new Pilot(RACERS_NAMES[i], MAX_LAPS, raceStatus);
 			pilots.add(pilot);
@@ -41,26 +42,45 @@ public class Race {
 		}
 	}
 	
-	private static void createBoxesAndTeams(List<Pilot> pilots, RaceStatus raceStatus, Map<String, Team> teamsPilots) {
+	private static void createBoxesAndTeams(List<Pilot> pilots, RaceStatus raceStatus, List<Thread> boxesThreads) {
+		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s", "", "Preparing the teams and their boxes! \n"));
+		
 		for (int i = 0; i < racers / 2; i++) {
 			List<Pilot> teamPilots = new ArrayList<>();
 			
 			teamPilots.add(pilots.get(i));
 			teamPilots.add(pilots.get(racers - 1 - i));
 			
-			teamsPilots.put(TEAM_NAMES[i], new Team(TEAM_NAMES[i], teamPilots, raceStatus));
+			Team team = new Team(TEAM_NAMES[i], teamPilots, raceStatus);
+			Thread currentTeam = new Thread(team.getBox());
+			currentTeam.setName(team.getName());
+			boxesThreads.add(currentTeam);
 		}
 	}
 
-	private static void startAndWaitThreads(List<Thread> pilotsThreads) throws InterruptedException {
-		System.out.println(String.format("%-20s %s %20s", "", "The race just started!", ""));
-		System.out.println("-------------------------------------------------------------------------");
-		for (Thread thread : pilotsThreads) {
-			thread.start();
+	private static void startAndWaitThreads(List<Thread> pilotsThreads, List<Thread> boxesThreads) throws InterruptedException {
+		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s %20s", "", "The race just started!", ""));
+		System.out.println("----------------------------------------------------------- \n");
+		
+		for (Thread box : boxesThreads) {
+			box.start();
+		}
+
+		for (Thread pilot : pilotsThreads) {
+			pilot.start();
 		}
 		
-		for (Thread thread : pilotsThreads) {
-			thread.join();
+		for (Thread pilot : pilotsThreads) {
+			pilot.join();
 		}
+		
+//		for (Thread box : boxesThreads) {
+//			synchronized (box) {						
+//				box.notify();
+//			}
+//			box.join();
+//		}
+		
+		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s", "", "RACE ENDED!"));
 	}
 }

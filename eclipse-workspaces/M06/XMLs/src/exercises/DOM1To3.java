@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 
 import globalThings.Libro;
 
-public class Exercise1To3 {
+public class DOM1To3 {
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
