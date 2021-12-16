@@ -18,13 +18,15 @@ public class Race {
 		} else {
 			List<Pilot> pilots = new ArrayList<>();
 			List<Thread> pilotsThreads = new ArrayList<Thread>();
+			List<Team> teams = new ArrayList<>();
 			List<Thread> boxesThreads = new ArrayList<Thread>();
 			RaceStatus raceStatus = new RaceStatus(new ArrayList<Pilot>(), false, racers);
 			
 			createPilots(pilots, pilotsThreads, raceStatus);
-			createBoxesAndTeams(pilots, raceStatus, boxesThreads);
 			
-			startAndWaitThreads(pilotsThreads, boxesThreads);
+			createBoxesAndTeams(pilots, teams, raceStatus, boxesThreads);
+			
+			startAndWaitThreads(pilotsThreads, teams, boxesThreads);
 			
 			System.out.println(raceStatus);
 		}
@@ -42,7 +44,7 @@ public class Race {
 		}
 	}
 	
-	private static void createBoxesAndTeams(List<Pilot> pilots, RaceStatus raceStatus, List<Thread> boxesThreads) {
+	private static void createBoxesAndTeams(List<Pilot> pilots, List<Team> teams, RaceStatus raceStatus, List<Thread> boxesThreads) {
 		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s", "", "Preparing the teams and their boxes! \n"));
 		
 		for (int i = 0; i < racers / 2; i++) {
@@ -52,13 +54,14 @@ public class Race {
 			teamPilots.add(pilots.get(racers - 1 - i));
 			
 			Team team = new Team(TEAM_NAMES[i], teamPilots, raceStatus);
+			teams.add(team);
 			Thread currentTeam = new Thread(team.getBox());
 			currentTeam.setName(team.getName());
 			boxesThreads.add(currentTeam);
 		}
 	}
 
-	private static void startAndWaitThreads(List<Thread> pilotsThreads, List<Thread> boxesThreads) throws InterruptedException {
+	private static void startAndWaitThreads(List<Thread> pilotsThreads, List<Team> teams, List<Thread> boxesThreads) throws InterruptedException {
 		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s %20s", "", "The race just started!", ""));
 		System.out.println("----------------------------------------------------------- \n");
 		
@@ -73,13 +76,16 @@ public class Race {
 		for (Thread pilot : pilotsThreads) {
 			pilot.join();
 		}
+
+		for (Team team : teams) {
+			synchronized (team) {
+				team.notify();
+			}
+		}
 		
-//		for (Thread box : boxesThreads) {
-//			synchronized (box) {						
-//				box.notify();
-//			}
-//			box.join();
-//		}
+		for (Thread box : boxesThreads) {
+			box.join();
+		}
 		
 		System.out.println(String.format("%-" + PADDING_TO_CENTER + "s %s", "", "RACE ENDED!"));
 	}

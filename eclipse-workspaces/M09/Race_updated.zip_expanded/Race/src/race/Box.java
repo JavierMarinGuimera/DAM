@@ -38,12 +38,12 @@ public class Box implements Runnable {
 
 	public synchronized void setPilot(Pilot pilot) {
 		try {
-			System.out.println(this + pilot.toString() +" is in the box.");
+			System.out.println(this + pilot.toString() + " is in the box.");
 			this.pilotInBox = pilot;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public synchronized void setPilotOut() {
@@ -51,7 +51,7 @@ public class Box implements Runnable {
 		this.pilotInBox = null;
 	}
 
-	public boolean isFree() {
+	public synchronized boolean isFree() {
 		if (this.pilotInBox == null) {
 			return true;
 		} else {
@@ -62,38 +62,41 @@ public class Box implements Runnable {
 	@Override
 	public void run() {
 		System.out.println(String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", "BOX(" + teamName + ") started!"));
-		
-		synchronized (this) {
-			while (!raceStatus.isFinish()) {
-				try {
-					// Waiting for the box to be occupied.
+
+		while (!raceStatus.isFinish()) {
+			try {
+				// Waiting for the box to be occupied.
+				synchronized (this) {
 					while (this.isFree() && !raceStatus.isFinish()) {
-						System.out.println(String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", this + " is free. \n"));
+						System.out.println(
+								String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", this + " is free. \n"));
 						wait();
 					}
-					
-					// If the race is finished, the thread has to finish too.
-					if (raceStatus.isFinish()) {
-						break;
-					}
-					
-					// Refuel and notify the pilot to continue the race.
-					System.out.println(this + pilotInBox.toString() + " refuel.");
-					pilotInBox.refuel();
-					
-					synchronized (pilotInBox) {						
-						pilotInBox.notify();
-					}
-					
-					// Waiting the pilot to leave the box.
+				}
+
+				// If the race is finished, the thread has to finish too.
+				if (raceStatus.isFinish()) {
+					break;
+				}
+
+				// Refuel and notify the pilot to continue the race.
+				System.out.println(this + pilotInBox.toString() + " refuel.");
+				pilotInBox.refuel();
+
+				synchronized (pilotInBox) {
+					pilotInBox.notify();
+				}
+
+				// Waiting the pilot to leave the box.
+				synchronized (this) {					
 					while (!isFree()) {
 						System.out.println(this + " waiting for the pilot: " + pilotInBox + " to leave the Box.");
 						wait();
 					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

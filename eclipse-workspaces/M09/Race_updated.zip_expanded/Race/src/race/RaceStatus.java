@@ -51,6 +51,7 @@ public class RaceStatus {
 				score.add(pilot);
 				if (racers == 0) {
 					setFinish(true);
+					
 				}
 			}
 		}

@@ -1,0 +1,17 @@
+/* AUTOMATICALLY GENERATED ON Thu Dec 16 14:11:02 CET 2021*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebUserDataPermission "/";
+  permission javax.security.jacc.WebResourcePermission "/";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "microprofile-metrics-resource", "**";
+  permission javax.security.jacc.WebRoleRefPermission "microprofile-openapi-servlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+  permission javax.security.jacc.WebRoleRefPermission "microprofile-healthcheck-servlet", "**";
+};
+
