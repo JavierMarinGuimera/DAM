@@ -19,14 +19,14 @@ public class Race {
 			List<Pilot> pilots = new ArrayList<>();
 			List<Thread> pilotsThreads = new ArrayList<Thread>();
 			List<Team> teams = new ArrayList<>();
-			List<Thread> boxesThreads = new ArrayList<Thread>();
+			List<Thread> teamsThreads = new ArrayList<Thread>();
 			RaceStatus raceStatus = new RaceStatus(new ArrayList<Pilot>(), false, racers);
 			
 			createPilots(pilots, pilotsThreads, raceStatus);
 			
-			createBoxesAndTeams(pilots, teams, raceStatus, boxesThreads);
+			createBoxesAndTeams(pilots, teams, raceStatus, teamsThreads);
 			
-			startAndWaitThreads(pilotsThreads, teams, boxesThreads);
+			startAndWaitThreads(pilotsThreads, teams, teamsThreads);
 			
 			System.out.println(raceStatus);
 		}
@@ -77,9 +77,11 @@ public class Race {
 			pilot.join();
 		}
 
+		
+		
 		for (Team team : teams) {
-			synchronized (team) {
-				team.notify();
+			synchronized (team.getBox()) {
+				team.getBox().notify();
 			}
 		}
 		

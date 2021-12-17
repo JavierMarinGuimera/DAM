@@ -92,25 +92,31 @@ public class Pilot implements Runnable {
 						
 						Box box = team.getBox();
 						
-						if (box.isFree()) {
-							System.out.println(this + " getting into the box.");
+						Boolean canIGetIntheBox;
+						
+						synchronized (box) {
+							canIGetIntheBox = box.isFree();
+							if (canIGetIntheBox) {
+								System.out.println(this + " getting into the box.");								
+								box.setPilot(this);
+							}
+						}
+						
+						if (canIGetIntheBox) {
 							
 							synchronized (this) {							
-								box.setPilot(this);
+								
+								synchronized (box) {										
+									box.notify();
+								}	
 								
 								while (fuelTank != MAX_TANK) {	
-									System.out.println(this + " is waiting for refueling...");
-									
-									synchronized (box) {										
-										box.notify();
-									}
-									
+									System.out.println(this + " is waiting for refueling...");								
 									this.wait();
 								}
 								
-								box.setPilotOut();
-								
 								synchronized (box) {										
+									box.setPilotOut();
 									box.notify();
 								}
 								

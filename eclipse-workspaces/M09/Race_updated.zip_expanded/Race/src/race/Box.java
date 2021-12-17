@@ -80,15 +80,14 @@ public class Box implements Runnable {
 				}
 
 				// Refuel and notify the pilot to continue the race.
-				System.out.println(this + pilotInBox.toString() + " refuel.");
-				pilotInBox.refuel();
-
 				synchronized (pilotInBox) {
+					System.out.println(this + pilotInBox.toString() + " refuel.");
+					pilotInBox.refuel();
 					pilotInBox.notify();
 				}
 
 				// Waiting the pilot to leave the box.
-				synchronized (this) {					
+				synchronized (this) {
 					while (!isFree()) {
 						System.out.println(this + " waiting for the pilot: " + pilotInBox + " to leave the Box.");
 						wait();
