@@ -3,22 +3,24 @@ package com.javiermarin.sqlite.dbClasses;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import static com.javiermarin.sqlite.dbClasses.UsersDatabaseContract.UsersTable;
+import static com.javiermarin.sqlite.dbClasses.UsersDatabaseContract.StudentsTable;
 
-public class UsersSQLiteHelper extends SQLiteOpenHelper {
-    // If you change the database schema, you must increment the database version.
+public class StudentsSQLiteHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Users.db";
+    public static final String DATABASE_NAME = "Students.db";
 
     private static final String SQL_CREATE_TABLES =
-            "CREATE TABLE " + UsersTable.TABLE + " ("
-                    + UsersTable._ID + " INTEGER PRIMARY KEY, "
-                    + UsersTable.COLUMN_NAME + " TEXT)";
+            "CREATE TABLE " + StudentsTable.TABLE + " ("
+                    + StudentsTable.COLUMN_ID_CARD + " TEXT PRIMARY KEY, "
+                    + StudentsTable.COLUMN_NAME + " TEXT, "
+                    + StudentsTable.COLUMN_SURNAME + " TEXT, "
+                    + StudentsTable.COLUMN_CYCLE + " TEXT, "
+                    + StudentsTable.COLUMN_COURSE + " TEXT)";
 
     private static final String SQL_DROP_TABLES =
-            "DROP TABLE IF EXISTS " + UsersTable.TABLE;
+            "DROP TABLE IF EXISTS " + StudentsTable.TABLE;
 
-    public UsersSQLiteHelper(Context context) {
+    public StudentsSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -29,8 +31,6 @@ public class UsersSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
         db.execSQL(SQL_DROP_TABLES);
         onCreate(db);
     }

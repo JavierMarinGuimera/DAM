@@ -25,61 +25,62 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Id card" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/inputId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Introduce ID"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="Name" />
+                android:minHeight="48dp" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Personal data" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/inputName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Introduce Name"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="Name" />
+                android:minHeight="48dp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/inputSurname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Introduce Surname"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="Name" />
+                android:minHeight="48dp" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/cycleSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RadioGroup
+                android:id="@+id/courseGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/firstRadioCourse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="First" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/secondRadioCourse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="Second" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
@@ -100,24 +101,27 @@
 
             <Button
                 android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Add" />
+                android:text="Add"
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/removeButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Remove" />
+                android:text="Remove"
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/updateButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Update"
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,25 +131,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/findByDNI"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Find by DNI"
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/findByCycle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Find by Cycle"
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/findByCourse"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Find by Course"
+                android:textAllCaps="false" />
         </LinearLayout>
     </LinearLayout>
 
