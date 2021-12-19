@@ -1,12 +1,12 @@
 package race;
 
-
-public class Pilot implements Runnable {
+public class Pilot implements Runnable, Comparable<Pilot> {
 	private static final int MINUT = 1000;
-	private static final int MINUT_DIFF = 300;
-	
+	private static final int MINUT_DIFF = 1500;
+	private static final int HALF_MINUT = 500;
+
 	private static final int MAX_TANK = 25;
-	
+
 	private String name;
 	private int laps;
 	private int time;
@@ -54,7 +54,7 @@ public class Pilot implements Runnable {
 	public void setRaceStatus(RaceStatus raceStatus) {
 		this.raceStatus = raceStatus;
 	}
-	
+
 	public Team getTeam() {
 		return team;
 	}
@@ -81,63 +81,58 @@ public class Pilot implements Runnable {
 		try {
 			int totalTime;
 			while (laps > 0 && !raceStatus.isFinish()) {
-				if (laps > 0) {					
-					totalTime = MINUT + (int) (Math.random() * MINUT_DIFF);
-					Thread.sleep(totalTime);
-					
-					fuelTank -= (int) (Math.random() * 7);
-					
-					if (fuelTank < 5) {
-						System.out.println(this + " need refueling.");
-						
-						Box box = team.getBox();
-						
-						Boolean canIGetIntheBox;
-						
-						synchronized (box) {
-							canIGetIntheBox = box.isFree();
-							if (canIGetIntheBox) {
-								System.out.println(this + " getting into the box.");								
-								box.setPilot(this);
-							}
-						}
-						
+				totalTime = MINUT + (int) (Math.random() * MINUT_DIFF);
+				Thread.sleep(totalTime);
+
+				fuelTank -= (int) (Math.random() * 7);
+
+				if (fuelTank < 5 && !raceStatus.isFinish()) {
+					System.out.println(this + " need refueling.");
+
+					Box box = team.getBox();
+
+					Boolean canIGetIntheBox;
+
+					synchronized (box) {
+						canIGetIntheBox = box.isFree();
 						if (canIGetIntheBox) {
-							
-							synchronized (this) {							
-								
-								synchronized (box) {										
-									box.notify();
-								}	
-								
-								while (fuelTank != MAX_TANK) {	
-									System.out.println(this + " is waiting for refueling...");								
-									this.wait();
-								}
-								
-								synchronized (box) {										
-									box.setPilotOut();
-									box.notify();
-								}
-								
-								totalTime += 500;
-							}
-						} else {
-							System.out.println(this + " BOX BUSY!!");
+							System.out.println(this + " getting into the box.");
+							box.setPilot(this);
 						}
 					}
-					
-					time += totalTime;
-					
-					raceStatus.lap(this);
-					
-					System.out.println(this + " HAS MADE A LAP. Still has " + fuelTank + " fuel left. Go go gooo!!! \n");
-				} else {
-					laps--;
-					
-					System.out.println("Finished the race but its still racing. Has made " + -(laps) + " extra laps!");
+
+					if (canIGetIntheBox) {
+
+						synchronized (this) {
+
+							synchronized (box) {
+								box.notify();
+							}
+
+							while (fuelTank != MAX_TANK) {
+								System.out.println(this + " is waiting for refueling...");
+								this.wait();
+							}
+
+							synchronized (box) {
+								box.setPilotOut();
+								box.notify();
+							}
+
+							totalTime += HALF_MINUT + (int) (Math.random() * HALF_MINUT);
+						}
+					} else {
+						System.out.println(this + " BOX BUSY!!");
+					}
 				}
+
+				time += totalTime;
+
+				raceStatus.lap(this);
+
+				System.out.println(this + " HAS MADE A LAP. Still has " + fuelTank + " fuel left. Go go gooo!!! \n");
 			}
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -145,7 +140,17 @@ public class Pilot implements Runnable {
 
 	@Override
 	public String toString() {
-		return "Pilot: [" + name + "(" + team.getName() + ") laps=" + (laps > 0 ? laps : -(laps)) + " fuel=" + fuelTank + "]";
+		return "Pilot: [" + name + "(" + team.getName() + ") laps=" + (laps > 0 ? laps : -(laps)) + " fuel=" + fuelTank
+				+ "]";
+	}
+
+	@Override
+	public int compareTo(Pilot pilot) {
+		    if (laps == pilot.laps) {
+		      return ((Integer) time).compareTo(pilot.time);
+		    } else {
+		      return ((Integer) laps).compareTo(pilot.laps);
+		    }
 	}
 
 }

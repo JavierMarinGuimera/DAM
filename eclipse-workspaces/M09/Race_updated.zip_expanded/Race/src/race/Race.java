@@ -8,8 +8,8 @@ public class Race {
 	public static final int LAP_INFO_PADDING = 3;
 	
 	private static final int MAX_LAPS = 10;
-	private static String[] TEAM_NAMES = {"Mercedes", "Red Bull", "McLaren", "Renault"};
-	private static String[] RACERS_NAMES = {"Javi" , "Toni", "Sergi", "Norbert", "Rebeca", "Andrea", "Sofia", "Julia"};
+	private static String[] TEAM_NAMES = {"Mercedes", "Red Bull", "Renault", "Ferrari"};
+	private static String[] RACERS_NAMES = {"Javi" , "Toni", "Sergi", "Norbert", "Andrea", "Julia", "Sara", "Rebeca"};
 	private static int racers = RACERS_NAMES.length;
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -20,7 +20,7 @@ public class Race {
 			List<Thread> pilotsThreads = new ArrayList<Thread>();
 			List<Team> teams = new ArrayList<>();
 			List<Thread> teamsThreads = new ArrayList<Thread>();
-			RaceStatus raceStatus = new RaceStatus(new ArrayList<Pilot>(), false, racers);
+			RaceStatus raceStatus = new RaceStatus(new ArrayList<Pilot>(), false);
 			
 			createPilots(pilots, pilotsThreads, raceStatus);
 			

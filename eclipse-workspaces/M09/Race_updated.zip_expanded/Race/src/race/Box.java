@@ -69,7 +69,7 @@ public class Box implements Runnable {
 				synchronized (this) {
 					while (this.isFree() && !raceStatus.isFinish()) {
 						System.out.println(
-								String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", this + " is free. \n"));
+								String.format("%-" + Race.PADDING_TO_CENTER + "s %s", "", this + " is free."));
 						wait();
 					}
 				}
