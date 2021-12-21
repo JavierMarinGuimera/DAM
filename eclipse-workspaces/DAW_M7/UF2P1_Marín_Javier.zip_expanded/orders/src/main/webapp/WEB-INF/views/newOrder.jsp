@@ -30,7 +30,7 @@
 							<spring:message code="newOrder.selected.items" />
 							<spring:url var="finishOrderUrl"
 								value='/users/orders/newOrder/clearItems' />
-							<a href="${finishOrderUrl }"
+							<a href="${finishOrderUrl}"
 								class="btn btn-default btn-sm"> <span
 								class="glyphicon glyphicon-remove"></span> <spring:message
 									code="newOrder.clear" />
