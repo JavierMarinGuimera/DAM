@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String ASIX_FILE = "asixCycleFile.txt";
     public static final String DAM_FILE = "damCycleFile.txt";
     public static final String DAW_FILE = "dawCycleFile.txt";
+    public static final String ID_FILE = "idFile.txt";
     public static final String FIRST_COURSE_FILE = "firstCourseFile.txt";
     public static final String SECOND_COURSE_FILE = "secondCourseFile.txt";
 
@@ -261,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
     private void findById() {
         Cursor cursor = selectUsers(find.ID);
         if (cursor.getCount() > 0) {
-            generateFile(cursor, "idFile.txt");
+            generateFile(cursor, ID_FILE);
         } else {
             Toast.makeText(this, NO_RESULTS, Toast.LENGTH_SHORT).show();
         }

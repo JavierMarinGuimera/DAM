@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import globalThings.Libro;
+import classes.Libro;
 
 public class DOM1To3 {
 

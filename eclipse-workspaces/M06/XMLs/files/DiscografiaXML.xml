@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Musica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="DiscografiaEsquema.xsd">
+
+	<Autor tipus="Grup" num_components="4">
+		<Nom pais="Irlanda">U2</Nom>
+		<Album data_publicacio="1980">Boy</Album>
+		<Album data_publicacio="1981">October</Album>
+		<Album data_publicacio="1983">War</Album>
+		<Album data_publicacio="1984">The Unforgettable Fire</Album>
+		<Album data_publicacio="1987">The Joshua Tree</Album>
+		<Album data_publicacio="1988">Rattle and Hum</Album>
+		<Album data_publicacio="1991">Achtung Baby</Album>
+		<Album data_publicacio="1993">Zooropa</Album>
+		<Album data_publicacio="1997">Pop</Album>
+		<Album data_publicacio="2000">All That You Can't Leave Behind</Album>
+		<Album data_publicacio="2004">How to Dismantle an Atomic Bomb</Album>
+		<Album data_publicacio="2009">No Line on the Horizon</Album>
+	</Autor>
+	<Autor tipus="Solista">
+		<Nom pais="USA">Bruce Springsteen</Nom>
+		<Album data_publicacio="1973">Greetings from Asbury Park,N.J.</Album>
+		<Album data_publicacio="1975">Born to Run</Album>
+		<Album data_publicacio="1980">The River</Album>
+		<Album data_publicacio="1984">Born in the USA</Album>
+		<Album data_publicacio="1987">Tunnel of Love</Album>
+		<Album data_publicacio="1992">Human Touch</Album>
+	</Autor>
+</Musica>

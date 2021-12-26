@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
 
-public class sharedFunctionsClass extends AppCompatActivity  {
+public class SharedFunctionsClass extends AppCompatActivity  {
     private static final String SHARED_PREFERENCES = "com.example.pe2_books_marn_javier";
     private static final String CREATE_OPTION = "create";
     private static final String DELETE_OPTION = "delete";
@@ -19,7 +19,7 @@ public class sharedFunctionsClass extends AppCompatActivity  {
     private static boolean confirmationDeleteDialog;
     private static boolean confirmationCreateDialog;
 
-    private sharedFunctionsClass() {}
+    private SharedFunctionsClass() {}
 
     private void saveData(Map<String, Integer> inputIDs, Context context) {
 
@@ -41,7 +41,9 @@ public class sharedFunctionsClass extends AppCompatActivity  {
             } else {
                 confirmDialog(CREATE_OPTION, inputIDs, context);
                 if (confirmationCreateDialog) {
-                    Toast.makeText(this, "Entry " + ((int) sharedPref.getInt(((EditText)findViewById(inputIDs.get("name"))).getText().toString(), 0) == 0 ? "created" : "updated") + " successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Entry "
+                            + ((int) sharedPref.getInt(((EditText)findViewById(inputIDs.get("name"))).getText().toString(), 0) == 0 ? "created" : "updated")
+                            + " successfully!", Toast.LENGTH_SHORT).show();
 
                     editor.putInt(((EditText)findViewById(inputIDs.get("name"))).getText().toString(), Integer.parseInt(((EditText)findViewById(inputIDs.get("name"))).getText().toString()));
                 } else {
@@ -56,8 +58,12 @@ public class sharedFunctionsClass extends AppCompatActivity  {
     private void confirmDialog(String operation, Map<String, Integer> inputIDs, Context context) {
         AlertDialog.Builder dialogToConfirm = new AlertDialog.Builder(this);
         dialogToConfirm.setTitle("Important");
-        dialogToConfirm.setMessage("Do you want to " + operation + (operation.equals(CREATE_OPTION) ? "/update" : "") + " the phone number of the " + ((EditText)findViewById(inputIDs.get("name"))).getText().toString() +
-                " contact" + (operation.equals(CREATE_OPTION) ? " with this number: " + ((EditText)findViewById(inputIDs.get("name"))).getText().toString() : "") + "?");
+        dialogToConfirm.setMessage("Do you want to " + operation + (operation.equals(CREATE_OPTION) ? "/update" : "")
+                + " the phone number of the "
+                + ((EditText)findViewById(inputIDs.get("name"))).getText().toString()
+                + " contact" + (operation.equals(CREATE_OPTION) ? " with this number: "
+                + ((EditText)findViewById(inputIDs.get("name"))).getText().toString() : "")
+                + "?");
         dialogToConfirm.setCancelable(false);
         dialogToConfirm.setPositiveButton("Confirm", new
                 DialogInterface.OnClickListener() {
@@ -80,5 +86,16 @@ public class sharedFunctionsClass extends AppCompatActivity  {
                     }
                 });
         dialogToConfirm.show();
+    }
+
+    private void getData(Map<String, Integer> inputIDs, Context context) {
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        int phoneNumber = sharedPref.getInt((((EditText)findViewById(inputIDs.get("name"))).getText().toString()), 0);
+
+        if (phoneNumber == 0) {
+            Toast.makeText(this, "We dont have the " + (((EditText)findViewById(inputIDs.get("name")))).getText().toString() + " number.", Toast.LENGTH_SHORT).show();
+        } else {
+            (((EditText)findViewById(inputIDs.get("name")))).setText(String.format("%s", phoneNumber));
+        }
     }
 }

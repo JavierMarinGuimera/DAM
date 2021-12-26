@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class spinnerFunctionsClass {
+public class SpinnerFunctionsClass {
 
-    private spinnerFunctionsClass() {}
+    private SpinnerFunctionsClass() {}
 
     public static void initSpinner(Spinner spinner, List<String> data, Context context) {
         ArrayAdapter<String> adapter =

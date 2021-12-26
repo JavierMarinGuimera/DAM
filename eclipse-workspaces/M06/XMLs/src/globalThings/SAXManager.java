@@ -1,53 +1,88 @@
 package globalThings;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class SAXManager extends DefaultHandler{
-	private static final String BOOK_SEPARATION = "--------------------------";
-	
-	private int currentElement = 0;
-	private String currentLine = "";
-	
+import classes.Author;
+
+public class SAXManager extends DefaultHandler {
+	public static final String OUTPUT_FILE = "files/DiscografiaResum.txt";
+
+	private static final String AUTHOR_SEPARATION = "--------------------------";
+
+	public enum variables {
+		TRASH, AUTHOR, NAME, ALBUM
+	};
+
+	private variables currentElement = variables.TRASH;
+	private List<Author> authors = new ArrayList<>();
+	private int currentAuthor = 0;
+	private String albumDate;
+	private String albumName;
+
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println("El resultado es: \n");
+		System.out.println("Comenzamos a leer el fichero: \n");
+		new File(OUTPUT_FILE).delete();
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		System.out.println("Element: " + qName);
-		
-		if (qName.equals("Libro")) {
-			currentElement = 1;
-		} else if (qName.equals("Titulo")) {
-			currentElement = 2;
-		} else if (qName.equals("Autor")) {
-			currentElement = 3;
+		if (qName.equals("Autor")) {
+			currentElement = variables.AUTHOR;
+			
+			authors.add(new Author());
+			authors.get(currentAuthor).setAuthorType(attributes.getValue("tipus"));
+			authors.get(currentAuthor).setAuthorMembers(attributes.getValue("num_components"));
+		} else if (qName.equals("Nom")) {
+			currentElement = variables.NAME;
+			authors.get(currentAuthor).setAuthorCountry(attributes.getValue("pais"));
+		} else if (qName.equals("Album")) {
+			currentElement = variables.ALBUM;
+			albumDate = attributes.getValue("data_publicacio");
 		}
 	}
-	
+
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if (qName.equals("Libro")) {
-			System.out.println(currentLine + "\n" + BOOK_SEPARATION);
-			currentLine = "";
+		if (qName.equals("Autor")) {
+			System.out.println(authors.get(currentAuthor));
+			System.out.println(AUTHOR_SEPARATION + "\n");
 		}
 		
-		currentElement = 0;
+		if (qName.equals("Album")) {
+			authors.get(currentAuthor).setAuthorAlbums(albumDate, albumName);
+		}
+
+		currentElement = variables.TRASH;
 	}
 
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (currentElement == 2 || currentElement == 3) {
-			String text = ch.toString().trim();
-			currentLine += "\n- El " + (currentElement == 2 ? "título" : "autor") + " es: " + text; 
+		if (currentElement == variables.NAME) {
+			authors.get(currentAuthor).setAuthorName(new String(ch, start, length));
+		}
+		
+		if (currentElement == variables.ALBUM) {
+			albumName = new String(ch, start, length);
 		}
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println("Ya no hay más registros.");
+		System.out.println("¡Fichero leído al completo!");
+	}
+	
+	public List<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
 	}
 }
