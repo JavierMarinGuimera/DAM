@@ -1,12 +1,22 @@
 package globalThings;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,8 +24,10 @@ import org.w3c.dom.NodeList;
 import classes.Author;
 
 public class XMLDOMManager {
+	private static final String OUTPUT_XML_FILE = "files/DiscografiaV2.xml";
+	
 
-	private static List<Author> constructAuthorsList(Node rootNode) {
+	public static List<Author> constructAuthorsList(Node rootNode) {
 		List<Author> authorsList = new ArrayList<Author>();
 
 		NodeList authors = rootNode.getChildNodes();
@@ -23,8 +35,11 @@ public class XMLDOMManager {
 		// FOR that will contain EVERY AUTHOR.
 		for (int i = 0; i < authors.getLength(); i++) {
 			if (authors.item(i).getNodeType() == Node.ELEMENT_NODE) {
-				String authorType = authors.item(i).getAttributes().getNamedItem("tipus").toString();
-				String authorMembers = authors.item(i).getAttributes().getNamedItem("num_components").toString();
+				String authorType = authors.item(i).getAttributes().getNamedItem("tipus").getNodeValue();
+				String authorMembers = (authors.item(i).getAttributes().getNamedItem("num_components") != null
+						? authors.item(i).getAttributes().getNamedItem("num_components").getNodeValue()
+						: "");
+				;
 				String authorCountry = "";
 				String authorName = "";
 
@@ -39,7 +54,7 @@ public class XMLDOMManager {
 							authorCountry = node.getAttributes().getNamedItem("pais").toString();
 							authorName = node.getTextContent();
 						} else if (node.getNodeName().equals("Album")) {
-							authorAlbums.put(node.getAttributes().getNamedItem("data_publicacio").toString(),
+							authorAlbums.put(node.getAttributes().getNamedItem("data_publicacio").getNodeValue(),
 									node.getTextContent());
 						}
 					}
@@ -52,7 +67,7 @@ public class XMLDOMManager {
 		return authorsList;
 	}
 
-	private static void searchBy(Node rootNode) {
+	public static void searchBy(Node rootNode) {
 		Scanner scanner = new Scanner(System.in);
 
 		int option;
@@ -95,17 +110,18 @@ public class XMLDOMManager {
 		scanner.close();
 	}
 
-	private static void searchAlbum(Node rootNode, Scanner scanner, String atributo) {
+	public static void searchAlbum(Node rootNode, Scanner scanner, String atributo) {
 		System.out.println("Vamos a buscar por " + atributo.toLowerCase() + " del autor.");
 
 		Element rootElement = (Element) rootNode;
 		NodeList resultAttributeList = rootElement.getElementsByTagName("Album");
-		
+
 		System.out.println("Qué " + atributo.toLowerCase()
 				+ (atributo.equals("Fecha de publicación") ? " ('1985' por ejemplo)" : "") + " quieres buscar?");
 		String resultAttribute = scanner.nextLine().trim();
 
 		for (int i = 0; i < resultAttributeList.getLength(); i++) {
+			System.out.println(resultAttributeList.item(i).getTextContent());
 			if (resultAttribute.equals(resultAttributeList.item(i).getTextContent())) {
 				System.out.println("El " + atributo.toLowerCase() + " se encuentra en el archivo.");
 
@@ -127,7 +143,7 @@ public class XMLDOMManager {
 
 							System.out.println(atributo + " nuevo: " + resultAttributeList.item(i).getTextContent());
 
-							System.out.println("Libro actualizado con éxito!");
+							System.out.println("Autor actualizado con éxito!");
 						} else if (option == 1) {
 							System.out.println("El " + atributo.toLowerCase() + " se ha quedado como estaba.");
 						} else {
@@ -144,5 +160,69 @@ public class XMLDOMManager {
 		}
 
 		System.out.println("El " + atributo.toLowerCase() + " no se encuentra en el archivo.");
+	}
+
+	public static void insertAlbum(List<Author> authorsList) {
+		new File(OUTPUT_XML_FILE).delete();
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		try {
+		    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+		    //root elements
+		    Document doc = docBuilder.newDocument();
+
+		    Element rootElement = doc.createElement("Musica");
+		    doc.appendChild(rootElement);
+
+		    for (Author author : authorsList) {
+		    	
+		    	System.out.println("Quieres añadir un album a " + author.getAuthorName() + "? (Si/No)");
+		    	String fechaPublicacion = "";
+		    	String nombreAlbum = "";
+		    	
+		    	if (scanner.nextLine().trim().toLowerCase().equals("si")) {
+		    		System.out.println("Introduce fecha de publicación del álbum:");
+		    		fechaPublicacion = scanner.nextLine().trim();
+		    		
+		    		System.out.println("Introduce nombre del álbum:");
+		    		nombreAlbum = scanner.nextLine().trim();
+		    	}
+			    
+			    for (Map.Entry<String, String> entry : author.getAuthorAlbums().entrySet()) {
+			    	Element album = doc.createElement("Album");
+			    	album.setAttribute("autor", author.getAuthorName());	
+				    album.setAttribute("data_publicacio", entry.getKey());
+				    album.appendChild(doc.createTextNode(entry.getValue()));
+				    rootElement.appendChild(album);
+				}
+			    
+			    if (!fechaPublicacion.equals("") && !author.getAuthorName().equals("") && !nombreAlbum.equals("")) {
+			    	Element album = doc.createElement("Album");
+			    	album.setAttribute("autor", author.getAuthorName());	
+				    album.setAttribute("data_publicacio", fechaPublicacion);
+				    album.appendChild(doc.createTextNode(nombreAlbum));
+				    rootElement.appendChild(album);
+			    }
+			}
+
+		    TransformerFactory transformerFactory =  TransformerFactory.newInstance();
+		    Transformer transformer = transformerFactory.newTransformer();
+		    DOMSource source = new DOMSource(doc);
+
+		    StreamResult result =  new StreamResult(new File(OUTPUT_XML_FILE));
+		    transformer.transform(source, result);
+
+		    System.out.println("Archivo creado con éxito!");
+
+		}catch(ParserConfigurationException pce){
+		    pce.printStackTrace();
+		}catch(TransformerException tfe){
+		    tfe.printStackTrace();
+		}
+		
+		scanner.close();
 	}
 }

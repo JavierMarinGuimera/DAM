@@ -9,11 +9,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import classes.Author;
+import exercises.DiscografiaMain;
 
 public class SAXManager extends DefaultHandler {
-	public static final String OUTPUT_FILE = "files/DiscografiaResum.txt";
-
-	private static final String AUTHOR_SEPARATION = "--------------------------";
+	public static final String OUTPUT_TXT_FILE = "files/DiscografiaResum.txt";
 
 	public enum variables {
 		TRASH, AUTHOR, NAME, ALBUM
@@ -28,7 +27,7 @@ public class SAXManager extends DefaultHandler {
 	@Override
 	public void startDocument() throws SAXException {
 		System.out.println("Comenzamos a leer el fichero: \n");
-		new File(OUTPUT_FILE).delete();
+		new File(OUTPUT_TXT_FILE).delete();
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class SAXManager extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals("Autor")) {
 			System.out.println(authors.get(currentAuthor));
-			System.out.println(AUTHOR_SEPARATION + "\n");
+			System.out.println(DiscografiaMain.SEPARATION + "\n");
 		}
 		
 		if (qName.equals("Album")) {
