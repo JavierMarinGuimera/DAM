@@ -74,7 +74,7 @@ public class Author {
 	public String toString() {
 		
 		try {
-			File file = new File(SAXManager.OUTPUT_FILE);
+			File file = new File(SAXManager.OUTPUT_TXT_FILE);
 			BufferedWriter bf = new BufferedWriter(new FileWriter(file, true));
 			
 			String str = "Autor: " + authorName + " (" + authorCountry + ") - "
