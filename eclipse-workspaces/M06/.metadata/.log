@@ -10910,7 +10910,11 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/XMLs/src/clas
 !ENTRY org.eclipse.ui.navigator 2 0 2021-12-26 22:29:44.411
 !MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering
 <<<<<<< HEAD
+<<<<<<< HEAD
 !SESSION 2021-12-26 22:32:43.218 -----------------------------------------------
+=======
+!SESSION 2021-12-26 22:36:24.690 -----------------------------------------------
+>>>>>>> features
 =======
 !SESSION 2021-12-26 22:36:24.690 -----------------------------------------------
 >>>>>>> features
@@ -10922,6 +10926,7 @@ Framework arguments:  -product org.eclipse.epp.package.jee.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 !ENTRY org.eclipse.oomph.p2.core 2 0 2021-12-26 22:32:44.494
 !MESSAGE Failed to register the thread safe credentials providers: 'java.util.Map org.eclipse.core.internal.runtime.AdapterManager.getFactories()'
 
@@ -10929,12 +10934,17 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-12-26 22:32:52.002
 =======
+=======
+>>>>>>> features
 !ENTRY org.eclipse.oomph.p2.core 2 0 2021-12-26 22:36:26.007
 !MESSAGE Failed to register the thread safe credentials providers: 'java.util.Map org.eclipse.core.internal.runtime.AdapterManager.getFactories()'
 
 !ENTRY org.eclipse.jface 2 0 2021-12-26 22:36:30.343
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-12-26 22:36:30.343
+<<<<<<< HEAD
+>>>>>>> features
+=======
 >>>>>>> features
 !MESSAGE A conflict occurred for CTRL+SHIFT+T:
 Binding(CTRL+SHIFT+T,
@@ -10942,7 +10952,11 @@ Binding(CTRL+SHIFT+T,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7d50b4c4,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@24be6e34,
+>>>>>>> features
 =======
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@24be6e34,
 >>>>>>> features
@@ -10954,7 +10968,10 @@ Binding(CTRL+SHIFT+T,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> features
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@39f3285d,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
@@ -10991,11 +11008,15 @@ Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
+>>>>>>> features
+=======
 >>>>>>> features
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7860a014,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 !ENTRY org.eclipse.ui.navigator 2 0 2021-12-26 22:32:54.945
@@ -11006,6 +11027,8 @@ Binding(CTRL+SHIFT+T,
 
 !ENTRY org.eclipse.egit.ui 2 0 2021-12-26 22:32:54.978
 =======
+=======
+>>>>>>> features
 Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
@@ -11291,6 +11314,9 @@ Binding(CTRL+SHIFT+T,
 	org.eclipse.ui.contexts.window,,,system)
 
 !ENTRY org.eclipse.egit.ui 2 0 2021-12-27 20:29:47.947
+<<<<<<< HEAD
+>>>>>>> features
+=======
 >>>>>>> features
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Javier'. If this is
