@@ -51,7 +51,6 @@ public class DiscografiaMain {
 		}
 
 		System.out.println("\n\nEjercicio 2: \n" + SEPARATION);
-//		XMLDOMManager.searchBy(rootNode);
 		XMLDOMManager.insertAlbum(authorsList);
 	}
 

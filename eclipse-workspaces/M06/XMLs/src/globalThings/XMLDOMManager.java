@@ -184,11 +184,19 @@ public class XMLDOMManager {
 		    	String nombreAlbum = "";
 		    	
 		    	if (scanner.nextLine().trim().toLowerCase().equals("si")) {
-		    		System.out.println("Introduce fecha de publicación del álbum:");
-		    		fechaPublicacion = scanner.nextLine().trim();
-		    		
-		    		System.out.println("Introduce nombre del álbum:");
-		    		nombreAlbum = scanner.nextLine().trim();
+		    		while (true) {
+		    			System.out.println("Introduce fecha de publicación del álbum:");
+			    		fechaPublicacion = scanner.nextLine().trim();
+			    		
+			    		System.out.println("Introduce nombre del álbum:");
+			    		nombreAlbum = scanner.nextLine().trim();
+			    		
+			    		if (isNumeric(fechaPublicacion) && !isNumeric(nombreAlbum)) {
+			    			break;
+			    		} else {			    			
+			    			System.out.println("¡Error! Debes introducir un número para la fecha de publicación y un texto para el nombre del album.");
+			    		}    			
+		    		}
 		    	}
 			    
 			    for (Map.Entry<String, String> entry : author.getAuthorAlbums().entrySet()) {
@@ -225,4 +233,13 @@ public class XMLDOMManager {
 		
 		scanner.close();
 	}
+
+	public static boolean isNumeric(String str) { 
+		  try {  
+		    Double.parseDouble(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 }

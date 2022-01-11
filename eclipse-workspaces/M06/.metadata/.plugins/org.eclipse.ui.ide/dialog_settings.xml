@@ -33,6 +33,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06"/>
 			<item value="F:\IES_Marianao\DAM\Segundo\eclipse-workspaces\M06"/>
 			<item value="D:\IES_Marianao\DAW\Segundo\M03_Programación\UF4_Programación orientada a objectos (POO). Fundamentos\UF4PF_Marín_Javier\ejercicioFinal"/>
 			<item value="D:\IES_Marianao\DAW\Segundo\M03_Programación\UF4_Programación orientada a objectos (POO). Fundamentos\UF4PE_Marín_Javier"/>
