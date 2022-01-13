@@ -19,14 +19,16 @@ import globalThings.SAXManager;
 import globalThings.XMLDOMManager;
 
 public class DiscografiaMain {
-	private static final String FILE = "files/DiscografiaXML.xml";
+	public static final String FILE = "files/DiscografiaXML.xml";
 
 	public static final String SEPARATION = "-----------------------------------------";
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
 		exercise1and2();
-//		exercise3();
+		exercise3();
+		
+		System.in.close();
 	}
 
 	private static void exercise1and2() throws ParserConfigurationException, SAXException, IOException {
@@ -53,8 +55,11 @@ public class DiscografiaMain {
 		System.out.println("\nParte getElementsByTagName: \n");
 		XMLDOMManager.searchBy(rootNode);
 
-//		System.out.println("\n\nEjercicio 2: \n" + SEPARATION);
-//		XMLDOMManager.insertAlbum(authorsList);
+		System.out.println("\nEjercicio 2: \n" + SEPARATION);
+		XMLDOMManager.insertAlbum(doc, authorsList);
+		
+		System.out.println("\nParte generar archivo ");		
+		XMLDOMManager.createResumedXML(authorsList);
 	}
 
 	private static void exercise3() throws ParserConfigurationException, SAXException, IOException {

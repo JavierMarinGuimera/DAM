@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Musica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="DiscografiaEsquema.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Musica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DiscografiaEsquema.xsd">
 
-	<Autor tipus="Grup" num_components="4">
+	<Autor num_components="4" tipus="Grup">
 		<Nom pais="Irlanda">U2</Nom>
 		<Album data_publicacio="1980">Boy</Album>
 		<Album data_publicacio="1981">October</Album>
@@ -16,7 +14,8 @@
 		<Album data_publicacio="2000">All That You Can't Leave Behind</Album>
 		<Album data_publicacio="2004">How to Dismantle an Atomic Bomb</Album>
 		<Album data_publicacio="2009">No Line on the Horizon</Album>
-	</Autor>
+	<Album data_publicacio="1346">sd</Album>
+</Autor>
 	<Autor tipus="Solista">
 		<Nom pais="USA">Bruce Springsteen</Nom>
 		<Album data_publicacio="1973">Greetings from Asbury Park,N.J.</Album>

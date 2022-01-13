@@ -3,14 +3,13 @@ package globalThings;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -21,11 +20,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import classes.Album;
 import classes.Author;
+import exercises.DiscografiaMain;
 
 public class XMLDOMManager {
 	private static final String OUTPUT_XML_FILE = "files/DiscografiaV2.xml";
-	
 
 	public static List<Author> constructAuthorsList(Node rootNode) {
 		List<Author> authorsList = new ArrayList<Author>();
@@ -43,7 +43,7 @@ public class XMLDOMManager {
 				String authorCountry = "";
 				String authorName = "";
 
-				Map<String, String> authorAlbums = new TreeMap<>();
+				List<Album> authorAlbums = new ArrayList<>();
 				NodeList authorChilds = authors.item(i).getChildNodes();
 
 				// FOR that will contain EVERY NODE under the AUTHOR
@@ -54,8 +54,9 @@ public class XMLDOMManager {
 							authorCountry = node.getAttributes().getNamedItem("pais").toString();
 							authorName = node.getTextContent();
 						} else if (node.getNodeName().equals("Album")) {
-							authorAlbums.put(node.getAttributes().getNamedItem("data_publicacio").getNodeValue(),
-									node.getTextContent());
+							authorAlbums
+									.add(new Album(node.getAttributes().getNamedItem("data_publicacio").getNodeValue(),
+											node.getTextContent()));
 						}
 					}
 				}
@@ -95,51 +96,57 @@ public class XMLDOMManager {
 			break;
 
 		case 1:
-			searchAlbum(rootNode, scanner, "Fecha de publicación");
+			searchInAuthors(rootNode, scanner, "Fecha de publicación");
 			break;
 
 		case 2:
-			searchAlbum(rootNode, scanner, "Nombre");
+			searchInAuthors(rootNode, scanner, "Nombre");
 			break;
 
 		default:
 			System.out.println("Algo ha ido mal...");
 			break;
 		}
-
-		scanner.close();
 	}
 
-	public static void searchAlbum(Node rootNode, Scanner scanner, String atributo) {
+	public static void searchInAuthors(Node rootNode, Scanner scanner, String atributo) {
 		System.out.println("Vamos a buscar por " + atributo.toLowerCase() + " del autor.");
 
 		Element rootElement = (Element) rootNode;
-		NodeList resultAttributeList = rootElement.getElementsByTagName("Album");
+		NodeList resultAttributeList = atributo.equals("Nombre") ? rootElement.getElementsByTagName("Nombre")
+				: rootElement.getElementsByTagName("Album");
 
 		System.out.println("Qué " + atributo.toLowerCase()
 				+ (atributo.equals("Fecha de publicación") ? " ('1985' por ejemplo)" : "") + " quieres buscar?");
-		String resultAttribute = scanner.nextLine().trim();
+		String resultAttribute = scanner.nextLine();
 
-		for (int i = 0; i < resultAttributeList.getLength(); i++) {		
-			Boolean hasFecha = resultAttribute.equals(resultAttributeList.item(i).getAttributes().getNamedItem("data_publicacio").getNodeValue().toString());
-			Boolean hasAlbum = resultAttribute.equals(resultAttributeList.item(i).getTextContent());
-			
+		for (int i = 0; i < resultAttributeList.getLength(); i++) {
+			Boolean hasFecha = resultAttribute.toLowerCase().equals(resultAttributeList.item(i).getAttributes()
+					.getNamedItem("data_publicacio").getNodeValue().toString().toLowerCase());
+			Boolean hasAlbum = resultAttribute.toLowerCase().equals(resultAttributeList.item(i).getTextContent().toLowerCase());
+
 			if (hasFecha || hasAlbum) {
 				System.out.println("El " + atributo.toLowerCase() + " se encuentra en el archivo.");
-				
+
 				System.out.println("Este es el album que hemos encontrado del artista: ");
-				System.out.println(resultAttributeList.item(i).getAttributes().getNamedItem("data_publicacio").getNodeValue().toString());
+				System.out.println(resultAttributeList.item(i).getAttributes().getNamedItem("data_publicacio")
+						.getNodeValue().toString());
 				System.out.println(resultAttributeList.item(i).getTextContent());
 
 				int option;
 				while (true) {
 					System.out.println("Quieres modificar el " + atributo.toLowerCase() + "?");
-					System.out.println("0: Si, quiero modificar el " + atributo.toLowerCase() + ".");
-					System.out.println("1: No, quiero dejar el " + atributo.toLowerCase() + " tal cual.");
+					System.out.println("0: Salir del programa.");
+					System.out.println("1: Si, quiero modificar el " + atributo.toLowerCase() + ".");
+					System.out.println("2: No, quiero dejar el " + atributo.toLowerCase() + " tal cual.");
 
 					try {
 						option = Integer.parseInt(scanner.nextLine());
 						if (option == 0) {
+							break;
+						}
+
+						if (option == 1) {
 							System.out.println("Cuál quieres que sea el nuevo " + atributo.toLowerCase() + "?");
 							String newValue = scanner.nextLine();
 
@@ -155,96 +162,137 @@ public class XMLDOMManager {
 						} else {
 							throw new NumberFormatException();
 						}
-
-						break;
 					} catch (Exception e) {
 						System.out.println("Opción incorrecta!");
 					}
+
 				}
+
 			}
 		}
 
-		System.out.println("El atributo '" + atributo.toLowerCase() + "' no se encuentra en el archivo.");
+		System.out.println("Ya no hay más álbumes.");
 	}
 
-	public static void insertAlbum(List<Author> authorsList) {
-		new File(OUTPUT_XML_FILE).delete();
-		
+	public static void insertAlbum(Document doc, List<Author> authorsList) {
 		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Escribe el nombre del autor");
+		String option = scanner.nextLine().trim();
 		
-		try {
-		    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		Boolean foundAuthor = false;
 
-		    //root elements
-		    Document doc = docBuilder.newDocument();
+		NodeList elements = doc.getElementsByTagName("Nom");
 
-		    Element rootElement = doc.createElement("Musica");
-		    doc.appendChild(rootElement);
+		for (int i = 0; i < elements.getLength(); i++) {
+			if (elements.item(i).getTextContent().equals(option) && !foundAuthor) {
+				String fechaPublicacion;
+				String nombreAlbum;
 
-		    for (Author author : authorsList) {
-		    	
-		    	System.out.println("Quieres añadir un album a " + author.getAuthorName() + "? (Si/No)");
-		    	String fechaPublicacion = "";
-		    	String nombreAlbum = "";
-		    	
-		    	if (scanner.nextLine().trim().toLowerCase().equals("si")) {
-		    		while (true) {
-		    			System.out.println("Introduce fecha de publicación del álbum:");
-			    		fechaPublicacion = scanner.nextLine().trim();
-			    		
-			    		System.out.println("Introduce nombre del álbum:");
-			    		nombreAlbum = scanner.nextLine().trim();
-			    		
-			    		if (isNumeric(fechaPublicacion) && !isNumeric(nombreAlbum)) {
-			    			break;
-			    		} else {			    			
-			    			System.out.println("¡Error! Debes introducir un número para la fecha de publicación y un texto para el nombre del album.");
-			    		}    			
-		    		}
-		    	}
-			    
-			    for (Map.Entry<String, String> entry : author.getAuthorAlbums().entrySet()) {
-			    	Element album = doc.createElement("Album");
-			    	album.setAttribute("autor", author.getAuthorName());	
-				    album.setAttribute("data_publicacio", entry.getKey());
-				    album.appendChild(doc.createTextNode(entry.getValue()));
-				    rootElement.appendChild(album);
+				while (true) {
+					System.out.println("Introduce fecha de publicación del álbum:");
+					fechaPublicacion = scanner.nextLine().trim();
+
+					System.out.println("Introduce nombre del álbum:");
+					nombreAlbum = scanner.nextLine().trim();
+
+					if (isNumeric(fechaPublicacion) && !isNumeric(nombreAlbum)) {
+						break;
+					} else {
+						System.out.println(
+								"¡Error! Debes introducir un número para la fecha de publicación y un texto para el nombre del album.");
+					}
 				}
-			    
-			    if (!fechaPublicacion.equals("") && !author.getAuthorName().equals("") && !nombreAlbum.equals("")) {
-			    	Element album = doc.createElement("Album");
-			    	album.setAttribute("autor", author.getAuthorName());	
-				    album.setAttribute("data_publicacio", fechaPublicacion);
-				    album.appendChild(doc.createTextNode(nombreAlbum));
-				    rootElement.appendChild(album);
-			    }
+				
+				if (!fechaPublicacion.equals("") && !nombreAlbum.equals("")) {
+					Element album = doc.createElement("Album");
+					album.setAttribute("data_publicacio", fechaPublicacion);
+					album.appendChild(doc.createTextNode(nombreAlbum));
+					elements.item(i).getParentNode().appendChild(album);
+					elements.item(i).getParentNode().appendChild(doc.createTextNode("\n"));
+					authorsList.get(i).addAuthorAlbum(new Album(fechaPublicacion, nombreAlbum));
+				}
+
+				foundAuthor = true;
 			}
-
-		    TransformerFactory transformerFactory =  TransformerFactory.newInstance();
-		    Transformer transformer = transformerFactory.newTransformer();
-		    DOMSource source = new DOMSource(doc);
-
-		    StreamResult result =  new StreamResult(new File(OUTPUT_XML_FILE));
-		    transformer.transform(source, result);
-
-		    System.out.println("Archivo creado con éxito!");
-
-		}catch(ParserConfigurationException pce){
-		    pce.printStackTrace();
-		}catch(TransformerException tfe){
-		    tfe.printStackTrace();
+		}
+		
+		if (!foundAuthor) {
+			System.out.println("No se ha encontrado el autor.");
+		} else {
+			try {
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				Transformer transformer;
+				transformer = transformerFactory.newTransformer();
+				DOMSource source = new DOMSource(doc);
+				
+				StreamResult result = new StreamResult(new File(DiscografiaMain.FILE));
+				transformer.transform(source, result);
+				
+				System.out.println("Album insertado con éxito!!");
+			} catch (TransformerConfigurationException e) {
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		scanner.close();
 	}
 
-	public static boolean isNumeric(String str) { 
-		  try {  
-		    Double.parseDouble(str);  
-		    return true;
-		  } catch(NumberFormatException e){  
-		    return false;  
-		  }  
+	public static void createResumedXML(List<Author> authorsList) {
+		new File(OUTPUT_XML_FILE).delete();
+
+		Scanner scanner = new Scanner(System.in);
+
+		try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+			// root elements
+			Document doc = docBuilder.newDocument();
+
+			Element rootElement = doc.createElement("Musica");
+			doc.appendChild(rootElement);
+			rootElement.appendChild(doc.createTextNode("\n"));
+
+			for (Author author : authorsList) {
+				for (Album album_to_xml : author.getAuthorAlbums()) {
+					Element album = doc.createElement("Album");
+					album.setAttribute("autor", author.getAuthorName());
+					album.setAttribute("data_publicacio", album_to_xml.getDate());
+					album.appendChild(doc.createTextNode(album_to_xml.getName()));
+					rootElement.appendChild(album);
+					rootElement.appendChild(doc.createTextNode("\n"));
+				}
+			}
+
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+
+			StreamResult result = new StreamResult(new File(OUTPUT_XML_FILE));
+			transformer.transform(source, result);
+
+			System.out.println("Archivo creado con éxito!");
+
+		} catch (
+
+		ParserConfigurationException pce) {
+			pce.printStackTrace();
+		} catch (TransformerException tfe) {
+			tfe.printStackTrace();
 		}
+
+		scanner.close();
+	}
+
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }

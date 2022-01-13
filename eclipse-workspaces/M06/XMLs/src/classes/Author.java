@@ -4,8 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import globalThings.SAXManager;
 
@@ -15,13 +15,13 @@ public class Author {
 	private String authorMembers;
 	private String authorCountry;
 	private String authorName;
-	private Map<String, String> authorAlbums = new TreeMap<>();
+	private List<Album> authorAlbums = new ArrayList<>();
 
 	public Author() {
 	}
 
 	public Author(String authorType, String authorMembers, String authorCountry, String authorName,
-			Map<String, String> authorAlbums) {
+			List<Album> authorAlbums) {
 		this.authorType = authorType;
 		this.authorMembers = authorMembers;
 		this.authorCountry = authorCountry;
@@ -62,12 +62,16 @@ public class Author {
 		this.authorName = authorName;
 	}
 
-	public Map<String, String> getAuthorAlbums() {
+	public List<Album> getAuthorAlbums() {
 		return authorAlbums;
 	}
+	
+	public void setAuthorAlbums(List<Album> albums) {
+		this.authorAlbums = albums;
+	}
 
-	public void setAuthorAlbums(String key, String val) {
-		this.authorAlbums.put(key, val);
+	public void addAuthorAlbum(Album album) {
+		this.authorAlbums.add(album);
 	}
 
 	@Override
@@ -75,15 +79,16 @@ public class Author {
 		
 		try {
 			File file = new File(SAXManager.OUTPUT_TXT_FILE);
-			BufferedWriter bf = new BufferedWriter(new FileWriter(file, false));
+			BufferedWriter bf = new BufferedWriter(new FileWriter(file, true));
 			
 			String str = "Autor: " + authorName + " (" + authorCountry + ") - "
 					+ (authorType.equals("Grup") ? "Grup (" + authorMembers + " components) \n" : "Solista \n");
 			
-			for (Map.Entry<String, String> entry : authorAlbums.entrySet())
-				str += entry.getKey() + ": " + entry.getValue() + "\n";
+			for (Album album : authorAlbums) {
+				str += album.getDate() + ": " + album.getName() + "\n";
+			}
 			
-			bf.write(str + "\n");
+			bf.write(str);
 			
 			bf.close();
 			

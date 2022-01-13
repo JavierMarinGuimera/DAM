@@ -8,6 +8,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import classes.Album;
 import classes.Author;
 import exercises.DiscografiaMain;
 
@@ -52,10 +53,11 @@ public class SAXManager extends DefaultHandler {
 		if (qName.equals("Autor")) {
 			System.out.println(authors.get(currentAuthor));
 			System.out.println(DiscografiaMain.SEPARATION + "\n");
+			currentAuthor++;
 		}
 		
 		if (qName.equals("Album")) {
-			authors.get(currentAuthor).setAuthorAlbums(albumDate, albumName);
+			authors.get(currentAuthor).addAuthorAlbum(new Album(albumDate, albumName));
 		}
 
 		currentElement = variables.TRASH;
