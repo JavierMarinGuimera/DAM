@@ -1,6 +1,3 @@
-from typing import final
-
-
 def major_prefix(list_mots):
     prim_mot = list_mots[0]
 
