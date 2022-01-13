@@ -26,7 +26,7 @@ public class DiscografiaMain {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
 		exercise1and2();
-		exercise3();
+//		exercise3();
 	}
 
 	private static void exercise1and2() throws ParserConfigurationException, SAXException, IOException {
@@ -49,9 +49,12 @@ public class DiscografiaMain {
 		for (Author author : authorsList) {
 			System.out.println(author + SEPARATION);
 		}
+		
+		System.out.println("\nParte getElementsByTagName: \n");
+		XMLDOMManager.searchBy(rootNode);
 
-		System.out.println("\n\nEjercicio 2: \n" + SEPARATION);
-		XMLDOMManager.insertAlbum(authorsList);
+//		System.out.println("\n\nEjercicio 2: \n" + SEPARATION);
+//		XMLDOMManager.insertAlbum(authorsList);
 	}
 
 	private static void exercise3() throws ParserConfigurationException, SAXException, IOException {

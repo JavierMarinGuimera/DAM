@@ -120,10 +120,16 @@ public class XMLDOMManager {
 				+ (atributo.equals("Fecha de publicación") ? " ('1985' por ejemplo)" : "") + " quieres buscar?");
 		String resultAttribute = scanner.nextLine().trim();
 
-		for (int i = 0; i < resultAttributeList.getLength(); i++) {
-			System.out.println(resultAttributeList.item(i).getTextContent());
-			if (resultAttribute.equals(resultAttributeList.item(i).getTextContent())) {
+		for (int i = 0; i < resultAttributeList.getLength(); i++) {		
+			Boolean hasFecha = resultAttribute.equals(resultAttributeList.item(i).getAttributes().getNamedItem("data_publicacio").getNodeValue().toString());
+			Boolean hasAlbum = resultAttribute.equals(resultAttributeList.item(i).getTextContent());
+			
+			if (hasFecha || hasAlbum) {
 				System.out.println("El " + atributo.toLowerCase() + " se encuentra en el archivo.");
+				
+				System.out.println("Este es el album que hemos encontrado del artista: ");
+				System.out.println(resultAttributeList.item(i).getAttributes().getNamedItem("data_publicacio").getNodeValue().toString());
+				System.out.println(resultAttributeList.item(i).getTextContent());
 
 				int option;
 				while (true) {
@@ -155,11 +161,10 @@ public class XMLDOMManager {
 						System.out.println("Opción incorrecta!");
 					}
 				}
-				return;
 			}
 		}
 
-		System.out.println("El " + atributo.toLowerCase() + " no se encuentra en el archivo.");
+		System.out.println("El atributo '" + atributo.toLowerCase() + "' no se encuentra en el archivo.");
 	}
 
 	public static void insertAlbum(List<Author> authorsList) {

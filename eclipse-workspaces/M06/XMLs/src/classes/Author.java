@@ -75,10 +75,10 @@ public class Author {
 		
 		try {
 			File file = new File(SAXManager.OUTPUT_TXT_FILE);
-			BufferedWriter bf = new BufferedWriter(new FileWriter(file, true));
+			BufferedWriter bf = new BufferedWriter(new FileWriter(file, false));
 			
 			String str = "Autor: " + authorName + " (" + authorCountry + ") - "
-					+ (authorType.equals("Grup") ? "Grup (" + authorMembers + " components)" : "Solista \n");
+					+ (authorType.equals("Grup") ? "Grup (" + authorMembers + " components) \n" : "Solista \n");
 			
 			for (Map.Entry<String, String> entry : authorAlbums.entrySet())
 				str += entry.getKey() + ": " + entry.getValue() + "\n";
