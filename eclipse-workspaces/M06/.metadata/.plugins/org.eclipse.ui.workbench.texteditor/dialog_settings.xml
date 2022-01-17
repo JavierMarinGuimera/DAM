@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="OUTPUT_TXT_FILE"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="OUTPUT_TXT_FILE"/>
+			<item value="false"/>
+			<item value="NodeList"/>
+			<item value="trim"/>
+			<item value="nextLine"/>
+			<item value="next"/>
+			<item value="new Scanner(System.in);"/>
 			<item value="BufferedWrite"/>
 			<item value="ALPHABET"/>
 			<item value=""/>

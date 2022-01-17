@@ -17,20 +17,15 @@
     <fullyQualifiedTypeName name="java.io.FileReader"/>
     <fullyQualifiedTypeName name="java.io.RandomAccessFile"/>
     <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="globalThings.Libro"/>
     <fullyQualifiedTypeName name="org.w3c.dom.Node"/>
     <fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="org.w3c.dom.Element"/>
     <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
     <fullyQualifiedTypeName name="org.xml.sax.helpers.DefaultHandler"/>
     <fullyQualifiedTypeName name="globalThings.SAXManager"/>
     <fullyQualifiedTypeName name="classes.Author"/>
-    <fullyQualifiedTypeName name="exercises.DiscografiaMain"/>
-    <fullyQualifiedTypeName name="globalThings.XMLDOMManager"/>
     <fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
     <fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilder"/>
     <fullyQualifiedTypeName name="javax.swing.text.Document"/>
@@ -42,4 +37,10 @@
     <fullyQualifiedTypeName name="javax.xml.transform.stream.StreamResult"/>
     <fullyQualifiedTypeName name="javax.xml.parsers.ParserConfigurationException"/>
     <fullyQualifiedTypeName name="javax.xml.transform.TransformerException"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="classes.Album"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="globalThings.XMLDOMManager"/>
+    <fullyQualifiedTypeName name="exercises.DiscografiaMain"/>
 </qualifiedTypeNameHistroy>

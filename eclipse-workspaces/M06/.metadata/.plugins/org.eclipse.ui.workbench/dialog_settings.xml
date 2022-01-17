@@ -16,6 +16,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF1P2_Marín_Javier.zip"/>
 			<item value="D:\IES_Marianao\DAM\Segundo\M06_Acceso_datos\UF1PF_Marín_Javier.zip"/>
 		</list>
 	</section>
