@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="OUTPUT_TXT_FILE"/>
+		<item key="selection" value="ContactosList"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="ContactosList"/>
+			<item value="linea"/>
+			<item value="lector"/>
+			<item value="builder"/>
+			<item value="Album"/>
+			<item value="isNumeric"/>
+			<item value="Author"/>
+			<item value="Map&lt;String, String&gt;"/>
 			<item value="OUTPUT_TXT_FILE"/>
 			<item value="false"/>
 			<item value="NodeList"/>
@@ -15,11 +23,11 @@
 			<item value="nextLine"/>
 			<item value="next"/>
 			<item value="new Scanner(System.in);"/>
-			<item value="BufferedWrite"/>
-			<item value="ALPHABET"/>
-			<item value=""/>
 		</list>
 		<list key="replacehistory">
+			<item value="br"/>
+			<item value="Contacto"/>
+			<item value="HashMap&lt;String, String&gt;"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

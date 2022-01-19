@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import classes.Album;
+import classes.Contacto;
 import classes.Author;
 import exercises.DiscografiaMain;
 
@@ -43,7 +43,7 @@ public class XMLDOMManager {
 				String authorCountry = "";
 				String authorName = "";
 
-				List<Album> authorAlbums = new ArrayList<>();
+				List<Contacto> authorAlbums = new ArrayList<>();
 				NodeList authorChilds = authors.item(i).getChildNodes();
 
 				// FOR that will contain EVERY NODE under the AUTHOR
@@ -55,7 +55,7 @@ public class XMLDOMManager {
 							authorName = node.getTextContent();
 						} else if (node.getNodeName().equals("Album")) {
 							authorAlbums
-									.add(new Album(node.getAttributes().getNamedItem("data_publicacio").getNodeValue(),
+									.add(new Contacto(node.getAttributes().getNamedItem("data_publicacio").getNodeValue(),
 											node.getTextContent()));
 						}
 					}
@@ -210,7 +210,7 @@ public class XMLDOMManager {
 					album.appendChild(doc.createTextNode(nombreAlbum));
 					elements.item(i).getParentNode().appendChild(album);
 					elements.item(i).getParentNode().appendChild(doc.createTextNode("\n"));
-					authorsList.get(i).addAuthorAlbum(new Album(fechaPublicacion, nombreAlbum));
+					authorsList.get(i).addAuthorAlbum(new Contacto(fechaPublicacion, nombreAlbum));
 				}
 
 				foundAuthor = true;
@@ -257,7 +257,7 @@ public class XMLDOMManager {
 			rootElement.appendChild(doc.createTextNode("\n"));
 
 			for (Author author : authorsList) {
-				for (Album album_to_xml : author.getAuthorAlbums()) {
+				for (Contacto album_to_xml : author.getAuthorAlbums()) {
 					Element album = doc.createElement("Album");
 					album.setAttribute("autor", author.getAuthorName());
 					album.setAttribute("data_publicacio", album_to_xml.getDate());

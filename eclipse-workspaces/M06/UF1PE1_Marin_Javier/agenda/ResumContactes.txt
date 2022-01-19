@@ -1,0 +1,34 @@
+Contacte: nif="11111111H"-Juan Gonzalez(Informatica-Sistemes)
+Telèfons: 
+	etiqueta="Feina":trabajoJuan@gmail.com
+Telèfons: 
+	etiqueta="Personal":personalJuan@gmail.com
+---------------------------------------------
+Contacte: nif="22222222F"-David Soler(Fabricacio-Mecanica)
+Telèfons: 
+	etiqueta="Feina":personalDavid@gmail.com
+Telèfons: 
+	etiqueta="Personal":111111111
+---------------------------------------------
+Contacte: nif="33333333R"-Eloy Albiach(Fabricacio-Electricitat)
+Telèfons: 
+	etiqueta="Feina":935555555
+Telèfons: 
+	etiqueta="Personal":222222222
+---------------------------------------------
+Contacte: nif="66666666H"-Guillem Espuig(Informatica-Programacio)
+Telèfons: 
+	etiqueta="Feina":feinaGuillem@gmail.com
+---------------------------------------------
+Contacte: nif="77777777H"-Alex Macia(Informatica-Xarxes)
+Telèfons: 
+	etiqueta="Feina":935555555
+Telèfons: 
+	etiqueta="Personal":personalAlex@gmail.com
+---------------------------------------------
+Contacte: nif="88888888P"-Cristina Ara(Informatica-BD)
+Telèfons: 
+	etiqueta="Feina":feinaCris@gmail.com
+Telèfons: 
+	etiqueta="Personal":personal2Cris@gmail.com
+---------------------------------------------

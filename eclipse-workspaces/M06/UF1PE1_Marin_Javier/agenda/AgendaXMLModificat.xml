@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Agenda xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="AgendaEsquema.xsd">
+	<Contacte>
+		<Identificacio nif="11111111H">
+			<Nom>Juan</Nom>
+			<Cognoms>Gonzalez</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Informatica</Nom>
+			<Assignatura>Sistemes</Assignatura>
+		</Departament>
+		<Telefon etiqueta="Feina">935555555</Telefon>
+		<Correu etiqueta="Feina">trabajoJuan@gmail.com</Correu>
+		<Correu etiqueta="Personal">personalJuan@gmail.com</Correu>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="22222222F">
+			<Nom>David</Nom>
+			<Cognoms>Soler</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Fabricacio</Nom>
+			<Assignatura>Mecanica</Assignatura>
+		</Departament>
+		<Telefon etiqueta="Personal">111111111</Telefon>
+		<Telefon etiqueta="Feina">935555555</Telefon>
+		<Correu etiqueta="Feina">personalDavid@gmail.com</Correu>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="33333333R">
+			<Nom>Eloy</Nom>
+			<Cognoms>Albiach</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Fabricacio</Nom>
+			<Assignatura>Electricitat</Assignatura>
+		</Departament>
+		<Telefon etiqueta="Personal">222222222</Telefon>
+		<Telefon etiqueta="Feina">935555555</Telefon>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="66666666H">
+			<Nom>Guillem</Nom>
+			<Cognoms>Espuig</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Informatica</Nom>
+			<Assignatura>Programacio</Assignatura>
+		</Departament>
+		<Correu etiqueta="Feina">feinaGuillem@gmail.com</Correu>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="77777777H">
+			<Nom>Alex</Nom>
+			<Cognoms>Macia</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Informatica</Nom>
+			<Assignatura>Xarxes</Assignatura>
+		</Departament>
+		<Telefon etiqueta="Personal">936666666</Telefon>
+		<Telefon etiqueta="Feina">935555555</Telefon>
+		<Correu etiqueta="Personal">personalAlex@gmail.com</Correu>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="88888888P">
+			<Nom>Cristina</Nom>
+			<Cognoms>Ara</Cognoms>
+		</Identificacio>
+		<Departament>
+			<Nom>Informatica</Nom>
+			<Assignatura>BD</Assignatura>
+		</Departament>
+		<Telefon etiqueta="Personal">936666666</Telefon>
+		<Telefon etiqueta="Feina">935555555</Telefon>
+		<Correu etiqueta="Feina">feinaCris@gmail.com</Correu>
+		<Correu etiqueta="Personal">personal1Cris@gmail.com</Correu>
+		<Correu etiqueta="Personal">personal2Cris@gmail.com</Correu>
+	</Contacte>
+	<Contacte>
+		<Identificacio nif="12345678X">
+			<Nom>Marga</Nom>
+			<Apellidos>Castañon</Apellidos>
+		</Identificacio>
+		<Departament>
+			<Nom>Informática</Nom>
+			<Assignatura>Programacio</Assignatura>
+		</Departament>
+		<Telefon etiqueta="personal">444444444</Telefon>
+	</Contacte>
+</Agenda>

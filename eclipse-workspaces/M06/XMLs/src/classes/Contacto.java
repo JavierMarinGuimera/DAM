@@ -1,10 +1,10 @@
 package classes;
 
-public class Album {
+public class Contacto {
 	private String date;
 	private String name;
 
-	public Album(String date, String name) {
+	public Contacto(String date, String name) {
 		super();
 		this.date = date;
 		this.name = name;

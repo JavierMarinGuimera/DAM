@@ -15,13 +15,13 @@ public class Author {
 	private String authorMembers;
 	private String authorCountry;
 	private String authorName;
-	private List<Album> authorAlbums = new ArrayList<>();
+	private List<Contacto> authorAlbums = new ArrayList<>();
 
 	public Author() {
 	}
 
 	public Author(String authorType, String authorMembers, String authorCountry, String authorName,
-			List<Album> authorAlbums) {
+			List<Contacto> authorAlbums) {
 		this.authorType = authorType;
 		this.authorMembers = authorMembers;
 		this.authorCountry = authorCountry;
@@ -62,15 +62,15 @@ public class Author {
 		this.authorName = authorName;
 	}
 
-	public List<Album> getAuthorAlbums() {
+	public List<Contacto> getAuthorAlbums() {
 		return authorAlbums;
 	}
 	
-	public void setAuthorAlbums(List<Album> albums) {
+	public void setAuthorAlbums(List<Contacto> albums) {
 		this.authorAlbums = albums;
 	}
 
-	public void addAuthorAlbum(Album album) {
+	public void addAuthorAlbum(Contacto album) {
 		this.authorAlbums.add(album);
 	}
 
@@ -84,7 +84,7 @@ public class Author {
 			String str = "Autor: " + authorName + " (" + authorCountry + ") - "
 					+ (authorType.equals("Grup") ? "Grup (" + authorMembers + " components) \n" : "Solista \n");
 			
-			for (Album album : authorAlbums) {
+			for (Contacto album : authorAlbums) {
 				str += album.getDate() + ": " + album.getName() + "\n";
 			}
 			

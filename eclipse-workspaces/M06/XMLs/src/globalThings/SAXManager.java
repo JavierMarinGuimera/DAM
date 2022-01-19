@@ -8,7 +8,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import classes.Album;
+import classes.Contacto;
 import classes.Author;
 import exercises.DiscografiaMain;
 
@@ -57,7 +57,7 @@ public class SAXManager extends DefaultHandler {
 		}
 		
 		if (qName.equals("Album")) {
-			authors.get(currentAuthor).addAuthorAlbum(new Album(albumDate, albumName));
+			authors.get(currentAuthor).addAuthorAlbum(new Contacto(albumDate, albumName));
 		}
 
 		currentElement = variables.TRASH;
