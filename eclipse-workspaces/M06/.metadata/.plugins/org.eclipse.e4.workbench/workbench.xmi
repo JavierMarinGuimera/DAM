@@ -804,7 +804,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_TKefonSMEey2sdgoE6E7Kg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_bGKhcHk6EeyqKJYVtntIuA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_Oqvl03SMEey2sdgoE6E7Kg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ppC14HlXEeyZA8J17IV73A" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_Oqvl03SMEey2sdgoE6E7Kg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_TKefo3SMEey2sdgoE6E7Kg" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -844,7 +844,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_TKefqnSMEey2sdgoE6E7Kg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_bGTrYHk6EeyqKJYVtntIuA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_OqvlenSMEey2sdgoE6E7Kg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ppGgQHlXEeyZA8J17IV73A" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_OqvlenSMEey2sdgoE6E7Kg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_TKefq3SMEey2sdgoE6E7Kg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -3378,6 +3378,13 @@
   <commands xmi:id="_TIm3bnSMEey2sdgoE6E7Kg" elementId="AUTOGEN:::org.eclipse.mylyn.tasks.ui.actions.view/org.eclipse.mylyn.context.ui.actions.tasklist.focus" commandName="Focus on Workweek" description="Focus on Workweek" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
   <commands xmi:id="_TIm3b3SMEey2sdgoE6E7Kg" elementId="AUTOGEN:::org.eclipse.pde.ui.logViewActions/org.eclipse.jdt.debug.ui.LogViewActions.showStackTrace" commandName="Show Stack Trace in Console View" description="Show Stack Trace in Console View" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
   <commands xmi:id="_TIm3cHSMEey2sdgoE6E7Kg" elementId="AUTOGEN:::org.eclipse.ui.articles.action.contribution.view/org.eclipse.wst.wsi.ui.internal.actions.actionDelegates.ValidateWSIProfileActionDelegate" commandName="WS-I Profile Validator" description="Validate WS-I Message Log File" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
+  <commands xmi:id="_pVoxsHlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.ViewAdminConsoleCommand" commandName="View Admin Console" description="View Admin Console" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
+  <commands xmi:id="_pVpYwHlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.OpenUrlCommand" commandName="OpenUrlCommand" category="_OqRq-HSMEey2sdgoE6E7Kg">
+    <parameters xmi:id="_pVpYwXlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.urlParam" name="url" optional="false"/>
+  </commands>
+  <commands xmi:id="_pVpYwnlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.ViewLogCommand" commandName="View Log File" description="View Log File" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
+  <commands xmi:id="_pVpYw3lXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.OpenServerHomeCommand" commandName="OpenServerHomeCommand" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
+  <commands xmi:id="_pVpYxHlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.OpenDomainHomeCommand" commandName="OpenDomainHomeCommand" category="_OqRq-HSMEey2sdgoE6E7Kg"/>
   <addons xmi:id="_OmiabXSMEey2sdgoE6E7Kg" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_OmiabnSMEey2sdgoE6E7Kg" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Omiab3SMEey2sdgoE6E7Kg" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -3389,7 +3396,7 @@
   <addons xmi:id="_OmiadXSMEey2sdgoE6E7Kg" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_OmiadnSMEey2sdgoE6E7Kg" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_OnHCIHSMEey2sdgoE6E7Kg" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_anTbMHk6EeyqKJYVtntIuA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_OqRq4HSMEey2sdgoE6E7Kg" elementId="org.eclipse.ui.category.edit" name="Edit"/>
   <categories xmi:id="_OqRq4XSMEey2sdgoE6E7Kg" elementId="org.eclipse.mylyn.wikitext.ui.editor.category" name="WikiText Markup Editing Commands" description="commands for editing lightweight markup"/>
@@ -3445,4 +3452,5 @@
   <categories xmi:id="_OqRrE3SMEey2sdgoE6E7Kg" elementId="org.eclipse.lsp4e.commandCategory" name="Command"/>
   <categories xmi:id="_OqRrFHSMEey2sdgoE6E7Kg" elementId="org.eclipse.jdt.ui.category.source" name="Source" description="Java Source Actions"/>
   <categories xmi:id="_OqRrFXSMEey2sdgoE6E7Kg" elementId="org.eclipse.pde.runtime.spy.commands.category" name="Spy"/>
+  <categories xmi:id="_pVm8gXlXEeyZA8J17IV73A" elementId="org.eclipse.payara.tools.commands.category" name="glassfish-commands"/>
 </application:Application>

@@ -40,4 +40,12 @@
 			<item value="D:\IES_Marianao\DAW\Segundo\M03_Programación\UF4_Programación orientada a objectos (POO). Fundamentos\UF4P_Marín_Javier.zip"/>
 		</list>
 	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="652"/>
+		<item key="DIALOG_Y_ORIGIN" value="341"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
 </section>

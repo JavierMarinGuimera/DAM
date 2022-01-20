@@ -23,6 +23,7 @@ public class TestResourceSaver {
        saver.addResourceType("video/.*", "videos");
 
        saver.createFolderTree();
+       
 	   save("ftp://mirror.vexxhost.com/apache/activemq/apache-nms/1.6.0/Apache.NMS-1.6.0-src.zip", saver);
 	   save("http://mirror.team-cymru.org/ubuntu/indices/override.breezy-backports.extra.main", saver);
 	   save("http://www.nic.funet.fi/pub/gnu/ftp.gnu.org/pub/gnu/Licenses/lgpl-2.1.txt", saver);
