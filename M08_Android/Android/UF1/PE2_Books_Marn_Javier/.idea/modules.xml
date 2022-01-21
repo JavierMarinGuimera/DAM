@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PE2_Books_Marín_Javier.iml" filepath="$PROJECT_DIR$/.idea/modules/PE2_Books_Marín_Javier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PE2_Books_Marín_Javier.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PE2_Books_Marín_Javier.app.iml" />
+    </modules>
+  </component>
+</project>
