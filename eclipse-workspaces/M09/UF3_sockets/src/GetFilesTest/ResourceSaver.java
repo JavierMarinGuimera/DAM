@@ -1,10 +1,9 @@
 package GetFilesTest;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -57,7 +56,10 @@ public class ResourceSaver {
 		}
 
 		for (Entry<String, String> entry : resourcesTypes.entrySet()) {
-			new File(SOURCE_DIRECTORY + entry.getValue()).mkdir();
+			File endFolder = new File(SOURCE_DIRECTORY + entry.getValue());
+			if (!endFolder.exists()) {
+				endFolder.mkdir();
+			}
 			System.out.println("Created " + entry.getValue() + " folder!");
 		}
 	}
@@ -78,27 +80,20 @@ public class ResourceSaver {
 				break;
 			}
 		}
-
+		
 		File outputFile = new File(SOURCE_DIRECTORY + endFolder + "/" + fileName);
 
-		System.out.println("El archivo se va a guardar en la carpeta: directories/" + endFolder);
+		System.out.println("El archivo se va a guardar en la ca"
+				+ "rpeta: directories/" + endFolder);
 
 		// Coger stream.
 		InputStream commingFile = url.openStream();
-		InputStreamReader isr = new InputStreamReader(commingFile);
-		FileWriter fw = new FileWriter(outputFile);
+		FileOutputStream fos = new FileOutputStream(outputFile);
 
-		// Leer y escribir en fichero.
-		char[] cbuf = new char[512];
-		int readedChars;
-		while ((readedChars = isr.read(cbuf)) != -1) {
-			fw.write(cbuf, 0, readedChars);
-		}
+		commingFile.transferTo(fos);
+		
+		fos.close();
 
-		fw.close();
-
-		System.out.println(con.getContentLength());
-		System.out.println(outputFile.length());
 		System.out.println("Fichero descargado con éxito!\n");
 	}
 

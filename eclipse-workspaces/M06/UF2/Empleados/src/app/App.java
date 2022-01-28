@@ -32,38 +32,43 @@ public class App {
 		}
 	}
 
-	private static void selectGroupingBy(Connection con) throws SQLException {
-		// Query to execute:
-		String sql = "SELECT dept.dnombre, em.emp_no, em.apellido, em.oficio, em2.apellido, em.salario, em.comision "
-				+ "FROM empleados em JOIN empleados em2 ON em.dir = em2.emp_no JOIN departamentos dept ON em.dept_no = dept.dept_no "
-				+ "GROUP BY em.dept_no  ";
-		Statement st = con.createStatement();
-
-		executeAndPrintResults(st, sql);
-	}
-
-	// SELECT ALL
 	private static void selectAll(Connection con) throws SQLException {
 		// Query to execute:
 		String sql = "SELECT * FROM departamentos";
 		Statement st = con.createStatement();
 
-		executeAndPrintResults(st, sql);
+		ResultSet resultat = st.executeQuery(sql);
+		System.out.println("Select all:");
+		while (resultat.next()) {
+			System.out.println("Codi departament: " + resultat.getInt(1) + " Nom: " + resultat.getString(2));
+		}
+		System.out.println("------------------------------");
 	}
 
 	private static void selectDept_no(Connection con) throws SQLException {
 		// Query to execute:
-		String sql = "SELECT * FROM departamentos WHERE dept_no = ?;";
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, 10);
+		String sql = "SELECT * FROM departamentos WHERE dept_no = ?";
+		PreparedStatement pst = con.prepareStatement(sql);
+		pst.setInt(1, 10);
 
-		executeAndPrintResults(st, sql);
+		ResultSet resultat = pst.executeQuery();
+		while (resultat.next()) {
+			System.out.println("Codi departament: " + resultat.getString(1) + " Nom: " + resultat.getString(2));
+		}
+		
+//		executeAndPrintResults(st, sql);
 	}
+	
+	private static void selectGroupingBy(Connection con) throws SQLException {
+		// Query to execute:
+		String sql = "SELECT dept.dnombre, em1.emp_no, em1.apellido, em1.oficio, em2.apellido, em1.salario, em1.comision " + 
+				"FROM empleados em2 JOIN empleados em1 ON em2.emp_no = em1.dir JOIN departamentos dept ON em1.dept_no = dept.dept_no " +
+				"GROUP BY dept.dnombre";
+		Statement st = con.createStatement();
 
-	private static void executeAndPrintResults(Statement st, String sql) throws SQLException {
 		ResultSet resultat = st.executeQuery(sql);
 		while (resultat.next()) {
-			System.out.println("Codi departament: " + resultat.getInt(1) + " Nom: " + resultat.getString(2));
+			System.out.println("Codi departament: " + resultat.getString(1) + " Nom: " + resultat.getString(2));
 		}
 	}
 

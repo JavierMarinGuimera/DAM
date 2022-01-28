@@ -30,10 +30,10 @@ public class TestResourceSaver {
                 saver);
         save("http://www.nic.funet.fi/pub/gnu/ftp.gnu.org/pub/gnu/Licenses/lgpl-2.1.txt", saver);
         save("ftp://ftp.man.lodz.pl/pub/security/README.html", saver);
-        save("http://www.uscis.gov/files/form/i-9.pdf", saver);
-        save("http://farm8.staticflickr.com/7076/7301495298_ee121d2013_s_d.jpg",
+        save("https://www.uscis.gov/files/form/i-9.pdf", saver);
+        save("https://farm8.staticflickr.com/7076/7301495298_ee121d2013_s_d.jpg",
                 saver);
-        save("http://www.mediacollege.com/downloads/sound-effects/city/traffic-02.mp3",
+        save("https://www.mediacollege.com/downloads/sound-effects/city/traffic-02.mp3",
                 saver);
         save("http://archive.org/download/TheCaseOfTheKangarooKid1963/TheKangarooKid.mp4",
                 saver);
