@@ -10,10 +10,10 @@ public class Empleado {
     private Date fecha_alt;
     private double salario;
     private double comision;
-    private Departamento departamento;
+    private int dept_no;
 
     public Empleado(int emp_no, String apellido, String oficio, int dir, Date fecha_alt, double salario,
-            double comision, Departamento departamento) {
+            double comision, int dept_no) {
         this.emp_no = emp_no;
         this.apellido = apellido;
         this.oficio = oficio;
@@ -21,7 +21,7 @@ public class Empleado {
         this.fecha_alt = fecha_alt;
         this.salario = salario;
         this.comision = comision;
-        this.departamento = departamento;
+        this.dept_no = dept_no;
     }
 
     public int getEmp_no() {
@@ -80,19 +80,19 @@ public class Empleado {
         this.comision = comision;
     }
 
-    public Departamento getDepartamento() {
-        return this.departamento;
+    public int getDept_no() {
+        return this.dept_no;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setDepartamento(int dept_no) {
+        this.dept_no = dept_no;
     }
 
     @Override
     public String toString() {
         return "Empleado: {Nº:" + this.emp_no + ", apellidos: " + this.apellido + ", oficio: " + this.oficio
                 + ", director: " + this.dir + ", fecha alta: " + this.fecha_alt + ", salario: " + this.salario
-                + ", comisión: " + this.comision + "}, \n\t" + this.departamento;
+                + ", comisión: " + this.comision + ", departamento: " + this.dept_no + "}";
     }
 
 }

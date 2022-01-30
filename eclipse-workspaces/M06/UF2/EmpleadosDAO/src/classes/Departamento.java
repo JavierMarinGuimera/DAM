@@ -2,22 +2,22 @@ package classes;
 
 public class Departamento {
 
-    private int id;
+    private int dept_no;
     private String name;
     private String ioc;
 
-    public Departamento(int id, String name, String ioc) {
-        this.id = id;
+    public Departamento(int dept_no, String name, String ioc) {
+        this.dept_no = dept_no;
         this.name = name;
         this.ioc = ioc;
     }
 
-    public int getId() {
-        return this.id;
+    public int getDept_no() {
+        return this.dept_no;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDept_no(int dept_no) {
+        this.dept_no = dept_no;
     }
 
     public String getName() {
@@ -38,7 +38,7 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento: {Nº: " + this.id + ", nombre: " + this.name + ", Ioc: " + this.ioc + "}.";
+        return "Departamento: {Nº: " + this.dept_no + ", nombre: " + this.name + ", Ioc: " + this.ioc + "}.";
     }
 
 }
