@@ -18,8 +18,6 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:paddingHorizontal="10dp"
-            android:paddingStart="10dp"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -46,8 +43,10 @@
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:background="@color/purpleSoft"
+            android:backgroundTintMode="screen"
             android:orientation="vertical"
+            android:padding="5dp"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,17 +55,61 @@
 
             <TextView
                 android:id="@+id/songName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@color/purpleDark"
+                android:padding="2dp"
+                android:text="@string/songText"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/rewindSongBtn"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/purpleDark"
+                    android:baselineAligned="false"
+                    android:contentDescription="@string/rewindSong"
+                    android:maxWidth="10dp"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    android:src="@drawable/ic_backward_solid" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="7"
+                    android:baselineAligned="false" />
+
+                <ImageButton
+                    android:id="@+id/advanceSongBtn"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/purpleDark"
+                    android:baselineAligned="false"
+                    android:contentDescription="@string/advanceSong"
+                    android:maxWidth="10dp"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    android:src="@drawable/ic_forward_solid" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,59 +118,44 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/lastSongBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:contentDescription="Play Button"
-                    android:maxWidth="10dp"
+                    android:backgroundTint="@color/purpleDark"
+                    android:contentDescription="@string/lastSong"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_play" />
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    app:srcCompat="@drawable/ic_fast_backward_solid"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/playSongBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:contentDescription="Play Button"
+                    android:backgroundTint="@color/purpleDark"
+                    android:contentDescription="@string/playSong"
                     android:maxWidth="10dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_play" />
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    android:src="@drawable/ic_play"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/nextSongBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:contentDescription="Play Button"
-                    android:maxWidth="10dp"
+                    android:backgroundTint="@color/purpleDark"
+                    android:contentDescription="@string/nextSong"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_play" />
-
-                <ImageButton
-                    android:id="@+id/imageButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:contentDescription="Play Button"
-                    android:maxWidth="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_play" />
-
-                <ImageButton
-                    android:id="@+id/imageButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:contentDescription="Play Button"
-                    android:maxWidth="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_play" />
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    app:srcCompat="@drawable/ic_fast_forward_solid"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
         </LinearLayout>

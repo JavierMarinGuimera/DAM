@@ -10,7 +10,7 @@ public interface DepartamentosDAO {
     // Basic DAO methods:
     public void selectAll(Connection con) throws SQLException;
 
-    public boolean selectOne(Connection con, int id) throws SQLException;
+    public Departamento selectOne(Connection con, int id) throws SQLException;
 
     public void insertOne(Connection con, Departamento dep) throws SQLException;
 

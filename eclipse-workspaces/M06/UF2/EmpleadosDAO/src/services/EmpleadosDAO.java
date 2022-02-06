@@ -3,16 +3,20 @@ package services;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import classes.Empleado;
+
 /**
  * EmpleadosDAO
  */
 
 public interface EmpleadosDAO {
 
-    // Basic DAO methods:
+    /*
+     * BASIC DAO METHODS:
+     */
     public void selectAll(Connection con) throws SQLException;
 
-    public boolean selectOne(Connection con, int emp_no) throws SQLException;
+    public Empleado selectOne(Connection con, int emp_no) throws SQLException;
 
     public void insertOne(Connection con) throws SQLException;
 
@@ -20,7 +24,11 @@ public interface EmpleadosDAO {
 
     public void deleteOne(Connection con) throws SQLException;
 
-    // Custom methods:
+    /*
+     * CUSTOM METHODS:
+     */
+    public void selectXJefes(Connection con) throws SQLException;
+
     public void selectGroupingBy(Connection con) throws SQLException;
 
     public void selectByDepartamento(Connection con, int dept_no) throws SQLException;

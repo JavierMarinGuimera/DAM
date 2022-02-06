@@ -32,7 +32,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     }
 
     @Override
-    public boolean selectOne(Connection con, int dept_no) throws SQLException {
+    public Departamento selectOne(Connection con, int dept_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM departamentos WHERE dept_no = ?";
         PreparedStatement st = con.prepareStatement(sql);
@@ -44,17 +44,17 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
                     result.getInt(1), result.getString(2), result.getString(3));
             System.out.println(dept);
             result.close();
-            return true;
+            return dept;
         }
 
         result.close();
         st.close();
-        return false;
+        return null;
     }
 
     @Override
     public void insertOne(Connection con, Departamento dep) throws SQLException {
-        if (!selectOne(con, dep.getDept_no())) {
+        if (selectOne(con, dep.getDept_no()) == null) {
             String sql = "INSERT INTO depLEADOS (`dep_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, dep.getDept_no());
@@ -70,7 +70,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
 
     @Override
     public void updateOne(Connection con, int dept_no) throws SQLException {
-        if (selectOne(con, dept_no)) {
+        if (selectOne(con, dept_no) != null) {
             String sql = "UPDATE empleados SET dnombre = 'MODIFIED' WHERE  dept_no = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, dept_no);
@@ -84,7 +84,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
 
     @Override
     public void deleteOne(Connection con, int dept_no) throws SQLException {
-        if (selectOne(con, dept_no)) {
+        if (selectOne(con, dept_no) != null) {
             String sql = "DELETE FROM departamentos WHERE dept_no = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, dept_no);

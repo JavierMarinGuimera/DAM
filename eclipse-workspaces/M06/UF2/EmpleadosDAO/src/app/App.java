@@ -9,9 +9,7 @@ import java.util.Scanner;
 
 import classes.Departamento;
 import classes.Empleado;
-import impl.DepartamentosDAOImpl;
 import impl.EmpleadosDAOImpl;
-import services.DepartamentosDAO;
 import services.EmpleadosDAO;
 
 public class App {
@@ -35,7 +33,10 @@ public class App {
 
 			// New object of the DAO:
 			EmpleadosDAO empDAO = new EmpleadosDAOImpl();
-			DepartamentosDAO depDAO = new DepartamentosDAOImpl();
+
+			System.out.println("También he hecho el DAO de Departamentos.");
+			System.out.print("");
+			// DepartamentosDAO depDAO = new DepartamentosDAOImpl();
 
 			// Select of every employee and departament
 			// System.out.println("Todos los datos:");
@@ -45,34 +46,40 @@ public class App {
 
 			// Ejercicio 4:
 			System.out.println("Ejercicio 4.1: ");
-			depDAO.selectOne(con, 30);
+			// depDAO.selectOne(con, 30);
 
 			System.out.println("Ejercicio 4.2");
 			empDAO.selectGroupingBy(con);
 
 			// Ejercicio 5:
 			System.out.println("Ejercicio 5.1:");
-			empDAO.selectByDepartamento(con, 20);
+			// empDAO.selectByDepartamento(con, 20);
 
 			System.out.println("Ejercicio 5.2:");
-			empDAO.selectByApellido(con, "SAN");
+			// empDAO.selectByApellido(con, "SAN");
 
 			System.out.println("Ejercicio 5.3:");
-			empDAO.selectByOficio(con);
+			// empDAO.selectByOficio(con);
 
 			// Ejercicio 6:
 			System.out.println("Ejercicio 6.1:");
 			// empDAO.insertOne(con);
 
 			System.out.println("Ejercicio 6.2:");
-			empDAO.deleteOne(con);
+			// empDAO.deleteOne(con);
 
 			// Ejercicio 7:
 			System.out.println("Ejercicio 7: ");
-			empDAO.alterColumns(con, "add", "nombre");
+			// empDAO.alterColumns(con, "add", "nombre");
+			// empDAO.alterColumns(con, "drop", "nombre");
 
 			// Ejercicio 8:
 			System.out.println("Ejercicio 8: ");
+			// myCon.DBData(con);
+
+			// Ejercicio EXTRA:
+			System.out.println("Ejercicio EXTRA: ");
+			// empDAO.selectXJefes(con);
 
 			sc.close();
 		} catch (SQLException e) {

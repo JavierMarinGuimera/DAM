@@ -19,6 +19,10 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     private static final String FOUND = "El empleado ya se encuentra en la base de datos.";
     private static final String NOT_FOUND = "El empleado no se encuentra en la base de datos.";
 
+    /*
+     * BASIC DAO METHODS:
+     */
+
     @Override
     public void selectAll(Connection con) throws SQLException {
 
@@ -34,13 +38,13 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
                     result.getInt(6), result.getInt(7), result.getInt(8)));
         }
 
-        System.out.println("Select all 'empleados' operation done!");
+        System.out.println("Operación Select all 'empleados' completada!");
         result.close();
         st.close();
     }
 
     @Override
-    public boolean selectOne(Connection con, int emp_no) throws SQLException {
+    public Empleado selectOne(Connection con, int emp_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM empleados WHERE emp_no = ?";
         PreparedStatement st = con.prepareStatement(sql);
@@ -54,11 +58,11 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
             System.out.println(emp);
             result.close();
             st.close();
-            return true;
+            return emp;
         }
         result.close();
         st.close();
-        return false;
+        return null;
     }
 
     @Override
@@ -91,8 +95,8 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
                 DepartamentosDAO depDAO = new DepartamentosDAOImpl();
 
-                if ((dir == 0 || selectOne(con, dir)) && depDAO.selectOne(con, emp.getDept_no())) {
-                    if (!selectOne(con, emp.getEmp_no())) {
+                if ((dir == 0 || selectOne(con, dir) != null) && depDAO.selectOne(con, emp.getDept_no()) != null) {
+                    if (selectOne(con, emp.getEmp_no()) != null) {
                         String sql = "INSERT INTO EMPLEADOS (`emp_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement st = con.prepareStatement(sql);
                         st.setInt(1, emp.getEmp_no());
@@ -128,7 +132,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
     @Override
     public void updateOne(Connection con, int emp_no) throws SQLException {
-        if (selectOne(con, emp_no)) {
+        if (selectOne(con, emp_no) != null) {
             String sql = "UPDATE empleados SET apellido = 'MODIFIED' WHERE emp_no = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, emp_no);
@@ -146,21 +150,26 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
         while (true) {
             try {
-                System.out.print("Nº de empleado: ");
+                System.out.print("Nº de empleado (0 para no eliminar empleado): ");
                 int emp_no = Integer.parseInt(sc.nextLine());
 
-                if (selectOne(con, emp_no)) {
-                    String sql = "DELETE FROM empleados WHERE emp_no = ?";
-                    PreparedStatement st = con.prepareStatement(sql);
-                    st.setInt(1, emp_no);
-
-                    st.executeUpdate();
-                    st.close();
-
-                    System.out.println("Empleado eliminado con éxito!");
+                if (emp_no == 0) {
+                    System.out.println("No se han eliminado empleados");
                     break;
                 } else {
-                    System.out.println(NOT_FOUND);
+                    if (selectOne(con, emp_no) != null) {
+                        String sql = "DELETE FROM empleados WHERE emp_no = ?";
+                        PreparedStatement st = con.prepareStatement(sql);
+                        st.setInt(1, emp_no);
+
+                        st.executeUpdate();
+                        st.close();
+
+                        System.out.println("Empleado eliminado con éxito!");
+                        break;
+                    } else {
+                        System.out.println(NOT_FOUND);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Debes introducir un número de empleado correcto.");
@@ -168,10 +177,60 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         }
     }
 
+    /*
+     * CUSTOM METHODS:
+     */
+
+    @Override
+    public void selectXJefes(Connection con) throws SQLException {
+        Scanner sc = App.sc;
+
+        int emp_no;
+        int countJefes;
+
+        while (true) {
+            try {
+                System.out.print("Nº de empleado por el que empezar a buscar: ");
+                emp_no = Integer.parseInt(sc.nextLine().trim());
+
+                System.out.print("Cúantos jefes quieres leer? (0 para todos hasta el director general): ");
+                countJefes = Integer.parseInt(sc.nextLine().trim());
+
+                if (countJefes == 0)
+                    countJefes = -1;
+                break;
+            } catch (Exception e) {
+                System.out.println("Debes introducir valores correctos!");
+            }
+        }
+
+        System.out.print("Empezamos por este empleado: ");
+        Empleado emp = selectOne(con, emp_no);
+
+        do {
+            if (countJefes != -1) {
+                countJefes--;
+            }
+
+            System.out.print("\nEl director de " + emp.getApellido() + " es: ");
+            Empleado currentDirector = selectOne(con, emp.getDir());
+
+            if (currentDirector != null && currentDirector.getDir() == Types.NULL) {
+                System.out.println("\n" + currentDirector.getApellido() + " es el director general.");
+                break;
+            } else if (currentDirector == null) {
+                System.out.println("Él mismo!");
+                break;
+            }
+
+            emp = currentDirector;
+        } while (countJefes == -1 || countJefes > 0);
+    }
+
     @Override
     public void selectGroupingBy(Connection con) throws SQLException {
         // Query to execute:
-        String sql = "SELECT dept.dnombre, em1.dept_no, em1.apellido as Empleado, em1.oficio, em2.apellido AS Jefe, em1.salario, em1.comision FROM empleados em2 JOIN empleados em1 ON em2.emp_no = em1.dir JOIN departamentos dept ON em1.dept_no = dept.dept_no";
+        String sql = "SELECT dept.dnombre, em1.dept_no, em1.apellido as Empleado, em1.oficio, em2.apellido AS Jefe, em1.salario, em1.comision FROM empleados em2 JOIN empleados em1 ON em2.emp_no = em1.dir JOIN departamentos dept ON em1.dept_no = dept.dept_no GROUP BY dept.dept_no";
 
         PreparedStatement st = con.prepareStatement(sql);
 
@@ -282,19 +341,18 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         String sql = "";
 
         if (operation.toLowerCase().equals("add")) {
-            sql = "ALTER TABLE empleados ADD ? varchar(10)";
-            System.out.println("Columna añadida con éxito");
+            sql = "ALTER TABLE empleados ADD " + column + " varchar(10)";
         } else if (operation.toLowerCase().equals("drop")) {
-            sql = "ALTER TABLE empleados DROP COLUMN ? ";
-            System.out.println("Columna eliminada con éxito");
+            sql = "ALTER TABLE empleados DROP COLUMN " + column;
         } else {
             System.out.println("Opción errónea de alter columns.");
         }
 
         PreparedStatement st = con.prepareStatement(sql);
-        st.setString(1, column);
 
-        st.executeQuery();
+        st.executeUpdate();
         st.close();
+        System.out.println("Columna " + column + " " + (operation.toLowerCase().equals("add") ? "añadida" : "eliminada")
+                + " con éxito!");
     }
 }
