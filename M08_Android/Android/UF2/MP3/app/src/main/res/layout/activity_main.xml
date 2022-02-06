@@ -26,12 +26,11 @@
 
         <ListView
             android:id="@+id/musicList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/btnsLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,7 @@
         </ListView>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/btnsLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/purpleSoft"
@@ -62,13 +61,13 @@
                 android:padding="2dp"
                 android:text="@string/songText"
                 android:textAlignment="center"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/gray"
+                android:background="@color/purpleDark"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -87,7 +86,7 @@
                     android:src="@drawable/ic_backward_solid" />
 
                 <SeekBar
-                    android:id="@+id/seekBar"
+                    android:id="@+id/songSeekBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -115,6 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/purpleDark"
                 android:orientation="horizontal">
 
                 <ImageButton
