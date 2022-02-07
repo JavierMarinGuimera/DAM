@@ -33,9 +33,6 @@ public class App {
 
 			// New object of the DAO:
 			EmpleadosDAO empDAO = new EmpleadosDAOImpl();
-
-			System.out.println("También he hecho el DAO de Departamentos.");
-			System.out.print("");
 			// DepartamentosDAO depDAO = new DepartamentosDAOImpl();
 
 			// Select of every employee and departament

@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item alignment="Qt::AlignVCenter">
+    <item>
      <widget class="QPlainTextEdit" name="te_desxifrat">
       <property name="placeholderText">
        <string>Texto para encriptar...</string>
@@ -61,7 +61,7 @@
       </item>
      </layout>
     </item>
-    <item alignment="Qt::AlignVCenter">
+    <item>
      <widget class="QPlainTextEdit" name="te_xifrat">
       <property name="placeholderText">
        <string>Texto para desencriptar...</string>
