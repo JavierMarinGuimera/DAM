@@ -9,7 +9,7 @@ class Encrypter(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ex10/ui/p10_JMG_cifrador.ui', self)
+        uic.loadUi('ui/p10_JMG_cifrador.ui', self)
         self.setWindowTitle('Encriptar - desencriptar')
         self.sb_clau.setValue(11)
         self.sb_clau.setMinimum(1)
@@ -23,6 +23,7 @@ class Encrypter(QMainWindow):
             self.close()
 
     def codificar(self):
+        print(len(self.alfabet))
         buttonPressed = self.sender().objectName()
         clau = self.sb_clau.value()
 

@@ -12,6 +12,7 @@ public class ClientRunner {
 			prg.init("localhost", ServerRunner.PORT);
 			prg.runClient();
 		} catch (IOException ex) {
+			ex.printStackTrace();
 			System.out.println("Error rebent o enviant");
 		}
 	}

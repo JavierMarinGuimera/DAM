@@ -24,15 +24,19 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
      */
 
     @Override
-    public void selectAll(Connection con) throws SQLException {
+    public List<Empleado> selectAll() throws SQLException {
 
         // Query to execute:
         String sql = "SELECT * FROM empleados";
-        PreparedStatement st = con.prepareStatement(sql);
+        Connection con = App.daoConnection.getConnection();
 
+        PreparedStatement st = con.prepareStatement(sql);
         ResultSet result = st.executeQuery();
+        con.close();
+
+        List<Empleado> empleados = new ArrayList<>();
         while (result.next()) {
-            App.empleados.add(new Empleado(
+            empleados.add(new Empleado(
                     result.getInt(1), result.getString(2),
                     result.getString(3), result.getInt(4), result.getDate(5),
                     result.getInt(6), result.getInt(7), result.getInt(8)));
@@ -41,16 +45,21 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         System.out.println("Operación Select all 'empleados' completada!");
         result.close();
         st.close();
+
+        return empleados;
     }
 
     @Override
-    public Empleado selectOne(Connection con, int emp_no) throws SQLException {
+    public Empleado selectOne(int emp_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM empleados WHERE emp_no = ?";
+
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, emp_no);
 
         ResultSet result = st.executeQuery();
+        con.close();
         while (result.next()) {
             Empleado emp = new Empleado(
                     result.getInt(1), result.getString(2), result.getString(3), result.getInt(4), result.getDate(5),
@@ -66,7 +75,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void insertOne(Connection con) throws SQLException {
+    public Enum insertOne() throws SQLException {
         System.out.println("Vamos a crear un usuario nuevo. Introduce los datos:");
 
         Scanner sc = App.sc;
@@ -95,9 +104,10 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
                 DepartamentosDAO depDAO = new DepartamentosDAOImpl();
 
-                if ((dir == 0 || selectOne(con, dir) != null) && depDAO.selectOne(con, emp.getDept_no()) != null) {
-                    if (selectOne(con, emp.getEmp_no()) != null) {
+                if ((dir == 0 || selectOne(dir) != null) && depDAO.selectOne(emp.getDept_no()) != null) {
+                    if (selectOne(emp.getEmp_no()) != null) {
                         String sql = "INSERT INTO EMPLEADOS (`emp_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        Connection con = App.daoConnection.getConnection();
                         PreparedStatement st = con.prepareStatement(sql);
                         st.setInt(1, emp.getEmp_no());
                         st.setString(2, emp.getApellido());
@@ -116,8 +126,8 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
                         st.executeUpdate();
                         st.close();
-                        System.out.println("Usuario creado con éxito!");
-                        break;
+                        con.close();
+                        return true;
                     } else {
                         System.out.println(FOUND);
                     }
@@ -131,21 +141,23 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void updateOne(Connection con, int emp_no) throws SQLException {
-        if (selectOne(con, emp_no) != null) {
+    public void updateOne(int emp_no) throws SQLException {
+        if (selectOne(emp_no) != null) {
             String sql = "UPDATE empleados SET apellido = 'MODIFIED' WHERE emp_no = ?";
+            Connection con = App.daoConnection.getConnection();
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, emp_no);
 
             st.executeQuery();
             st.close();
+            con.close();
         } else {
             System.out.println(NOT_FOUND);
         }
     }
 
     @Override
-    public void deleteOne(Connection con) throws SQLException {
+    public void deleteOne() throws SQLException {
         Scanner sc = App.sc;
 
         while (true) {
@@ -157,14 +169,15 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
                     System.out.println("No se han eliminado empleados");
                     break;
                 } else {
-                    if (selectOne(con, emp_no) != null) {
+                    if (selectOne(emp_no) != null) {
                         String sql = "DELETE FROM empleados WHERE emp_no = ?";
+                        Connection con = App.daoConnection.getConnection();
                         PreparedStatement st = con.prepareStatement(sql);
                         st.setInt(1, emp_no);
 
                         st.executeUpdate();
                         st.close();
-
+                        con.close();
                         System.out.println("Empleado eliminado con éxito!");
                         break;
                     } else {
@@ -182,7 +195,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
      */
 
     @Override
-    public void selectXJefes(Connection con) throws SQLException {
+    public void selectXJefes() throws SQLException {
         Scanner sc = App.sc;
 
         int emp_no;
@@ -205,7 +218,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         }
 
         System.out.print("Empezamos por este empleado: ");
-        Empleado emp = selectOne(con, emp_no);
+        Empleado emp = selectOne(emp_no);
 
         do {
             if (countJefes != -1) {
@@ -213,7 +226,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
             }
 
             System.out.print("\nEl director de " + emp.getApellido() + " es: ");
-            Empleado currentDirector = selectOne(con, emp.getDir());
+            Empleado currentDirector = selectOne(emp.getDir());
 
             if (currentDirector != null && currentDirector.getDir() == Types.NULL) {
                 System.out.println("\n" + currentDirector.getApellido() + " es el director general.");
@@ -228,13 +241,16 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void selectGroupingBy(Connection con) throws SQLException {
+    public void selectGroupingBy() throws SQLException {
         // Query to execute:
         String sql = "SELECT dept.dnombre, em1.dept_no, em1.apellido as Empleado, em1.oficio, em2.apellido AS Jefe, em1.salario, em1.comision FROM empleados em2 JOIN empleados em1 ON em2.emp_no = em1.dir JOIN departamentos dept ON em1.dept_no = dept.dept_no GROUP BY dept.dept_no";
 
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
+        con.close();
+
         while (result.next()) {
             System.out.println(
                     "Nombre departamento : " + result.getString(1)
@@ -251,13 +267,15 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void selectByDepartamento(Connection con, int dept_no) throws SQLException {
+    public void selectByDepartamento(int dept_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM empleados WHERE dept_no = ?";
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, dept_no);
 
         ResultSet result = st.executeQuery();
+        con.close();
 
         while (result.next()) {
             Empleado emp = new Empleado(
@@ -272,13 +290,15 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void selectByApellido(Connection con, String apellido) throws SQLException {
+    public void selectByApellido(String apellido) throws SQLException {
         // Query to execute:
         String sql = "SELECT em1.emp_no, em1.apellido, em1.oficio, em2.apellido, em1.salario, em1.comision FROM empleados em1 INNER JOIN empleados em2 ON em1.dir = em2.emp_no WHERE em1.apellido LIKE ?";
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setString(1, apellido.toUpperCase() + "%");
 
         ResultSet result = st.executeQuery();
+        con.close();
 
         while (result.next()) {
             System.out.println("Nº: " + result.getInt(1) + ", apellido: " + result.getString(2) + ", oficio: "
@@ -291,14 +311,16 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void selectByOficio(Connection con) throws SQLException {
+    public void selectByOficio() throws SQLException {
         List<String> oficios = new ArrayList<>();
 
         // Query to execute:
         String sql = "SELECT DISTINCT oficio FROM empleados";
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
+        con.close();
 
         System.out.println("Selecciona uno de los oficios: ");
         while (result.next()) {
@@ -337,7 +359,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public void alterColumns(Connection con, String operation, String column) throws SQLException {
+    public void alterColumns(String operation, String column) throws SQLException {
         String sql = "";
 
         if (operation.toLowerCase().equals("add")) {
@@ -348,10 +370,13 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
             System.out.println("Opción errónea de alter columns.");
         }
 
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         st.executeUpdate();
         st.close();
+        con.close();
+
         System.out.println("Columna " + column + " " + (operation.toLowerCase().equals("add") ? "añadida" : "eliminada")
                 + " con éxito!");
     }

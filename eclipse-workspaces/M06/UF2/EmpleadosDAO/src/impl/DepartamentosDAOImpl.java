@@ -14,9 +14,10 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     private static final String NOT_FOUND = "El departamento no se encuentra en la base de datos.";
 
     @Override
-    public void selectAll(Connection con) throws SQLException {
+    public void selectAll() throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM departamentos";
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
@@ -32,13 +33,16 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     }
 
     @Override
-    public Departamento selectOne(Connection con, int dept_no) throws SQLException {
+    public Departamento selectOne(int dept_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM departamentos WHERE dept_no = ?";
+        Connection con = App.daoConnection.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, dept_no);
 
         ResultSet result = st.executeQuery();
+        con.close();
+
         while (result.next()) {
             Departamento dept = new Departamento(
                     result.getInt(1), result.getString(2), result.getString(3));
@@ -53,7 +57,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     }
 
     @Override
-    public void insertOne(Connection con, Departamento dep) throws SQLException {
+    public void insertOne(Departamento dep) throws SQLException {
         if (selectOne(con, dep.getDept_no()) == null) {
             String sql = "INSERT INTO depLEADOS (`dep_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = con.prepareStatement(sql);
@@ -69,7 +73,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     }
 
     @Override
-    public void updateOne(Connection con, int dept_no) throws SQLException {
+    public void updateOne(int dept_no) throws SQLException {
         if (selectOne(con, dept_no) != null) {
             String sql = "UPDATE empleados SET dnombre = 'MODIFIED' WHERE  dept_no = ?";
             PreparedStatement st = con.prepareStatement(sql);
@@ -83,7 +87,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     }
 
     @Override
-    public void deleteOne(Connection con, int dept_no) throws SQLException {
+    public void deleteOne(int dept_no) throws SQLException {
         if (selectOne(con, dept_no) != null) {
             String sql = "DELETE FROM departamentos WHERE dept_no = ?";
             PreparedStatement st = con.prepareStatement(sql);

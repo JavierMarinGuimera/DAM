@@ -1,7 +1,9 @@
 package udp;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Request {
@@ -47,18 +49,18 @@ public class Request {
 
 	public void setOperation(char operation) {
 		switch (operation) {
-		case '+':
-			this.operation = OP_ADD;
-			break;
-		case '-':
-			this.operation = OP_SUB;
-			break;
-		case '*':
-			this.operation = OP_MUL;
-			break;
-		case '/':
-			this.operation = OP_DIV;
-			break;
+			case '+':
+				this.operation = OP_ADD;
+				break;
+			case '-':
+				this.operation = OP_SUB;
+				break;
+			case '*':
+				this.operation = OP_MUL;
+				break;
+			case '/':
+				this.operation = OP_DIV;
+				break;
 		}
 	}
 
@@ -82,22 +84,41 @@ public class Request {
 		return bytes;
 	}
 
+	/**
+	 * This method is USED BY THE CLIENT to mount the bytes array that WILL BE SEND
+	 * TO THE SERVER.
+	 * 
+	 * @throws IOException
+	 */
 	private void dataToBytes() throws IOException {
-		// TODO transform data to bytes
+		ByteArrayOutputStream arrayOut = new ByteArrayOutputStream();
+		DataOutputStream dataOut = new DataOutputStream(arrayOut);
+
+		dataOut.writeByte(this.operation);
+		dataOut.writeShort(this.op1);
+		dataOut.writeShort(this.op2);
+		this.bytes = arrayOut.toByteArray();
+
+		dataOut.close();
 	}
 
+	/**
+	 * This method is USED BY THE SERVER to get the data RECEIVED FROM THE CLIENT.
+	 * 
+	 * @throws IOException
+	 */
 	private void bytesToData() throws IOException {
 		ByteArrayInputStream arrayIn = new ByteArrayInputStream(bytes);
 		DataInputStream dataIn = new DataInputStream(arrayIn);
 
 		setOperation(dataIn.readByte());
-		switch (operation) {
-		case OP_ADD:
-		case OP_SUB:
-		case OP_MUL:
-		case OP_DIV:
-			setOp1(dataIn.readShort());
-			setOp2(dataIn.readShort());
+		switch (this.operation) {
+			case OP_ADD:
+			case OP_SUB:
+			case OP_MUL:
+			case OP_DIV:
+				setOp1(dataIn.readShort());
+				setOp2(dataIn.readShort());
 		}
 
 		dataIn.close();

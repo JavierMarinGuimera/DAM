@@ -1,6 +1,8 @@
 package udp;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -45,6 +47,12 @@ public class Response {
 		return bytes;
 	}
 
+	/**
+	 * This method is USED BY THE SERVER to mount the bytes array that WILL BE SEND
+	 * TO THE CLIENT.
+	 * 
+	 * @throws IOException
+	 */
 	private void dataToBytes() throws IOException {
 		ByteArrayOutputStream arrayOut = new ByteArrayOutputStream();
 		DataOutputStream dataOut = new DataOutputStream(arrayOut);
@@ -56,7 +64,18 @@ public class Response {
 		dataOut.close();
 	}
 
+	/**
+	 * This method is USED BY THE SERVER to get the data RECEIVED FROM THE CLIENT.
+	 * 
+	 * @throws IOException
+	 */
 	private void bytesToData() throws IOException {
-		// TODO Transform bytes to data
+		ByteArrayInputStream arrayIn = new ByteArrayInputStream(bytes);
+		DataInputStream dataIn = new DataInputStream(arrayIn);
+
+		this.setErrorCode(dataIn.readByte());
+		this.setResult(dataIn.readLong());
+
+		dataIn.close();
 	}
 }

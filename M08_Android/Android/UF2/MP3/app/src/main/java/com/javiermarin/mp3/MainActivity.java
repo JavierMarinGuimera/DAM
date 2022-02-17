@@ -6,12 +6,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.ContentUris;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,34 +20,28 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.javiermarin.mp3.classes.Song;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class MainActivity extends AppCompatActivity implements Runnable {
     // CONSTANTS:
     private static final int CAN_WE_READ = 0;
-    private static final String ROOT_PATH_SD = Environment.getExternalStorageDirectory().getPath() + "/";
-    private static final int REWIND_SECS = 10;
+    private static final int REWIND_SECS = 10000;
 
     // USEFUL APP VARIABLES:
     private int currentSongPosition;
-    private MediaPlayer mp;
+    private MediaPlayer mediaPlayer;
     private ListView musicList;
-    private ArrayList<HashMap<String, String>> songs;
-    private Thread updateSeekBar;
+    private List<Song> songs;
 
     // BUTTONS LAYOUT THINGS:
     private TextView songName;
-    private ImageButton rewindSongBtn;
     private SeekBar songSeekBar;
-    private ImageButton advanceSongBtn;
-    private ImageButton lastSongBtn;
     private ImageButton playSongBtn;
-    private ImageButton nextSongBtn;
+    private static Thread currentThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
         toolbarTop.setTitle("Música");
         setSupportActionBar(toolbarTop);
 
+        songs = new ArrayList<>();
         musicList = findViewById(R.id.musicList);
-        songs = getSongs(ROOT_PATH_SD);
+        getSongs();
 
         if (songs != null) {
-            constructMusicList(musicList, songs);
+            constructMusicList(musicList);
         } else {
             Toast.makeText(this, "You don't have songs on your device.", Toast.LENGTH_SHORT).show();
         }
@@ -97,15 +93,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // MOVING BUTTONS:
-        rewindSongBtn = findViewById(R.id.rewindSongBtn);
+        ImageButton rewindSongBtn = findViewById(R.id.rewindSongBtn);
         rewindSongBtn.setOnClickListener(v -> rewindAdvanceSong("rewind"));
-        advanceSongBtn = findViewById(R.id.advanceSongBtn);
+        ImageButton advanceSongBtn = findViewById(R.id.advanceSongBtn);
         advanceSongBtn.setOnClickListener(v -> rewindAdvanceSong("advance"));
 
         // CHANGING SONG BUTTONS:
-        lastSongBtn = findViewById(R.id.lastSongBtn);
+        ImageButton lastSongBtn = findViewById(R.id.lastSongBtn);
         lastSongBtn.setOnClickListener(v -> lastNextSong("last"));
-        nextSongBtn = findViewById(R.id.nextSongBtn);
+        ImageButton nextSongBtn = findViewById(R.id.nextSongBtn);
         nextSongBtn.setOnClickListener(v -> lastNextSong("next"));
 
         // PLAY / PAUSE BUTTON:
@@ -113,131 +109,117 @@ public class MainActivity extends AppCompatActivity {
         playSongBtn.setOnClickListener(v -> playStopSong());
     }
 
-    private ArrayList<HashMap<String, String>> getSongs(String rootPath) {
-        ArrayList<HashMap<String, String>> fileList = new ArrayList<>();
 
-        try {
-            File rootFolder = new File(rootPath);
+    private void getSongs() {
+        Uri collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
-            //here you will get NPE if directory doesn't contains  any file,handle it like this.
-            File[] files = rootFolder.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isDirectory()) {
-                        if (getSongs(file.getAbsolutePath()) != null) {
-                            fileList.addAll(Objects.requireNonNull(getSongs(file.getAbsolutePath())));
-                        } else {
-                            break;
-                        }
-                    } else if (file.getName().endsWith(".mp3")) {
-                        HashMap<String, String> song = new HashMap<>();
-                        song.put("file_path", file.getAbsolutePath());
-                        song.put("file_name", file.getName());
-                        fileList.add(song);
-                    }
-                }
-            } else {
-                Log.println(Log.WARN, "Error", "No files");
+        String[] projection = new String[]{
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.DURATION,
+        };
+        String selection = MediaStore.Audio.Media.DURATION + " >= ?";
+        String[] selectionArgs = new String[]{
+                String.valueOf(TimeUnit.MILLISECONDS.convert(5, TimeUnit.SECONDS))};
+        String sortOrder = MediaStore.Audio.Media.DISPLAY_NAME + " ASC";
+
+        try (Cursor cursor = getApplicationContext().getContentResolver().query(
+                collection,
+                projection,
+                selection,
+                selectionArgs,
+                sortOrder
+        )) {
+            // Cache column indices.
+            int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
+            int nameColumn =
+                    cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
+            int durationColumn =
+                    cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
+
+            while (cursor.moveToNext()) {
+                long id = cursor.getLong(idColumn);
+                String name = cursor.getString(nameColumn);
+                int duration = cursor.getInt(durationColumn);
+
+                Uri contentUri = ContentUris.withAppendedId(
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
+
+                songs.add(new Song(contentUri, name, duration));
             }
-            return fileList;
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
         }
     }
 
-    private void constructMusicList(ListView musicList, ArrayList<HashMap<String, String>> songs) {
+
+    private void constructMusicList(ListView musicList) {
         List<String> previousSongList = new ArrayList<>();
 
-        for (HashMap<String, String> directorySongs : songs) {
-            for (Map.Entry<String, String> song : directorySongs.entrySet()) {
-                if (!song.getValue().contains("/")) {
-                    previousSongList.add(song.getValue());
-                }
-            }
+        for (Song song : songs) {
+            previousSongList.add(song.getName().substring(0, song.getName().length() - 4));
         }
 
-
-        musicList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, previousSongList));
+        musicList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, previousSongList));
     }
 
     private void askForPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        CAN_WE_READ);
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        CAN_WE_READ);
-            }
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    CAN_WE_READ);
         }
     }
 
     public void playSongFromList(String selectedSong) {
-        Uri songToPlay = null;
+        Song songToPlay = null;
 
         playSongBtn.setImageResource(R.drawable.ic_pause_solid);
         songSeekBar.setProgress(0);
 
-        for (HashMap<String, String> directorySongs : songs) {
-            for (Map.Entry<String, String> song : directorySongs.entrySet()) {
-                if (song.getValue().endsWith(selectedSong) && song.getValue().contains("/")) {
-                    songToPlay = Uri.parse(song.getValue());
-                } else if (song.getValue().endsWith(selectedSong)) {
-                    songName.setText(song.getValue().substring(0, song.getValue().length() - 4));
-                }
+        for (Song song : songs) {
+            if (song.getName().substring(0, song.getName().length() - 4).equals(selectedSong)) {
+                songName.setText(song.getName().substring(0, song.getName().length() - 4));
+                songToPlay = song;
             }
         }
 
         if (songToPlay != null) {
-            if (mp != null && mp.isPlaying()) {
-                mp.release();
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.release();
+                mediaPlayer = null;
             }
 
-            mp = MediaPlayer.create(this, songToPlay);
-            mp.start();
+            mediaPlayer = MediaPlayer.create(this, songToPlay.getUri());
+            mediaPlayer.start();
 
-            updateSeekBar = new Thread() {
-                @Override
-                public void run() {
-                    while (mp.isPlaying()) {
-                        try {
-                            int singleDuration = mp.getDuration() / 100;
-                            int newPosition = mp.getCurrentPosition() / singleDuration;
-                            songSeekBar.setProgress(newPosition);
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };
+            if (currentThread != null && currentThread.isAlive()) currentThread.interrupt();
 
-            updateSeekBar.start();
+            currentThread = new Thread(this);
+            currentThread.start();
         } else {
             Toast.makeText(this, "Error desconocido", Toast.LENGTH_SHORT).show();
         }
     }
 
     /*
-     * Buttons methods
+     * Buttons methods:
      */
 
     public void rewindAdvanceSong(String action) {
-        if (mp != null) {
+        if (mediaPlayer != null) {
             if (action.equals("advance")) {
-                int nextPosition = mp.getCurrentPosition() + 10000;
-                mp.seekTo(nextPosition);
+                int nextPosition = mediaPlayer.getCurrentPosition() + REWIND_SECS;
+                mediaPlayer.seekTo(nextPosition);
 
-                int singleDuration = mp.getDuration() / 100;
+                int singleDuration = mediaPlayer.getDuration() / 100;
                 int newPosition = nextPosition / singleDuration;
                 songSeekBar.setProgress(newPosition);
             } else {
-                int nextPosition = mp.getCurrentPosition() - 10000;
-                mp.seekTo(nextPosition);
+                int nextPosition = mediaPlayer.getCurrentPosition() - REWIND_SECS;
+                mediaPlayer.seekTo(nextPosition);
 
-                int singleDuration = mp.getDuration() / 100;
+                int singleDuration = mediaPlayer.getDuration() / 100;
                 int newPosition = nextPosition / singleDuration;
                 songSeekBar.setProgress(newPosition);
             }
@@ -245,44 +227,89 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveSongToX(int progress) {
-        if (mp != null && mp.isPlaying()) {
-            int singleDuration = mp.getDuration() / 100;
+        if (mediaPlayer != null) {
+            int singleDuration = mediaPlayer.getDuration() / 100;
             int newPosition = singleDuration * progress;
-            mp.seekTo(newPosition);
+            mediaPlayer.seekTo(newPosition);
         }
     }
 
     public void playStopSong() {
-        if (mp != null) {
-            if (mp.isPlaying()) {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
                 playSongBtn.setImageResource(R.drawable.ic_play);
-                mp.pause();
+                mediaPlayer.pause();
             } else {
                 playSongBtn.setImageResource(R.drawable.ic_pause_solid);
-                mp.start();
+                if (currentThread != null) {
+                    System.out.println("Hola a todos");
+                    synchronized (currentThread) {
+                        currentThread.notify();
+                    }
+                }
             }
         } else {
-            Toast.makeText(this, "Select a song first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Playing random song", Toast.LENGTH_SHORT).show();
+            playSongFromList(musicList.getItemAtPosition((int) (Math.random() * songs.size())).toString());
         }
     }
 
     public void lastNextSong(String action) {
-        if (mp != null) {
-            if (action.equals("next")) {
-                if (currentSongPosition == musicList.getAdapter().getCount() - 1) {
-                    currentSongPosition = 0;
-                } else {
-                    currentSongPosition++;
-                }
-            } else {
-                if (currentSongPosition == 0) {
-                    currentSongPosition = musicList.getAdapter().getCount() - 1;
-                } else {
-                    currentSongPosition--;
-                }
+        if (mediaPlayer != null) {
+            switch (action) {
+                case "next":
+                    if (currentSongPosition == musicList.getAdapter().getCount() - 1) {
+                        currentSongPosition = 0;
+                    } else {
+                        currentSongPosition++;
+                    }
+                    break;
+
+                case "last":
+                    if (currentSongPosition == 0) {
+                        currentSongPosition = musicList.getAdapter().getCount() - 1;
+                    } else {
+                        currentSongPosition--;
+                    }
+                    break;
+
+                case "random":
+                    currentSongPosition = (int) (Math.random() * songs.size());
+                    break;
+
+                default:
+                    Toast.makeText(this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+                    break;
             }
 
             playSongFromList(musicList.getItemAtPosition(currentSongPosition).toString());
+        }
+    }
+
+    @Override
+    public void run() {
+        int total = mediaPlayer.getDuration();
+        int singleDuration = total / 100;
+
+        while (!currentThread.isInterrupted() && mediaPlayer != null) {
+            try {
+                synchronized (currentThread) {
+                    while (!mediaPlayer.isPlaying()) {
+                        currentThread.wait();
+                        mediaPlayer.start();
+                    }
+                }
+                int newPosition = mediaPlayer.getCurrentPosition() / singleDuration;
+                songSeekBar.setProgress(newPosition);
+            } catch (Exception e) {
+                return;
+            }
+        }
+
+        System.out.println("SALIDA");
+
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            lastNextSong("next");
         }
     }
 }
