@@ -19,7 +19,7 @@ public class Client {
 
 	// Constructor:
 	public void init(String host, int port) throws SocketException, UnknownHostException {
-		System.out.println("Welcome! Client started.");
+		System.out.println("Bienvenido! Cliente iniciado.");
 		serverAddress = InetAddress.getByName(host);
 		serverPort = port;
 		socket = new DatagramSocket();
@@ -30,9 +30,9 @@ public class Client {
 	public void runClient() throws IOException {
 		while (mustContinue()) {
 			// Here we read every CLIENT answer.
-			Short firstNum = consoleInterface.readShort("First number: ");
-			char op = consoleInterface.readOperation("Choose a valid operation (+, -, *, /): ");
-			Short secondNum = consoleInterface.readShort("Second number: ");
+			Short firstNum = consoleInterface.readShort("Número 1: ");
+			char op = consoleInterface.readOperation("Selecciona una operación válida (+, -, *, /): ");
+			Short secondNum = consoleInterface.readShort("Número 2: ");
 
 			Request rq = new Request(op, firstNum, secondNum);
 
@@ -46,8 +46,6 @@ public class Client {
 			// Now here we get the reponses packet.
 			packet = new DatagramPacket(new byte[BUFFER_SIZE], BUFFER_SIZE);
 			socket.receive(packet);
-
-			System.out.println("Hola" + Arrays.toString(Arrays.copyOfRange(packet.getData(), 0, packet.getLength())));
 
 			// Once we get the packet, we can handle it with our Repsonse class.
 			Response rs = new Response(Arrays.copyOfRange(packet.getData(), 0, packet.getLength()));
@@ -68,7 +66,7 @@ public class Client {
 				break;
 
 			case Response.OK:
-				this.consoleInterface.showMessage(Long.toString(rs.getResult()));
+				this.consoleInterface.showMessage("Resultado: " + Long.toString(rs.getResult()));
 				break;
 
 			default:

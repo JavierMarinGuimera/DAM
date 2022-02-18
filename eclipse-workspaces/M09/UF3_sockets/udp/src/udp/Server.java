@@ -25,7 +25,7 @@ public class Server {
 	public void init(int port) throws SocketException {
 		socket = new DatagramSocket(port);
 		finish = false;
-		System.out.println("Server started at port " + port);
+		System.out.println("Server iniciado en el puerto " + port);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Server {
 			socket.receive(packet);
 
 			bufferInData = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
-			System.out.println("Data received: " + Arrays.toString(bufferInData));
+			System.out.println("Datos recibidos: " + Arrays.toString(bufferInData));
 
 			// Process
 			bufferOutData = processData(bufferInData);
@@ -61,12 +61,12 @@ public class Server {
 				socket.send(packet);
 
 				System.out.println(
-						"Sent data " + Arrays.toString(bufferOutData) + " to " + clientAddress + ":" + clientPort);
+						"Datos enviados " + Arrays.toString(bufferOutData) + " a " + clientAddress + ":" + clientPort);
 			}
 		}
 		// Close
 		close();
-		System.out.println("Server shutted down");
+		System.out.println("Server apagado.");
 	}
 
 	private byte[] processData(byte[] requestData) {
@@ -115,7 +115,7 @@ public class Server {
 	private void close() {
 		if (socket != null && !socket.isClosed()) {
 			socket.close();
-			System.out.println("Socket closed");
+			System.out.println("Socket cerrado.");
 		}
 	}
 }
