@@ -242,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements Runnable {
             } else {
                 playSongBtn.setImageResource(R.drawable.ic_pause_solid);
                 if (currentThread != null) {
-                    System.out.println("Hola a todos");
                     synchronized (currentThread) {
                         currentThread.notify();
                     }
@@ -305,8 +304,6 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                 return;
             }
         }
-
-        System.out.println("SALIDA");
 
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             lastNextSong("next");

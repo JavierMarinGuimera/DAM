@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private final ImageView[] imagesList = new ImageView[3];
+    private static final int TOTAL_IMGS = 3;
+    private final ImageView[] imagesList = new ImageView[TOTAL_IMGS];
 
     private ConstraintLayout layout;
-    private Toolbar toolbar;
     private Button playAgainButton;
     private String correctImgString;
     private MediaPlayer mp;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void addFunctionality() {
         layout = findViewById(R.id.layout);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
@@ -56,22 +56,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playGame() {
-        if (mp != null && !mp.isPlaying()) {
-            playAgainButton.setEnabled(true);
-            List<String> images = randomImages();
-            int correctImgInt = (int) (Math.random() * 3);
-            for (int i = 0; i < imagesList.length; i++) {
-                imagesList[i].setImageResource(getResources().getIdentifier(images.get(i), "drawable", getPackageName()));
-                if ((i) == correctImgInt) {
-                    imagesList[i].setOnClickListener(v -> playAnswerSound("win"));
-                } else {
-                    imagesList[i].setOnClickListener(v -> playAnswerSound("fail"));
-                }
+        playAgainButton.setEnabled(true);
+        List<String> images = randomImages();
+        int correctImgInt = (int) (Math.random() * 3);
+        for (int i = 0; i < imagesList.length; i++) {
+            imagesList[i].setImageResource(getResources().getIdentifier(images.get(i), "drawable", getPackageName()));
+            if ((i) == correctImgInt) {
+                imagesList[i].setOnClickListener(v -> playAnswerSound("win"));
+            } else {
+                imagesList[i].setOnClickListener(v -> playAnswerSound("fail"));
             }
-
-            correctImgString = images.get(correctImgInt);
-            playImgSound(correctImgString);
         }
+
+        correctImgString = images.get(correctImgInt);
+        Toast.makeText(this, "Image: " + correctImgString, Toast.LENGTH_SHORT).show();
+        playImgSound(correctImgString);
     }
 
     private void changeBackground(String answer) {
@@ -109,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void playImgSound(String image) {
         changeBackground("start");
-        if (mp == null || !mp.isPlaying()) {
-            if (mp != null) {
-                mp.release();
-            }
-            mp = MediaPlayer.create(MainActivity.this,
-                    getResources().getIdentifier(image, "raw", getPackageName()));
-            mp.start();
+        if (mp != null) {
+            mp.release();
+            mp = null;
         }
+
+        mp = MediaPlayer.create(MainActivity.this,
+                getResources().getIdentifier(image, "raw", getPackageName()));
+        mp.start();
     }
 
     private void playAnswerSound(String answer) {
