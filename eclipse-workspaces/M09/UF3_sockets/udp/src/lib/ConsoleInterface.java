@@ -66,7 +66,7 @@ public class ConsoleInterface {
 				line = reader.readLine();
 				return Short.parseShort(line);
 			} catch (NumberFormatException | IOException e) {
-				System.out.println("Must enter an integer between " + Short.MIN_VALUE + " and " + Short.MAX_VALUE);
+				System.out.println("Tienes que introducir un entero entre " + Short.MIN_VALUE + " y " + Short.MAX_VALUE);
 			}
 		} while (true);
 	}
@@ -84,7 +84,7 @@ public class ConsoleInterface {
 			}
 			correct = line.matches("[\\+\\-\\*/]");
 			if (!correct) {
-				System.out.println("Must enter char '+', '-', '*' or '/' ");
+				System.out.println("Debes introducir un caracter '+', '-', '*' o '/'.");
 			}
 		} while (!correct);
 		ret = line.charAt(0);
@@ -122,7 +122,7 @@ public class ConsoleInterface {
 			}
 			correct = line.length() > 0;
 			if (!correct) {
-				System.out.println("Must enter a character");
+				System.out.println("Tienes que introducir un carácter.");
 			}
 		} while (!correct);
 

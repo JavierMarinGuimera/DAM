@@ -13,7 +13,7 @@ public class ClientRunner {
 			prg.runClient();
 		} catch (IOException ex) {
 			ex.printStackTrace();
-			System.out.println("Error rebent o enviant");
+			System.out.println("Error recibiendo o enviando petición.");
 		}
 	}
 }
