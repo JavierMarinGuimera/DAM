@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 21 feb. 2022 17:59:07 by Hibernate Tools 5.6.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="exemple_hibernate" name="pojos.Departaments" optimistic-lock="none" table="departaments">
+        <id name="deptNo" type="byte">
+            <column name="deptNo" />
+            <generator class="assigned" />
+        </id>
+        <property name="deptNom" type="string">
+            <column length="15" name="deptNom" />
+        </property>
+        <property name="deptCiutat" type="string">
+            <column length="15" name="deptCiutat" />
+        </property>
+        <set fetch="select" inverse="true" lazy="false" name="empleatses" table="empleats" cascade="save-update, delete">
+            <key>
+                <column name="deptNo" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Empleats" />
+        </set>
+    </class>
+</hibernate-mapping>

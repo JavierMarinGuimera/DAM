@@ -21,7 +21,13 @@ class Calculator(QMainWindow):
         self.rb_decimal.setChecked(True)
         self.rb_suma.setChecked(True)
         self.getType()
-        # self.getOperation()
+
+        # Some asignments:
+        self.le_num1.setMaxLength(12)
+        self.le_num1.setAlignment(Qt.AlignRight)
+        self.le_num2.setMaxLength(12)
+        self.le_num2.setAlignment(Qt.AlignRight)
+        self.le_resultat.setAlignment(Qt.AlignRight)
 
         # - OnClick METHODS:
         self.rb_decimal.clicked.connect(self.getType)
@@ -39,7 +45,6 @@ class Calculator(QMainWindow):
         operationType = 1 if (self.rb_decimal.isChecked()) else 2
 
         if (operationType == 2):
-            print("Entero")
             intValidator = QIntValidator()
 
             self.le_num1.setValidator(intValidator)
@@ -53,25 +58,44 @@ class Calculator(QMainWindow):
             if (num2 != ''):
                 self.le_num2.setText(str(round(locale.atof(num2))))
         else:
-            print("Decimal")
             doubleValidator = QDoubleValidator()
             self.le_num1.setValidator(doubleValidator)
             self.le_num2.setValidator(doubleValidator)
 
     def calc(self):
+        text = 0
         if (self.le_num1.text() != '' and self.le_num2.text() != ''):
             if (self.rb_suma.isChecked()):
-                self.le_resultat.setText(
-                    str(locale.atof(self.le_num1.text()) + locale.atof(self.le_num2.text())))
+                if (self.rb_decimal.isChecked()):
+                    text = locale.atof(self.le_num1.text()) + \
+                        locale.atof(self.le_num2.text())
+                else:
+                    text = locale.atoi(self.le_num1.text()) + \
+                        locale.atoi(self.le_num2.text())
             elif (self.rb_resta.isChecked()):
-                self.le_resultat.setText(
-                    str(locale.atof(self.le_num1.text()) - locale.atof(self.le_num2.text())))
+                if (self.rb_decimal.isChecked()):
+                    text = locale.atof(self.le_num1.text()) - \
+                        locale.atof(self.le_num2.text())
+                else:
+                    text = locale.atoi(self.le_num1.text()) - \
+                        locale.atoi(self.le_num2.text())
+
             elif (self.rb_producte.isChecked()):
-                self.le_resultat.setText(
-                    str(locale.atof(self.le_num1.text()) * locale.atof(self.le_num2.text())))
+                if (self.rb_decimal.isChecked()):
+                    text = locale.atof(self.le_num1.text()) * \
+                        locale.atof(self.le_num2.text())
+                else:
+                    text = locale.atoi(self.le_num1.text()) * \
+                        locale.atoi(self.le_num2.text())
             else:
-                self.le_resultat.setText(
-                    str(locale.atof(self.le_num1.text()) / locale.atof(self.le_num2.text())))
+                if (self.rb_decimal.isChecked()):
+                    text = locale.atof(self.le_num1.text()) / \
+                        locale.atof(self.le_num2.text())
+                else:
+                    text = locale.atoi(self.le_num1.text()) / \
+                        locale.atoi(self.le_num2.text())
+
+            self.le_resultat.setText(locale.format_string("%.12g", text))
 
 
 app = QApplication(sys.argv)

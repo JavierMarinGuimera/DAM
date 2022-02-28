@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 21 feb. 2022 17:59:07 by Hibernate Tools 5.6.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="exemple_hibernate" name="pojos.Empleats" optimistic-lock="none" table="empleats">
+        <id name="empNo" type="short">
+            <column name="emp_no" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one class="pojos.Departaments" fetch="select" name="departaments">
+            <column name="deptNo" not-null="true" />
+        </many-to-one>
+        <property name="cognoms" type="string">
+            <column length="20" name="cognoms" not-null="true" />
+        </property>
+        <property name="nom" type="string">
+            <column length="15" name="nom" not-null="true" />
+        </property>
+        <property name="dataAlta" type="date">
+            <column length="10" name="data_alta" />
+        </property>
+        <property name="sou" type="java.lang.Float">
+            <column name="sou" precision="6" />
+        </property>
+        <property name="comissio" type="java.lang.Float">
+            <column name="comissio" precision="6" />
+        </property>
+    </class>
+</hibernate-mapping>

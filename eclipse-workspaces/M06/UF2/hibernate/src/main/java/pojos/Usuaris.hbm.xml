@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 21 feb. 2022 17:59:07 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="exemple_hibernate" name="pojos.Usuaris" optimistic-lock="none" table="usuaris">
+        <id name="userid" type="int">
+            <column name="userid"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="pwd" type="string">
+            <column length="20" name="pwd" not-null="true"/>
+        </property>
+        <property name="nom" type="string">
+            <column length="45" name="nom"/>
+        </property>
+        <property name="cognoms" type="string">
+            <column length="45" name="cognoms"/>
+        </property>
+        <property name="email" type="string">
+            <column length="100" name="email"/>
+        </property>
+    </class>
+</hibernate-mapping>
