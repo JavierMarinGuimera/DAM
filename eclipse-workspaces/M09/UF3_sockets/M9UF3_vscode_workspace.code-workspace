@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "udp"
+		},
+		{
+			"path": "downloader"
+		},
+		{
+			"path": "tcp"
+		}
+	],
+	"settings": {}
+}
