@@ -1,10 +1,11 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import manager.DAOManager;
 import pojos.Departaments;
+import pojos.Empleats;
 import pojos.Usuaris;
 import services.DepartamentosService;
 import services.UsuariosService;
@@ -48,23 +49,32 @@ public class Main {
     private static void departamentosCRUD() {
         DepartamentosService ds = DAOManager.getDepartamentosService(DAOManager.HIBERNATE);
 
-        System.out.println("Select all: ");
-        Departaments.printDepartamentosFromList(ds.getAll());
+        // System.out.println("Select all: ");
+        // Departaments.printDepartamentosFromList(ds.getAll());
 
         // System.out.println("CRUD operations:");
         // System.out.println("Create one: (Crud)");
-        // Usuaris.isCreated(ds.createOne(new Usuaris(1234, "1234", "javier", "marin",
-        // "marinj460@gmail.com")));
+        // Departaments.isCreated(ds.createOne(new Departaments((byte) 50, "PRUEBAS",
+        // "SANT BOI")));
+        // Set<Empleats> empleados = new HashSet<>() {
+        // {
+        // add(new Empleats((short) 43, ds.selectOne((byte) 50), "Pruebas", "Pruebas"));
+        // }
+        // };
+        // Departaments.isCreated(ds.createOne(new Departaments((byte) 60, "PRUEBAS2",
+        // "SANT BOI", empleados)));
 
-        // System.out.println("Select one: (cRud)");
-        // Usuaris.printUser(ds.selectOne(1246));
+        System.out.println("Select one: (cRud)");
+        Departaments.printDepartamento(ds.selectOne((byte) 30));
 
         // System.out.println("Update one: (crUd)");
-        // Usuaris.isUpdated(ds.updateOne(new Usuaris(1234, "1234", "Javier", "Marin",
+        // Departaments.isUpdated(ds.updateOne(new Usuaris(1234, "1234", "Javier",
+        // "Marin",
         // "marinj460@gmail.com")));
 
         // System.out.println("Delete one: (cruD)");
-        // Usuaris.isDeleted(ds.deleteOne(new Usuaris(1234, "1234", "javier", "marin",
+        // Departaments.isDeleted(ds.deleteOne(new Usuaris(1234, "1234", "javier",
+        // "marin",
         // "marinj460@gmail.com")));
     }
 }

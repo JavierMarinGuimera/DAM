@@ -23,6 +23,12 @@ public class Departaments implements java.io.Serializable {
 		this.deptNo = deptNo;
 	}
 
+	public Departaments(byte deptNo, String deptNom, String deptCiutat) {
+		this.deptNo = deptNo;
+		this.deptNom = deptNom;
+		this.deptCiutat = deptCiutat;
+	}
+
 	public Departaments(byte deptNo, String deptNom, String deptCiutat, Set<Empleats> empleatses) {
 		this.deptNo = deptNo;
 		this.deptNom = deptNom;

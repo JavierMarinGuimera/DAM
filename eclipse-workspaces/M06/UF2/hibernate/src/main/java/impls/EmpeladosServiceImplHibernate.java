@@ -25,7 +25,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
             List<Empleats> data = session.createQuery(criteria).getResultList();
             return data;
         } catch (Exception e) {
-            System.out.println("No se han podido obtener los usuarios.");
+            System.out.println("No se han podido obtener los empleados.");
             e.printStackTrace();
         } finally {
             session.close();
@@ -40,7 +40,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
         try {
             return session.get(Empleats.class, empNo);
         } catch (Exception e) {
-            System.out.println("No se han podido obtener el usuario.");
+            System.out.println("No se han podido obtener el empleado.");
             e.printStackTrace();
         } finally {
             session.close();
@@ -64,7 +64,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el empleado.");
             tx.rollback();
             e.printStackTrace();
         } finally {
@@ -89,7 +89,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el empleado.");
             tx.rollback();
             e.printStackTrace();
         } finally {
@@ -114,7 +114,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el empleado.");
             tx.rollback();
             e.printStackTrace();
         } finally {

@@ -25,7 +25,7 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
             List<Departaments> data = session.createQuery(criteria).getResultList();
             return data;
         } catch (Exception e) {
-            System.out.println("No se han podido obtener los usuarios.");
+            System.out.println("No se han podido obtener los departamentos.");
             e.printStackTrace();
         } finally {
             session.close();
@@ -34,13 +34,13 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
     }
 
     @Override
-    public Departaments selectOne(int deptNo) {
+    public Departaments selectOne(byte deptNo) {
         Session session = DBConnection.getSessionFactory().openSession();
 
         try {
             return session.get(Departaments.class, deptNo);
         } catch (Exception e) {
-            System.out.println("No se han podido obtener el usuario.");
+            System.out.println("No se han podido obtener el departamento.");
             e.printStackTrace();
         } finally {
             session.close();
@@ -64,7 +64,7 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el departamento.");
             tx.rollback();
             e.printStackTrace();
         } finally {
@@ -89,7 +89,7 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el departamento.");
             tx.rollback();
             e.printStackTrace();
         } finally {
@@ -114,7 +114,7 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
 
             return true;
         } catch (Exception e) {
-            System.out.println("No se han podido crear el usuario.");
+            System.out.println("No se han podido crear el departamento.");
             tx.rollback();
             e.printStackTrace();
         } finally {

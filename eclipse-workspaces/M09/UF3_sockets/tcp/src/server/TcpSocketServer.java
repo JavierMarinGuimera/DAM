@@ -9,22 +9,49 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TcpSocketServer {
-    static final int PORT = 9090;
-    private boolean end = false;
+import manager.MainManager;
 
-    public void listen() {
+public class TcpSocketServer {
+    public static final int PORT = 9090;
+
+    public static void main(String[] args) throws Exception {
+        MainManager.welcomeMessage(MainManager.SERVER_SENDER);
+
+        listen();
+    }
+
+    public static void listen() {
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
         try {
             serverSocket = new ServerSocket(PORT);
 
-            while (!end) {
+            while (!MainManager.end) {
                 clientSocket = serverSocket.accept();
-                // processem la petició del client
-                proccesClientRequest(clientSocket);
-                // tanquem el sòcol temporal per atendre el client
-                closeClient(clientSocket);
+
+                String clientMessage;
+                BufferedReader in = null;
+                PrintStream out = null;
+                try {
+                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    out = new PrintStream(clientSocket.getOutputStream());
+                    do {
+                        String dataToSend = MainManager.readMessage();
+                        out.println(dataToSend);
+                        out.flush();
+
+                        clientMessage = in.readLine();
+                        if (clientMessage.equals(MainManager.ENDING_TEXT))
+                            MainManager.end = true;
+
+                        MainManager.printMessage(MainManager.CLIENT_SENDER, clientMessage);
+                    } while (!MainManager.end);
+                } catch (IOException ex) {
+                    Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
+                            null, ex);
+                }
+
+                MainManager.closeSocket(clientSocket);
             }
             // tanquem el sòcol principal
             if (serverSocket != null && !serverSocket.isClosed()) {
@@ -36,55 +63,4 @@ public class TcpSocketServer {
         }
     }
 
-    public void proccesClientRequest(Socket clientSocket) {
-        boolean farewellMessage = false;
-        String clientMessage = "";
-        BufferedReader in = null;
-        PrintStream out = null;
-        try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintStream(clientSocket.getOutputStream());
-            do {
-                // processem el missatge del client i generem la resposta. Si
-                // clientMessage és buida generarem el missatge de benvinguda
-                String dataToSend = processData(clientMessage);
-                out.println(dataToSend);
-                out.flush();
-                clientMessage = in.readLine();
-                farewellMessage = isFarewellMessage(clientMessage);
-            } while ((clientMessage) != null && !farewellMessage);
-        } catch (IOException ex) {
-            Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
-                    null, ex);
-        }
-    }
-
-    private boolean isFarewellMessage(String clientMessage) {
-        return false;
-    }
-
-    private String processData(String clientMessage) {
-        return null;
-    }
-
-    private void closeClient(Socket clientSocket) {
-        // si falla el tancament no podem fer gaire cosa, només enregistrar
-        // el problema
-        try {
-            // tancament de tots els recursos
-            if (clientSocket != null && !clientSocket.isClosed()) {
-                if (!clientSocket.isInputShutdown()) {
-                    clientSocket.shutdownInput();
-                }
-                if (!clientSocket.isOutputShutdown()) {
-                    clientSocket.shutdownOutput();
-                }
-                clientSocket.close();
-            }
-        } catch (IOException ex) {
-            // enregistrem l’error amb un objecte Logger
-            Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
-                    null, ex);
-        }
-    }
 }

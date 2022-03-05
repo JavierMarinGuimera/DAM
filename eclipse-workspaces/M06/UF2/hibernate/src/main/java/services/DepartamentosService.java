@@ -7,7 +7,7 @@ import pojos.Departaments;
 public interface DepartamentosService {
     public List<Departaments> getAll();
 
-    public Departaments selectOne(int deptNo);
+    public Departaments selectOne(byte deptNo);
 
     public Boolean createOne(Departaments departamento);
 
