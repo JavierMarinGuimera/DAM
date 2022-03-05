@@ -1,9 +1,6 @@
 package client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -20,31 +17,29 @@ public class TcpSocketClient {
     }
 
     public static void connect(String address, int port) {
-        String serverMessage;
-        String clientMessage;
         Socket socket;
-        BufferedReader in;
-        PrintStream out;
 
         try {
             socket = new Socket(InetAddress.getByName(address), port);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintStream(socket.getOutputStream());
 
-            while (!MainManager.end) {
-                // Getting the data from the server.
-                serverMessage = in.readLine();
-                MainManager.printMessage(MainManager.SERVER_SENDER, serverMessage);
+            MainManager.startAndWaitThreads(socket);
 
-                // Typing new message...
-                clientMessage = MainManager.readMessage();
+            // in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // out = new PrintStream(socket.getOutputStream());
 
-                // Send the data to the server.
-                out.println(clientMessage);
-                out.flush();
-            }
+            // while (!MainManager.end) {
+            // System.out.println(MainManager.end);
+            // // Getting the data from the server.
+            // serverMessage = in.readLine();
+            // MainManager.printMessage(MainManager.SERVER_SENDER, serverMessage);
 
-            MainManager.closeSocket(socket);
+            // // Typing new message...
+            // clientMessage = MainManager.writeMessage();
+
+            // // Send the data to the server.
+            // out.println(clientMessage);
+            // out.flush();
+            // }
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {

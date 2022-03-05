@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import server.TcpSocketServer;
+import threads.InThread;
+import threads.OutThread;
 
 public class MainManager {
     public static final String SERVER_SENDER = "Server";
@@ -20,9 +22,47 @@ public class MainManager {
                         : " Type " + ENDING_TEXT + " anytime to end the program."));
     }
 
-    // TODO - Make thread methods to make full-duplex communication.
-    public static void name() {
-        
+    /**
+     * Thsi method is the thread's starter and waiter.
+     * 
+     * @param socket Socket to send or receive data.
+     */
+    public static void startAndWaitThreads(Socket socket) {
+        try {
+            InThread inThread = new InThread(MainManager.CLIENT_SENDER, socket);
+            OutThread outThread = new OutThread(MainManager.SERVER_SENDER, socket);
+
+            inThread.start();
+            outThread.start();
+
+            inThread.join();
+            outThread.join();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static String writeMessage() {
+        if (scanner == null) {
+            scanner = new Scanner(System.in);
+        }
+
+        return scanner.nextLine();
+    }
+
+    /**
+     * Main method to print messages.
+     * 
+     * @param sender  The instance that is sending the message.
+     * @param message Thre message that the instance sent.
+     */
+    public static void printMessage(String sender, String message) {
+        System.out.println(sender + ": " + message);
+    }
+
+    public static boolean isFarewellMessage(String message) {
+        return ENDING_TEXT.equals(message);
     }
 
     /**
@@ -50,29 +90,5 @@ public class MainManager {
         if (scanner != null) {
             scanner.close();
         }
-    }
-
-    public static void closeEverything(Socket serverSocket, Socket clientSocket) {
-        closeSocket(serverSocket);
-        closeSocket(clientSocket);
-        closeScanner();
-    }
-
-    public static String readMessage() {
-        if (scanner == null) {
-            scanner = new Scanner(System.in);
-        }
-
-        return scanner.nextLine();
-    }
-
-    /**
-     * Main method to print messages.
-     * 
-     * @param sender  The instance that is sending the message.
-     * @param message Thre message that the instance sent.
-     */
-    public static void printMessage(String sender, String message) {
-        System.out.println(sender + ": " + message);
     }
 }
