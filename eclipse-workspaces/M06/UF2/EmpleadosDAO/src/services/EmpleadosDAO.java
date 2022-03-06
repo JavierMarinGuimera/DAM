@@ -18,7 +18,7 @@ public interface EmpleadosDAO {
 
     public Empleado selectOne(int emp_no) throws SQLException;
 
-    public Enum insertOne() throws SQLException;
+    public Boolean insertOne() throws SQLException;
 
     public void updateOne(int emp_no) throws SQLException;
 

@@ -34,11 +34,11 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
     }
 
     @Override
-    public Departaments selectOne(byte deptNo) {
+    public Departaments selectOne(int deptNo) {
         Session session = DBConnection.getSessionFactory().openSession();
 
         try {
-            return session.get(Departaments.class, deptNo);
+            return session.get(Departaments.class, (byte) deptNo);
         } catch (Exception e) {
             System.out.println("No se han podido obtener el departamento.");
             e.printStackTrace();

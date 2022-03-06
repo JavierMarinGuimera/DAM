@@ -96,9 +96,9 @@ public class Departaments implements java.io.Serializable {
 	}
 
 	/**
-	 * Receives a list of user to print them.
+	 * Receives a list to print it.
 	 * 
-	 * @param users
+	 * @param departamentos
 	 */
 	public static void printDepartamentosFromList(List<Departaments> departamentos) {
 		for (Departaments departamento : departamentos) {
@@ -110,9 +110,9 @@ public class Departaments implements java.io.Serializable {
 	}
 
 	/**
-	 * Encapsulates de user in a list of them to reuse the method above.
+	 * Encapsulates the parameter in a list of them to reuse the method above.
 	 * 
-	 * @param user
+	 * @param departamento
 	 */
 	public static void printDepartamento(Departaments departamento) {
 		List<Departaments> departamentoAsList = new ArrayList<>();

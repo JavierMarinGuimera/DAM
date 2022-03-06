@@ -14,12 +14,6 @@ import services.EmpleadosDAO;
 public class App {
 	public static final String PRINT_SEPARATION = "--------------------------------------------";
 
-	private static enum InsertMessages {
-		OK,
-		USER_FOUND,
-		ERROR
-	}
-
 	public static ConnectionManager daoConnection;
 
 	public static List<Empleado> empleados;
@@ -82,7 +76,7 @@ public class App {
 
 			// Ejercicio 8:
 			System.out.println("Ejercicio 8: ");
-			daoConnection.DBData();
+			ConnectionManager.DBData();
 
 			// Ejercicio EXTRA:
 			System.out.println("Ejercicio EXTRA: ");

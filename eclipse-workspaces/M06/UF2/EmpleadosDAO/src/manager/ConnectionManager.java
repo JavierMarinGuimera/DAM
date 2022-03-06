@@ -7,57 +7,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-    private String url;
-    private String user;
-    private String passwd;
+    private static String url;
+    private static String user;
+    private static String passwd;
 
-    public ConnectionManager() {
-        this.url = "jdbc:mysql://localhost/empleados";
-        this.user = "root";
-        this.passwd = "";
+    static {
+        System.out.println();
+        url = "jdbc:mysql://localhost/empleados";
+        user = "root";
+        passwd = "";
     }
 
-    public ConnectionManager(String url, String user, String passwd) {
-        this.url = url;
-        this.user = user;
-        this.passwd = passwd;
-    }
-
-    public String getUrl() {
-        return this.url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUser() {
-        return this.user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPasswd() {
-        return this.passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPasswd());
+            return DriverManager.getConnection(url, user, passwd);
         } catch (SQLException e) {
             System.out.println("Something went wrong on getting the connection!");
             return null;
         }
     }
 
-    public void DBData() throws SQLException {
-        Connection con = this.getConnection();
+    public static void DBData() throws SQLException {
+        Connection con = getConnection();
         DatabaseMetaData estructuraBD = con.getMetaData();
         con.close();
         String nom = estructuraBD.getDatabaseProductName();

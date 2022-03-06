@@ -9,7 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import connection.DBConnection;
+import manager.DAOManager;
 import pojos.Empleats;
+import services.DepartamentosService;
 import services.EmpleadosService;
 
 public class EmpeladosServiceImplHibernate implements EmpleadosService {
@@ -38,7 +40,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
         Session session = DBConnection.getSessionFactory().openSession();
 
         try {
-            return session.get(Empleats.class, empNo);
+            return session.get(Empleats.class, (short) empNo);
         } catch (Exception e) {
             System.out.println("No se han podido obtener el empleado.");
             e.printStackTrace();
@@ -99,16 +101,47 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
     }
 
     @Override
-    public Boolean deleteOne(Empleats empleado) {
+    public Boolean deleteOne(int empNo) {
         Session session = DBConnection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         try {
-            if (selectOne(empleado.getEmpNo()) == null) {
+            Empleats empleado = selectOne(empNo);
+            if (empleado == null) {
                 return false;
             }
 
             session.delete(empleado);
+
+            session.getTransaction().commit();
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("No se han podido eliminar el empleado.");
+            tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public Object changeDepartamento(int empNo, int deptNo) {
+        Session session = DBConnection.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            Empleats empleado = selectOne(empNo);
+            DepartamentosService ds = DAOManager.getDepartamentosService(DAOManager.HIBERNATE);
+
+            if (empleado == null) {
+                return false;
+            }
+
+            empleado.setDepartaments(ds.selectOne(deptNo));
+
+            session.update(empleado);
 
             session.getTransaction().commit();
 

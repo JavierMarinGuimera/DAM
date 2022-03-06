@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import app.App;
 import classes.Departamento;
+import manager.ConnectionManager;
 import services.DepartamentosDAO;
 
 public class DepartamentosDAOImpl implements DepartamentosDAO {
@@ -17,7 +18,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     public void selectAll() throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM departamentos";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
@@ -36,7 +37,7 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
     public Departamento selectOne(int dept_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM departamentos WHERE dept_no = ?";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, dept_no);
 
@@ -58,9 +59,9 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
 
     @Override
     public void insertOne(Departamento dep) throws SQLException {
-        if (selectOne(con, dep.getDept_no()) == null) {
+        if (selectOne(dep.getDept_no()) == null) {
             String sql = "INSERT INTO depLEADOS (`dep_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement st = con.prepareStatement(sql);
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
             st.setInt(1, dep.getDept_no());
             st.setString(2, dep.getName());
             st.setString(3, dep.getIoc());
@@ -74,9 +75,9 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
 
     @Override
     public void updateOne(int dept_no) throws SQLException {
-        if (selectOne(con, dept_no) != null) {
+        if (selectOne(dept_no) != null) {
             String sql = "UPDATE empleados SET dnombre = 'MODIFIED' WHERE  dept_no = ?";
-            PreparedStatement st = con.prepareStatement(sql);
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
             st.setInt(1, dept_no);
 
             st.executeQuery();
@@ -88,9 +89,9 @@ public class DepartamentosDAOImpl implements DepartamentosDAO {
 
     @Override
     public void deleteOne(int dept_no) throws SQLException {
-        if (selectOne(con, dept_no) != null) {
+        if (selectOne(dept_no) != null) {
             String sql = "DELETE FROM departamentos WHERE dept_no = ?";
-            PreparedStatement st = con.prepareStatement(sql);
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
             st.setInt(1, dept_no);
 
             st.executeQuery();

@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import app.App;
 import classes.Empleado;
+import manager.ConnectionManager;
 import services.DepartamentosDAO;
 import services.EmpleadosDAO;
 
@@ -28,7 +29,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
         // Query to execute:
         String sql = "SELECT * FROM empleados";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
 
         PreparedStatement st = con.prepareStatement(sql);
         ResultSet result = st.executeQuery();
@@ -54,7 +55,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         // Query to execute:
         String sql = "SELECT * FROM empleados WHERE emp_no = ?";
 
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, emp_no);
 
@@ -75,7 +76,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     }
 
     @Override
-    public Enum insertOne() throws SQLException {
+    public Boolean insertOne() throws SQLException {
         System.out.println("Vamos a crear un usuario nuevo. Introduce los datos:");
 
         Scanner sc = App.sc;
@@ -107,7 +108,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
                 if ((dir == 0 || selectOne(dir) != null) && depDAO.selectOne(emp.getDept_no()) != null) {
                     if (selectOne(emp.getEmp_no()) != null) {
                         String sql = "INSERT INTO EMPLEADOS (`emp_no`, `apellido`, `oficio`, `dir`, `fecha_alt`, `salario`, `comision`, `dept_no`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                        Connection con = App.daoConnection.getConnection();
+                        Connection con = ConnectionManager.getConnection();
                         PreparedStatement st = con.prepareStatement(sql);
                         st.setInt(1, emp.getEmp_no());
                         st.setString(2, emp.getApellido());
@@ -144,7 +145,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     public void updateOne(int emp_no) throws SQLException {
         if (selectOne(emp_no) != null) {
             String sql = "UPDATE empleados SET apellido = 'MODIFIED' WHERE emp_no = ?";
-            Connection con = App.daoConnection.getConnection();
+            Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, emp_no);
 
@@ -171,7 +172,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
                 } else {
                     if (selectOne(emp_no) != null) {
                         String sql = "DELETE FROM empleados WHERE emp_no = ?";
-                        Connection con = App.daoConnection.getConnection();
+                        Connection con = ConnectionManager.getConnection();
                         PreparedStatement st = con.prepareStatement(sql);
                         st.setInt(1, emp_no);
 
@@ -245,7 +246,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
         // Query to execute:
         String sql = "SELECT dept.dnombre, em1.dept_no, em1.apellido as Empleado, em1.oficio, em2.apellido AS Jefe, em1.salario, em1.comision FROM empleados em2 JOIN empleados em1 ON em2.emp_no = em1.dir JOIN departamentos dept ON em1.dept_no = dept.dept_no GROUP BY dept.dept_no";
 
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
@@ -270,7 +271,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     public void selectByDepartamento(int dept_no) throws SQLException {
         // Query to execute:
         String sql = "SELECT * FROM empleados WHERE dept_no = ?";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, dept_no);
 
@@ -293,7 +294,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
     public void selectByApellido(String apellido) throws SQLException {
         // Query to execute:
         String sql = "SELECT em1.emp_no, em1.apellido, em1.oficio, em2.apellido, em1.salario, em1.comision FROM empleados em1 INNER JOIN empleados em2 ON em1.dir = em2.emp_no WHERE em1.apellido LIKE ?";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
         st.setString(1, apellido.toUpperCase() + "%");
 
@@ -316,7 +317,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
 
         // Query to execute:
         String sql = "SELECT DISTINCT oficio FROM empleados";
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         ResultSet result = st.executeQuery();
@@ -370,7 +371,7 @@ public class EmpleadosDAOImpl implements EmpleadosDAO {
             System.out.println("Opción errónea de alter columns.");
         }
 
-        Connection con = App.daoConnection.getConnection();
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
 
         st.executeUpdate();

@@ -13,5 +13,7 @@ public interface EmpleadosService {
 
     public Boolean updateOne(Empleats empleado);
 
-    public Boolean deleteOne(Empleats empleado);
+    public Boolean deleteOne(int empNo);
+
+    public Object changeDepartamento(int i, int j);
 }
