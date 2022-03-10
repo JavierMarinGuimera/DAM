@@ -24,21 +24,21 @@ public class OutThread extends Thread {
             String outgoingMessage;
             PrintStream out = new PrintStream(socket.getOutputStream());
 
-            socket.setSoTimeout(1000);
+            socket.setSoTimeout(2000);
 
             while (!MainManager.end && !socket.isClosed()) {
                 outgoingMessage = "";
-                System.out.print("Yo: ");
-                while (!MainManager.end && !socket.isClosed() && !outgoingMessage.equals("")) {
-                    try {
-                        outgoingMessage = MainManager.writeMessage();
-                    } catch (Exception e) {
+
+                try {
+                    outgoingMessage = MainManager.writeMessage();
+                } catch (Exception e) {
+                    if (MainManager.end) {
+                        break;
+                    } else {
                         continue;
                     }
                 }
 
-                // if (MainManager.isFarewellMessage(outgoingMessage))
-                // MainManager.end = true;
                 if (!MainManager.end && !outgoingMessage.equals("")) {
                     out.println(outgoingMessage);
                     out.flush();
@@ -49,6 +49,7 @@ public class OutThread extends Thread {
                     MainManager.closeSocket(socket);
                 }
             }
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

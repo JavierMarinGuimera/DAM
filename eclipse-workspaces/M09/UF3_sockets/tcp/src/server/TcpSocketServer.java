@@ -13,49 +13,27 @@ public class TcpSocketServer {
 
     public static void main(String[] args) throws Exception {
         MainManager.welcomeMessage(MainManager.SERVER_SENDER);
-
         listen();
     }
 
     public static void listen() {
-        ServerSocket serverSocket = null;
-        Socket clientSocket = null;
-
         try {
-            serverSocket = new ServerSocket(PORT);
+            // Creating our server socket who will receive the client request.
+            ServerSocket serverSocket = new ServerSocket(PORT);
 
-            clientSocket = serverSocket.accept();
+            // Receiving the client request.
+            Socket clientSocket = serverSocket.accept();
 
+            // Main program occurs form here...
             MainManager.startAndWaitThreads(clientSocket);
 
-            // String clientMessage;
-            // BufferedReader in = null;
-            // PrintStream out = null;
-            // try {
-            // in = new BufferedReader(new
-            // InputStreamReader(clientSocket.getInputStream()));
-            // out = new PrintStream(clientSocket.getOutputStream());
+            // If the client socket is not closed, we need to close it.
+            if (clientSocket != null && !clientSocket.isClosed()) {
+                clientSocket.close();
+            }
 
-            // do {
-            // String dataToSend = MainManager.writeMessage();
-            // out.println(dataToSend);
-            // out.flush();
-
-            // clientMessage = in.readLine();
-            // MainManager.isFarewellMessage(clientMessage);
-
-            // MainManager.printMessage(MainManager.CLIENT_SENDER, clientMessage);
-            // } while (!MainManager.end);
-            // } catch (IOException ex) {
-            // Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
-            // null, ex);
-            // }
-
-            // MainManager.closeSocket(clientSocket);
-
-            // We need to close the main socket.
+            // If the server socket is not closed, we need to close it.
             if (serverSocket != null && !serverSocket.isClosed()) {
-                System.out.println("Closing socket");
                 serverSocket.close();
             }
 

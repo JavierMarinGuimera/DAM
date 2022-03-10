@@ -20,26 +20,17 @@ public class TcpSocketClient {
         Socket socket;
 
         try {
+            // Creating new socket to contact with the server at its port.
             socket = new Socket(InetAddress.getByName(address), port);
 
+            // Main program occurs form here...
             MainManager.startAndWaitThreads(socket);
 
-            // in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            // out = new PrintStream(socket.getOutputStream());
+            // If the socket is not closed, we need to close it.
+            if (socket != null && !socket.isClosed()) {
+                socket.close();
+            }
 
-            // while (!MainManager.end) {
-            // System.out.println(MainManager.end);
-            // // Getting the data from the server.
-            // serverMessage = in.readLine();
-            // MainManager.printMessage(MainManager.SERVER_SENDER, serverMessage);
-
-            // // Typing new message...
-            // clientMessage = MainManager.writeMessage();
-
-            // // Send the data to the server.
-            // out.println(clientMessage);
-            // out.flush();
-            // }
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {

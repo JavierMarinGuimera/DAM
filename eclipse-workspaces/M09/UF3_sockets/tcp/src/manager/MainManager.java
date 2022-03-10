@@ -47,6 +47,7 @@ public class MainManager {
             scanner = new Scanner(System.in);
         }
 
+        // TODO - Solucionar bloqueo.
         return scanner.nextLine();
     }
 

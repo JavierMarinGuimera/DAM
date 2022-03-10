@@ -21,12 +21,11 @@ public class InThread extends Thread {
      */
     @Override
     public void run() {
-
         try {
             String incomingMessage;
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            socket.setSoTimeout(1000);
+            socket.setSoTimeout(2000);
 
             while (!MainManager.end && !socket.isClosed()) {
                 try {
@@ -40,7 +39,6 @@ public class InThread extends Thread {
                 }
 
                 if (MainManager.isFarewellMessage(incomingMessage)) {
-                    System.out.println("isFarewellMessage");
                     MainManager.end = true;
                     MainManager.closeSocket(socket);
                 }
@@ -50,8 +48,6 @@ public class InThread extends Thread {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        MainManager.closeSocket(socket);
     }
 
 }
