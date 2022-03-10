@@ -56,7 +56,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
         Transaction tx = session.beginTransaction();
 
         try {
-            if (selectOne(empleado.getEmpNo()) != null) {
+            if (empleado == null || selectOne(empleado.getEmpNo()) != null) {
                 return false;
             }
 
@@ -76,11 +76,12 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
     }
 
     @Override
-    public Boolean updateOne(Empleats empleado) {
+    public Boolean updateOne(int empNo) {
         Session session = DBConnection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         try {
+            Empleats empleado = selectOne(empNo);
             if (selectOne(empleado.getEmpNo()) == null) {
                 return false;
             }
@@ -127,7 +128,7 @@ public class EmpeladosServiceImplHibernate implements EmpleadosService {
     }
 
     @Override
-    public Object changeDepartamento(int empNo, int deptNo) {
+    public Boolean changeDepartamento(int empNo, int deptNo) {
         Session session = DBConnection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 

@@ -24,16 +24,28 @@ public class OutThread extends Thread {
             String outgoingMessage;
             PrintStream out = new PrintStream(socket.getOutputStream());
 
-            while (!MainManager.end & !socket.isClosed()) {
-                outgoingMessage = MainManager.writeMessage();
+            socket.setSoTimeout(1000);
 
-                if (MainManager.isFarewellMessage(outgoingMessage))
+            while (!MainManager.end && !socket.isClosed()) {
+                outgoingMessage = "";
+                System.out.print("Yo: ");
+                while (!MainManager.end && !socket.isClosed() && !outgoingMessage.equals("")) {
+                    try {
+                        outgoingMessage = MainManager.writeMessage();
+                    } catch (Exception e) {
+                        continue;
+                    }
+                }
+
+                // if (MainManager.isFarewellMessage(outgoingMessage))
+                // MainManager.end = true;
+                if (!MainManager.end && !outgoingMessage.equals("")) {
+                    out.println(outgoingMessage);
+                    out.flush();
+                }
+
+                if (MainManager.isFarewellMessage(outgoingMessage)) {
                     MainManager.end = true;
-
-                out.println(outgoingMessage);
-                out.flush();
-
-                if (MainManager.end) {
                     MainManager.closeSocket(socket);
                 }
             }

@@ -26,10 +26,21 @@ public class InThread extends Thread {
             String incomingMessage;
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            while (!MainManager.end & !socket.isClosed()) {
-                incomingMessage = in.readLine();
+            socket.setSoTimeout(1000);
+
+            while (!MainManager.end && !socket.isClosed()) {
+                try {
+                    incomingMessage = in.readLine();
+                } catch (Exception e) {
+                    if (MainManager.end) {
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
 
                 if (MainManager.isFarewellMessage(incomingMessage)) {
+                    System.out.println("isFarewellMessage");
                     MainManager.end = true;
                     MainManager.closeSocket(socket);
                 }

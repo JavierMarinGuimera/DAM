@@ -29,8 +29,8 @@ public class MainManager {
      */
     public static void startAndWaitThreads(Socket socket) {
         try {
-            InThread inThread = new InThread(MainManager.CLIENT_SENDER, socket);
-            OutThread outThread = new OutThread(MainManager.SERVER_SENDER, socket);
+            InThread inThread = new InThread("Sender", socket);
+            OutThread outThread = new OutThread("Receiver", socket);
 
             inThread.start();
             outThread.start();
@@ -38,7 +38,6 @@ public class MainManager {
             inThread.join();
             outThread.join();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

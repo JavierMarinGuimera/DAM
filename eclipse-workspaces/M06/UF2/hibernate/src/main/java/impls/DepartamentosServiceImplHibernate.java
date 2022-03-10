@@ -74,14 +74,18 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
     }
 
     @Override
-    public Boolean updateOne(Departaments departamento) {
+    public Boolean updateOne(int deptNo) {
         Session session = DBConnection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         try {
-            if (selectOne(departamento.getDeptNo()) == null) {
+            Departaments departamento = selectOne(deptNo);
+
+            if (departamento == null) {
                 return false;
             }
+
+            departamento.setDeptCiutat("Pruebas");
 
             session.update(departamento);
 
@@ -99,12 +103,14 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
     }
 
     @Override
-    public Boolean deleteOne(Departaments departamento) {
+    public Boolean deleteOne(int deptNo) {
         Session session = DBConnection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         try {
-            if (selectOne(departamento.getDeptNo()) == null) {
+            Departaments departamento = selectOne(deptNo);
+
+            if (departamento == null) {
                 return false;
             }
 
@@ -122,5 +128,4 @@ public class DepartamentosServiceImplHibernate implements DepartamentosService {
         }
         return null;
     }
-
 }

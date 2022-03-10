@@ -11,7 +11,7 @@ public interface DepartamentosService {
 
     public Boolean createOne(Departaments departamento);
 
-    public Boolean updateOne(Departaments departamento);
+    public Boolean updateOne(int i);
 
-    public Boolean deleteOne(Departaments departamento);
+    public Boolean deleteOne(int i);
 }

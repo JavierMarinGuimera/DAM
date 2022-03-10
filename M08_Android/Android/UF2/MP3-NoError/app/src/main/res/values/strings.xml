@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MP3</string>
+    <string name="playSong">Play</string>
+    <string name="lastSong">Past song</string>
+    <string name="nextSong">Next song</string>
+    <string name="songText">Any song playing…</string>
+    <string name="rewindSong">Rewinding song</string>
+    <string name="advanceSong">Advancing song</string>
+    <string name="titleText">Songs: </string>
+</resources>

@@ -13,13 +13,13 @@ public enum Activities {
 
     private int id;
 
-    Activities(int id){
-        this.id=id;
+    Activities(int id) {
+        this.id = id;
     }
 
     public static Activities getActivity(int id) {
-        for (Activities activity:values()) {
-            if(activity.id==id) return activity;
+        for (Activities activity : values()) {
+            if (activity.id == id) return activity;
         }
 
         return null;

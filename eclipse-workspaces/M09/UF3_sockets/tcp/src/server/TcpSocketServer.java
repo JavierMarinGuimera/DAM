@@ -20,42 +20,42 @@ public class TcpSocketServer {
     public static void listen() {
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
+
         try {
             serverSocket = new ServerSocket(PORT);
 
-            while (!MainManager.end) {
-                clientSocket = serverSocket.accept();
+            clientSocket = serverSocket.accept();
 
-                MainManager.startAndWaitThreads(clientSocket);
+            MainManager.startAndWaitThreads(clientSocket);
 
-                // String clientMessage;
-                // BufferedReader in = null;
-                // PrintStream out = null;
-                // try {
-                // in = new BufferedReader(new
-                // InputStreamReader(clientSocket.getInputStream()));
-                // out = new PrintStream(clientSocket.getOutputStream());
+            // String clientMessage;
+            // BufferedReader in = null;
+            // PrintStream out = null;
+            // try {
+            // in = new BufferedReader(new
+            // InputStreamReader(clientSocket.getInputStream()));
+            // out = new PrintStream(clientSocket.getOutputStream());
 
-                // do {
-                // String dataToSend = MainManager.writeMessage();
-                // out.println(dataToSend);
-                // out.flush();
+            // do {
+            // String dataToSend = MainManager.writeMessage();
+            // out.println(dataToSend);
+            // out.flush();
 
-                // clientMessage = in.readLine();
-                // MainManager.isFarewellMessage(clientMessage);
+            // clientMessage = in.readLine();
+            // MainManager.isFarewellMessage(clientMessage);
 
-                // MainManager.printMessage(MainManager.CLIENT_SENDER, clientMessage);
-                // } while (!MainManager.end);
-                // } catch (IOException ex) {
-                // Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
-                // null, ex);
-                // }
+            // MainManager.printMessage(MainManager.CLIENT_SENDER, clientMessage);
+            // } while (!MainManager.end);
+            // } catch (IOException ex) {
+            // Logger.getLogger(TcpSocketServer.class.getName()).log(Level.SEVERE,
+            // null, ex);
+            // }
 
-                // MainManager.closeSocket(clientSocket);
-            }
+            // MainManager.closeSocket(clientSocket);
 
             // We need to close the main socket.
             if (serverSocket != null && !serverSocket.isClosed()) {
+                System.out.println("Closing socket");
                 serverSocket.close();
             }
 

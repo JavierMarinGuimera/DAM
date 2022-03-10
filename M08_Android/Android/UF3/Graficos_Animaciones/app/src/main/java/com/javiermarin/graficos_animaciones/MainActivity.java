@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
         propertyBtn.setOnClickListener(v -> loadActivity(Activities.PROPERTY));
     }
 
-    private void loadActivity(Activities actividad) {
+    private void loadActivity(Activities activity) {
         Intent intent = new Intent(this, LaunchActivities.class);
 
-        intent.putExtra("activity", actividad);
+        intent.putExtra("activity", activity);
 
         startActivity(intent);
     }

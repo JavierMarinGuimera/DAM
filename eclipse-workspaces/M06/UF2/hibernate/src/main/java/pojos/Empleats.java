@@ -125,6 +125,10 @@ public class Empleats implements java.io.Serializable {
 		System.out.println("Empleado " + (deleted ? "" : "no ") + "eliminado.\n");
 	}
 
+	public static void isInDepartamento(Boolean isDepartamentUpdated) {
+		System.out.println("Departamento " + (isDepartamentUpdated ? "" : "no ") + "actualizado en el empleado.\n");
+	}
+
 	/**
 	 * Receives a list to print it.
 	 * 
@@ -145,8 +149,5 @@ public class Empleats implements java.io.Serializable {
 		List<Empleats> empleadoAsList = new ArrayList<>();
 		empleadoAsList.add(empleado);
 		printEmpleadosFromList(empleadoAsList);
-	}
-
-	public static void isInDepartamento(Object changeDepartamento) {
 	}
 }
