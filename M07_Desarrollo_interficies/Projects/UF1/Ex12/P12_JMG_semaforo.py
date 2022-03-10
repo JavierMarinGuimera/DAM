@@ -3,7 +3,7 @@
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5 import uic
+from PyQt5 import uic, QtWidgets
 import sys
 import locale
 
@@ -21,6 +21,9 @@ class Semaforo(QMainWindow):
     llums = {"nom etiquetes": ("lb_vermell", "lb_groc", "lb_verd"),
              "colors on": ("red", "yellow", "green"),
              "colors off": ("grey", "grey", "grey")}
+    currentCycle = "Estàndard"
+    currentFase = 0
+    currentSpeed = 1
 
     def __init__(self):
         # DEFAULT TASKS:
@@ -31,6 +34,7 @@ class Semaforo(QMainWindow):
         # CUSTOM TASKS:
         self.setWindowTitle('Semáforo')
         self.timer = QTimer()
+        self.setComboBoxValues()
 
         # - OnClick METHODS:
         self.ac_configurar.triggered.connect(self.mostrarConfig)
@@ -38,14 +42,15 @@ class Semaforo(QMainWindow):
         self.ac_quant_a.triggered.connect(self.mostrarInfo)
         self.bt_ok1.clicked.connect(self.mostrarMain)
         self.bt_ok2.clicked.connect(self.mostrarMain)
+        self.cb_cicle.currentIndexChanged.connect(self.changeCycle)
+        self.dial.valueChanged.connect(self.dialMoved)
 
         # Some asignments:
         self.timer.timeout.connect(self.changeState)
 
         # SHOW UI and methods calls:
         self.show()
-        self.setComboBoxValues()
-        self.mainProgram()
+        self.changeState()
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
@@ -55,13 +60,33 @@ class Semaforo(QMainWindow):
         for cicle in self.cicles:
             self.cb_cicle.addItem(cicle)
 
-    def mainProgram(self):
+        self.cb_cicle.setCurrentIndex(self.currentFase)
 
-        pass
+    def changeCycle(self):
+        self.currentCycle = self.cb_cicle.currentText()
+        self.currentFase = 0
+        self.changeState()
+
+    def dialMoved(self):
+        self.currentSpeed = round(self.dial.value())
 
     def changeState(self):
-        pass
-        self.timer.start(1000)
+        speed = 1000 - (self.currentSpeed * 10)
+        self.timer.start(round(self.cicles[self.currentCycle]
+                         [self.currentFase][0] * speed))
+
+        for value in self.llums["nom etiquetes"]:
+            label = self.findChild(QtWidgets.QLabel, value)
+            if (self.cicles[self.currentCycle][self.currentFase][self.llums["nom etiquetes"].index(value) + 1] == True):
+                label.setStyleSheet(
+                    f"background-color: {self.llums['colors on'][self.llums['nom etiquetes'].index(value)]}; border-radius: 60px;")
+            else:
+                label.setStyleSheet(
+                    f"background-color: {self.llums['colors off'][self.llums['nom etiquetes'].index(value)]}; border-radius: 60px;")
+        self.currentFase += 1
+
+        if (self.currentFase == len(self.cicles[self.currentCycle])):
+            self.currentFase = 0
 
     def mostrarMain(self):
         self.stackedWidget.setCurrentIndex(0)
