@@ -1,7 +1,9 @@
 package com.javiermarin.graficos_animaciones.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.view.MotionEvent;
@@ -33,11 +35,10 @@ public class Circle extends View {
     @Override
     public void onDraw(Canvas canvas) {
         if (print) {
-            int ancho = 30 + currentSize;
-            int alto = 30 + currentSize;
-            this.circulo.getPaint().setARGB(255, currentRed, currentGreen, currentBlue);
-            this.circulo.setBounds(positionX, positionY, positionX + ancho, positionY + alto);
-            canvas.draw
+            @SuppressLint("DrawAllocation") Paint paint = new Paint();
+            int radio = 30 + currentSize;
+            paint.setARGB(255, currentRed, currentGreen, currentBlue);
+            canvas.drawCircle(positionX, positionY, radio, paint);
         }
     }
 

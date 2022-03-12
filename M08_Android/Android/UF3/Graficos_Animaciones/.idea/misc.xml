@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/drawable/sun.xml" value="0.3796875" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/activity_tween_animation.xml" value="0.5" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/color_animation.xml" value="0.36354166666666665" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/displacement_animation.xml" value="0.36354166666666665" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/fade_animation.xml" value="0.36354166666666665" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/rotation_animation.xml" value="0.5" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/Graficos_Animaciones/app/src/main/res/layout/text_size_animation.xml" value="0.36354166666666665" />
       </map>
     </option>
   </component>

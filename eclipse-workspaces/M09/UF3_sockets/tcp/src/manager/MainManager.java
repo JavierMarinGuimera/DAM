@@ -1,8 +1,9 @@
 package manager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.Scanner;
 
 import server.TcpSocketServer;
 import threads.InThread;
@@ -14,7 +15,7 @@ public class MainManager {
     public static final String ENDING_TEXT = "!END";
 
     public static boolean end = false;
-    public static Scanner scanner;
+    public static BufferedReader bf;
 
     public static void welcomeMessage(String nodeUser) {
         System.out.println("Welcome " + nodeUser + " to the TCP app!"
@@ -42,13 +43,16 @@ public class MainManager {
         }
     }
 
-    public static String writeMessage() {
-        if (scanner == null) {
-            scanner = new Scanner(System.in);
+    public static String writeMessage() throws IOException {
+        if (bf == null) {
+            bf = new BufferedReader(new InputStreamReader(System.in));
         }
 
-        // TODO - Solucionar bloqueo.
-        return scanner.nextLine();
+        if (bf.ready()) {
+            return bf.readLine();
+        }
+
+        return "";
     }
 
     /**
@@ -83,12 +87,6 @@ public class MainManager {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-    }
-
-    public static void closeScanner() {
-        if (scanner != null) {
-            scanner.close();
         }
     }
 }

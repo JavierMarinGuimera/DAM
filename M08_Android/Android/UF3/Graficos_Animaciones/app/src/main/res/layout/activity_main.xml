@@ -52,17 +52,11 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/colorBtn"
+            android:id="@+id/textSizeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cambio color"
+            android:text="Tamaño texto"
             android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/propertyBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Property"
-            android:textAllCaps="false" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

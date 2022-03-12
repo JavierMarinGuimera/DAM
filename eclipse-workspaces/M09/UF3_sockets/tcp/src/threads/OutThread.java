@@ -23,9 +23,7 @@ public class OutThread extends Thread {
         try {
             String outgoingMessage;
             PrintStream out = new PrintStream(socket.getOutputStream());
-
-            socket.setSoTimeout(2000);
-
+                
             while (!MainManager.end && !socket.isClosed()) {
                 outgoingMessage = "";
 

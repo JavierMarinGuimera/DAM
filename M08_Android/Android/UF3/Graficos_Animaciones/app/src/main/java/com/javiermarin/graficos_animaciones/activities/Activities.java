@@ -3,12 +3,11 @@ package com.javiermarin.graficos_animaciones.activities;
 import com.javiermarin.graficos_animaciones.R;
 
 public enum Activities {
-    CHANGE_COLOR(R.id.colorBtn),
     CIRCLES(R.id.circlesBtn),
     DISPLACEMENTS(R.id.displacementsBtn),
     FADES(R.id.fadesBtn),
-    PROPERTY(R.id.propertyBtn),
     ROTATIONS(R.id.rotationsBtn),
+    TEXT_SIZE(R.id.textSizeBtn),
     TWEEN(R.id.tweenBtn);
 
     private int id;

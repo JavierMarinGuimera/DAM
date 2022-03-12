@@ -1,13 +1,13 @@
 package com.javiermarin.graficos_animaciones;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.javiermarin.graficos_animaciones.activities.Activities;
-import com.javiermarin.graficos_animaciones.activities.LaunchActivities;
+import com.javiermarin.graficos_animaciones.activities.LaunchActivitiesManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,15 +35,12 @@ public class MainActivity extends AppCompatActivity {
         Button fadesBtn = findViewById(R.id.fadesBtn);
         fadesBtn.setOnClickListener(v -> loadActivity(Activities.FADES));
 
-        Button colorBtn = findViewById(R.id.colorBtn);
-        colorBtn.setOnClickListener(v -> loadActivity(Activities.CHANGE_COLOR));
-
-        Button propertyBtn = findViewById(R.id.propertyBtn);
-        propertyBtn.setOnClickListener(v -> loadActivity(Activities.PROPERTY));
+        Button textSizeBtn = findViewById(R.id.textSizeBtn);
+        textSizeBtn.setOnClickListener(v -> loadActivity(Activities.TEXT_SIZE));
     }
 
     private void loadActivity(Activities activity) {
-        Intent intent = new Intent(this, LaunchActivities.class);
+        Intent intent = new Intent(this, LaunchActivitiesManager.class);
 
         intent.putExtra("activity", activity);
 
