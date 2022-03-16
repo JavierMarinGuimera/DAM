@@ -8,11 +8,11 @@ public interface ServicesService {
 
     public List<Serveis> readAll();
 
-    public boolean createOne();
+    public boolean createOne(Serveis service);
 
-    public Serveis readOne();
+    public Serveis readOne(int id);
 
-    public boolean updateOne();
+    public boolean updateOne(Serveis service);
 
-    public boolean deleteOne();
+    public boolean deleteOne(int id);
 }

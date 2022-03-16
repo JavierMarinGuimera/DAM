@@ -3,7 +3,7 @@ package connection;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DBConnection {
+public class DBConnectionHibernate {
 	private static SessionFactory sessionFactory;
 
 	static {

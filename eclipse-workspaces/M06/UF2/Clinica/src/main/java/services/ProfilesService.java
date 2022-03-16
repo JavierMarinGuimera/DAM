@@ -12,7 +12,7 @@ public interface ProfilesService {
 
     public Perfils readOne(int id);
 
-    public boolean updateOne(int id);
+    public boolean updateOne(Perfils perfil);
 
     public boolean deleteOne(int id);
 }

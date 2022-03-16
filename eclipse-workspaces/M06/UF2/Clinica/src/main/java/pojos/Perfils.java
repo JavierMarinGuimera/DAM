@@ -2,6 +2,7 @@ package pojos;
 // Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -51,4 +52,8 @@ public class Perfils implements java.io.Serializable {
 		this.usuarises = usuarises;
 	}
 
+	@Override
+	public String toString() {
+		return "Perfils [codi=" + codi + ", descripcio=" + descripcio + "]";
+	}
 }

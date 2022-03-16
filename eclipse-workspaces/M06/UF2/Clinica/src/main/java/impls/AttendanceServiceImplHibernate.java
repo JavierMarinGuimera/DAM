@@ -2,37 +2,37 @@ package impls;
 
 import java.util.List;
 
-import pojos.Serveis;
-import services.ServicesService;
+import pojos.Assistencies;
+import services.AttendanceService;
 
-public class ServicesServiceImpl implements ServicesService {
+public class AttendanceServiceImplHibernate implements AttendanceService {
 
     @Override
-    public List<Serveis> readAll() {
+    public List<Assistencies> readAll() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean createOne() {
+    public boolean createOne(Assistencies attendance) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public Serveis readOne() {
+    public Assistencies readOne(int id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean updateOne() {
+    public boolean updateOne(Assistencies attendance) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean deleteOne() {
+    public boolean deleteOne(int id) {
         // TODO Auto-generated method stub
         return false;
     }

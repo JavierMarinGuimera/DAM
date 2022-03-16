@@ -8,11 +8,11 @@ public interface UsersService {
 
     public List<Usuaris> readAll();
 
-    public boolean createOne();
+    public boolean createOne(Usuaris user);
 
-    public Usuaris readOne();
+    public Usuaris readOne(String user_id);
 
-    public boolean updateOne();
+    public boolean updateOne(Usuaris user);
 
-    public boolean deleteOne();
+    public boolean deleteOne(String user_id);
 }

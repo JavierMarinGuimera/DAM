@@ -115,5 +115,12 @@ public class Usuaris implements java.io.Serializable {
 	public void setAssistencieses(Set<Assistencies> assistencieses) {
 		this.assistencieses = assistencieses;
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuaris [assistencieses=" + assistencieses + ", cognoms=" + cognoms + ", correu=" + correu
+				+ ", especialitat=" + especialitat + ", idUsuari=" + idUsuari + ", nom=" + nom + ", numcolegiat="
+				+ numcolegiat + ", password=" + password + ", perfils=" + perfils + "]";
+	}
 
 }

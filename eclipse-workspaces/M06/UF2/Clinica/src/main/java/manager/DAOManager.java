@@ -1,10 +1,11 @@
 package manager;
 
-import impls.AttendanceServiceImpl;
-import impls.ClientsServiceImpl;
-import impls.ProfilesServiceImpl;
-import impls.ServicesServiceImpl;
-import impls.UsersServiceImpl;
+import impls.AttendanceServiceImplHibernate;
+import impls.ClientsServiceImplHibernate;
+import impls.ProfilesServiceImplHibernate;
+import impls.ServicesServiceImplHibernate;
+import impls.users.UsersServiceImplHibernate;
+import impls.users.UsersServiceImplJDBC;
 import services.AttendanceService;
 import services.ClientsService;
 import services.ProfilesService;
@@ -30,12 +31,12 @@ public class DAOManager {
         if (usersService == null) {
             switch (option) {
                 case JDBC:
-                    usersService = new UsersServiceImpl();
+                    usersService = new UsersServiceImplJDBC();
                     break;
 
                 case HIBERNATE:
                     // This can be created on the future.
-                    usersService = null;
+                    usersService = new UsersServiceImplHibernate();
                     break;
 
                 default:
@@ -55,7 +56,7 @@ public class DAOManager {
                     break;
 
                 case HIBERNATE:
-                    clientsService = new ClientsServiceImpl();
+                    clientsService = new ClientsServiceImplHibernate();
                     break;
 
                 default:
@@ -75,7 +76,7 @@ public class DAOManager {
                     break;
 
                 case HIBERNATE:
-                    servicesService = new ServicesServiceImpl();
+                    servicesService = new ServicesServiceImplHibernate();
                     break;
 
                 default:
@@ -95,7 +96,7 @@ public class DAOManager {
                     break;
 
                 case HIBERNATE:
-                    attendanceService = new AttendanceServiceImpl();
+                    attendanceService = new AttendanceServiceImplHibernate();
                     break;
 
                 default:
@@ -115,7 +116,7 @@ public class DAOManager {
                     break;
 
                 case HIBERNATE:
-                    profilesService = new ProfilesServiceImpl();
+                    profilesService = new ProfilesServiceImplHibernate();
                     break;
 
                 default:

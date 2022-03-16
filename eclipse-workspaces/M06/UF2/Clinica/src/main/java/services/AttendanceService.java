@@ -8,11 +8,11 @@ public interface AttendanceService {
 
     public List<Assistencies> readAll();
 
-    public boolean createOne();
+    public boolean createOne(Assistencies attendance);
 
-    public Assistencies readOne();
+    public Assistencies readOne(int id);
 
-    public boolean updateOne();
+    public boolean updateOne(Assistencies attendance);
 
-    public boolean deleteOne();
+    public boolean deleteOne(int id);
 }

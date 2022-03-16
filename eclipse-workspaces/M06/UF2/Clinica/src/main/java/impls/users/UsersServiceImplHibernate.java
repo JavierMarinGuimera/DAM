@@ -1,11 +1,11 @@
-package impls;
+package impls.users;
 
 import java.util.List;
 
 import pojos.Usuaris;
 import services.UsersService;
 
-public class UsersServiceImpl implements UsersService {
+public class UsersServiceImplHibernate implements UsersService {
 
     @Override
     public List<Usuaris> readAll() {
@@ -14,25 +14,25 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public boolean createOne() {
+    public boolean createOne(Usuaris user) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public Usuaris readOne() {
+    public Usuaris readOne(String user_id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean updateOne() {
+    public boolean updateOne(Usuaris user) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean deleteOne() {
+    public boolean deleteOne(String user_id) {
         // TODO Auto-generated method stub
         return false;
     }

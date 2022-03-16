@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class catalog="bdclinica" name="pojos.Perfils" optimistic-lock="none" table="perfils">
         <id name="codi" type="int">
-            <column name="codi"/>
-            <generator class="assigned"/>
+            <column name="codi" />
+            <generator class="assigned" />
         </id>
         <property name="descripcio" type="string">
-            <column length="15" name="descripcio" not-null="true"/>
+            <column length="15" name="descripcio" not-null="true" />
         </property>
-        <set fetch="select" inverse="true" lazy="true" name="usuarises" table="usuaris">
+        <set fetch="join" inverse="true" lazy="true" name="usuarises" table="usuaris">
             <key>
-                <column name="perfil" not-null="true"/>
+                <column name="perfil" not-null="true" />
             </key>
-            <one-to-many class="pojos.Usuaris"/>
+            <one-to-many class="pojos.Usuaris" />
         </set>
     </class>
 </hibernate-mapping>

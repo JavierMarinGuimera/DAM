@@ -4,16 +4,16 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/exemple_hibernate</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/bdclinica</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping resource="pojos/Perfils.hbm.xml"/>
-        <mapping resource="pojos/Clients.hbm.xml"/>
-        <mapping resource="pojos/Assistencies.hbm.xml"/>
-        <mapping resource="pojos/Usuaris.hbm.xml"/>
-        <mapping resource="pojos/Serveis.hbm.xml"/>
+        <mapping resource="pojos/Perfils.hbm.xml" />
+        <mapping resource="pojos/Clients.hbm.xml" />
+        <mapping resource="pojos/Assistencies.hbm.xml" />
+        <mapping resource="pojos/Usuaris.hbm.xml" />
+        <mapping resource="pojos/Serveis.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
