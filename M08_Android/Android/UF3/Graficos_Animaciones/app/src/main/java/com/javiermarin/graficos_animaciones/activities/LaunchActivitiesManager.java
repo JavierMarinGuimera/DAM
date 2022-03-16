@@ -1,6 +1,7 @@
 package com.javiermarin.graficos_animaciones.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import com.javiermarin.graficos_animaciones.R;
 import com.javiermarin.graficos_animaciones.views.Circle;
+
+import java.lang.reflect.Array;
 
 public class LaunchActivitiesManager extends AppCompatActivity {
     Activities ac;
@@ -71,20 +74,20 @@ public class LaunchActivitiesManager extends AppCompatActivity {
                 ValueAnimator rotateTv = ObjectAnimator.ofFloat(tv, "rotation", 0, 360);
                 rotateTv.setDuration(3000)
                         .setRepeatCount(ValueAnimator.INFINITE);
-                rotateTv.setInterpolator(inter); 
+                rotateTv.setInterpolator(inter);
 
-                tvSet.play( rotateTv );
+                tvSet.play(rotateTv);
                 tvSet.start();
 
                 ValueAnimator moveTv = ObjectAnimator.ofFloat(tv, "x", 300);
                 moveTv.setDuration(3000)
-                        .setRepeatMode(ValueAnimator.REVERSE); 
+                        .setRepeatMode(ValueAnimator.REVERSE);
                 moveTv.setRepeatCount(ValueAnimator.INFINITE);
                 moveTv.setInterpolator(inter);
 
-                tvSet.playTogether( rotateTv, moveTv );
+                tvSet.playTogether(rotateTv, moveTv);
 
-                tvSet.play( moveTv ).before( rotateTv );
+                tvSet.play(moveTv).before(rotateTv);
                 break;
             case FADES:
                 setContentView(R.layout.fade_animation);
@@ -98,17 +101,33 @@ public class LaunchActivitiesManager extends AppCompatActivity {
                 fadeAnim.start();
                 break;
             case TEXT_SIZE:
+                String texto = "La República Galáctica está sumida en el caos. Los impuestos de las rutas comerciales a los sistemas estelares exteriores están en disputa. Esperando resolver el con un bloqueo de poderosas naves de guerra, la codiciosa Federación de Comercio ha detenido todos los envíos al pequeño planeta de Naboo. Mientras el Congreso de la República debate interminablemente esta alarmante cadena de acontecimientos, el Canciller Supremo ha enviado en secreto a dos Caballeros Jedi, guardianes de la paz y la justicia en la galaxia, para resolver el conflicto....";
+
                 setContentView(R.layout.text_size_animation);
 
-                ValueAnimator textAnim = ObjectAnimator.ofInt( findViewById(R.id.color_tv1), "backgroundColor", Color.rgb(0x66, 0xcc, 0xff), Color.rgb(0x00, 0x66, 0x99));
+                ConstraintLayout cl = findViewById(R.id.text_layout);
 
-                textAnim.setDuration(3000);
-                textAnim.setRepeatCount(ValueAnimator.INFINITE);
-                textAnim.setRepeatMode(ValueAnimator.REVERSE);
+                TextView tv_size = findViewById(R.id.color_tv1);
 
-                textAnim.setEvaluator(new ArgbEvaluator());
+                tv_size.setText(texto);
 
-                textAnim.start();
+                ValueAnimator animator = ValueAnimator.ofFloat(1200, -2000f);
+                animator.setDuration(15000);
+
+                animator.addUpdateListener(valueAnimator -> {
+                    float animatedValue = (float) valueAnimator.getAnimatedValue();
+                    tv_size.setTranslationY(animatedValue);
+                    tv_size.setTextSize(animatedValue / 25);
+                });
+
+                ValueAnimator animator2 = ValueAnimator.ofInt(48, 12);
+                animator2.setDuration(15000);
+
+                animator2.addUpdateListener(valueAnimator -> {
+                    float animatedValue2 = (float) valueAnimator.getAnimatedValue();
+                });
+
+                animator.start();
 
                 break;
 

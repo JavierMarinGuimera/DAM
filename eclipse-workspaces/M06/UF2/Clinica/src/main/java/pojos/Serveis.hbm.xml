@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="bdclinica" name="pojos.Serveis" optimistic-lock="none" table="serveis">
+        <id name="codi" type="int">
+            <column name="codi"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="descripcio" type="string">
+            <column length="10" name="descripcio" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="assistencieses" table="assistencies">
+            <key>
+                <column name="tipusServei" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Assistencies"/>
+        </set>
+    </class>
+</hibernate-mapping>

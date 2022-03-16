@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="bdclinica" name="pojos.Usuaris" optimistic-lock="none" table="usuaris">
+        <id name="idUsuari" type="string">
+            <column length="15" name="idUsuari"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="pojos.Perfils" fetch="select" name="perfils">
+            <column name="perfil" not-null="true"/>
+        </many-to-one>
+        <property name="password" type="string">
+            <column length="15" name="password" not-null="true"/>
+        </property>
+        <property name="nom" type="string">
+            <column length="25" name="nom" not-null="true"/>
+        </property>
+        <property name="cognoms" type="string">
+            <column length="50" name="cognoms" not-null="true"/>
+        </property>
+        <property name="correu" type="string">
+            <column length="50" name="correu" not-null="true"/>
+        </property>
+        <property name="numcolegiat" type="java.lang.Integer">
+            <column name="numcolegiat"/>
+        </property>
+        <property name="especialitat" type="string">
+            <column length="50" name="especialitat"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="assistencieses" table="assistencies">
+            <key>
+                <column length="15" name="assistent" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Assistencies"/>
+        </set>
+    </class>
+</hibernate-mapping>

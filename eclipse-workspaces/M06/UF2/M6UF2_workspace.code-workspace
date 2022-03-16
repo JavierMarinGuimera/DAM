@@ -11,6 +11,9 @@
 		{
 			"name": "hibernate",
 			"path": "hibernate"
+		},
+		{
+			"path": "Clinica"
 		}
 	],
 	"settings": {

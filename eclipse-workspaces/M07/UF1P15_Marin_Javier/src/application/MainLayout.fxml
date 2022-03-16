@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<TabPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+   <tabs>
+      <Tab text="Calculadora">
+         <content>
+            <VBox minHeight="250.0" minWidth="400.0">
+               <children>
+                  <HBox VBox.vgrow="NEVER">
+                     <children>
+                        <VBox prefWidth="50.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label maxWidth="-Infinity" text="Label" VBox.vgrow="NEVER" />
+                              <RadioButton maxWidth="-Infinity" mnemonicParsing="false" text="Hombre" />
+                              <RadioButton maxWidth="-Infinity" mnemonicParsing="false" text="Mujer" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="300.0" HBox.hgrow="NEVER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" text="Label" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Slider HBox.hgrow="ALWAYS" />
+                                    <Label text="Label" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label text="Label" />
+                              <DatePicker />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label text="Label" />
+                              <TextField />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" HBox.hgrow="ALWAYS" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label text="Label" />
+                              <TextField />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+         </content>
+      </Tab>
+      <Tab text="Ecuación de Harris-Benedict">
+        <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ecuación de Harris-Benedict">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La ecuación de Harris-Benedict es una ecuación empírica para estimar el metabolismo basal de una persona en función de su peso corporal, estatura y edad, y es utilizado en conjunto con factores de actividad física, para calcular la recomendación de consumo diario de calorías para un individuo. La ecuación supone una composición corporal normal, con una relación media entre la masa muscular y la masa grasa, por lo que puede ser inexacta para las personas que son muy musculosas (la fórmula subestima las necesidades reales) o para las personas con sobrepeso (la ecuación sobreestima las necesidades reales). " wrappingWidth="500.0">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Las ecuaciones de Harris-Benedict revisadas por Mifflin y St Jeor en 1990">
+                     <VBox.margin>
+                        <Insets top="24.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hombres TMB = (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5.">
+                     <VBox.margin>
+                        <Insets top="16.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mujeres TMB = (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161.">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>

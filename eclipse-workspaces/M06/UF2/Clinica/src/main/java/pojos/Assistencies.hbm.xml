@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="bdclinica" name="pojos.Assistencies" optimistic-lock="none" table="assistencies">
+        <id name="codiAssistencia" type="java.lang.Integer">
+            <column name="codiAssistencia"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pojos.Clients" fetch="select" name="clients">
+            <column name="client" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Serveis" fetch="select" name="serveis">
+            <column name="tipusServei" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Usuaris" fetch="select" name="usuaris">
+            <column length="15" name="assistent" not-null="true"/>
+        </many-to-one>
+        <property name="data" type="date">
+            <column length="10" name="data" not-null="true"/>
+        </property>
+        <property name="observacions" type="string">
+            <column length="65535" name="observacions"/>
+        </property>
+    </class>
+</hibernate-mapping>
