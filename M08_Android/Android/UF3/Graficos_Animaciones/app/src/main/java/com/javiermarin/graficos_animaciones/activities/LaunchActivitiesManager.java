@@ -111,20 +111,12 @@ public class LaunchActivitiesManager extends AppCompatActivity {
 
                 tv_size.setText(texto);
 
-                ValueAnimator animator = ValueAnimator.ofFloat(1200, -2000f);
+                ValueAnimator animator = ValueAnimator.ofFloat(1000, -2000f);
                 animator.setDuration(15000);
 
                 animator.addUpdateListener(valueAnimator -> {
                     float animatedValue = (float) valueAnimator.getAnimatedValue();
                     tv_size.setTranslationY(animatedValue);
-                    tv_size.setTextSize(animatedValue / 25);
-                });
-
-                ValueAnimator animator2 = ValueAnimator.ofInt(48, 12);
-                animator2.setDuration(15000);
-
-                animator2.addUpdateListener(valueAnimator -> {
-                    float animatedValue2 = (float) valueAnimator.getAnimatedValue();
                 });
 
                 animator.start();
