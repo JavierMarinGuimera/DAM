@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package marianao.dam.m09.ftp.client;
+package marianao.dam.m09.ftp.client.models;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

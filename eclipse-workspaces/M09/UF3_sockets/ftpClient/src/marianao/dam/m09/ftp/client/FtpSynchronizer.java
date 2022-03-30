@@ -4,22 +4,24 @@
  */
 package marianao.dam.m09.ftp.client;
 
+import marianao.dam.m09.ftp.client.models.ConditionalNotifier;
+
 /**
  *
  * @author Josep Cañellas <jcanell4@ioc.cat>
  */
 public class FtpSynchronizer {
-    ConditionalNotifier<Boolean> enabled = new ConditionalNotifier<>("E", true);
     ConditionalNotifier<Boolean> ready = new ConditionalNotifier<>("R", false);
+    ConditionalNotifier<Boolean> enabled = new ConditionalNotifier<>("E", true);
 
-    public void disableSynchronizer() {
-        enabled.conditionalWait(Boolean.TRUE);
-        enabled.changeCondition(Boolean.FALSE);
+    public void enableSynchronizer() {
+        ready.changeCondition(false);
+        enabled.changeCondition(true);
     }
 
-    public void enableSynchornizer() {
-        ready.changeCondition(Boolean.FALSE);
-        enabled.changeCondition(Boolean.TRUE);
+    public void disableSynchronizer() {
+        enabled.conditionalWait(true);
+        enabled.changeCondition(false);
     }
 
     public boolean isEnabled() {
@@ -31,14 +33,14 @@ public class FtpSynchronizer {
     }
 
     public void waitingToStart() {
-        ready.conditionalWait(Boolean.TRUE);
+        ready.conditionalWait(true);
     }
 
     public void youCanStart() {
-        ready.changeCondition(Boolean.TRUE);
+        ready.changeCondition(true);
     }
 
     public void waitingToEnabled() {
-        enabled.conditionalWait(Boolean.TRUE);
+        enabled.conditionalWait(true);
     }
 }

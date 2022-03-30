@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package marianao.dam.m09.ftp.client;
+package marianao.dam.m09.ftp.client.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import marianao.dam.m09.ftp.client.FtpSynchronizer;
 
 /**
  *
@@ -29,7 +31,6 @@ public class ClientFtpDataService implements Runnable {
             boolean pCloseOutput) throws IOException {
         init(not, pSocket, pOut);
         closeOutput = pCloseOutput;
-
     }
 
     public void init(FtpSynchronizer not, Socket pSocket, OutputStream pOut)
@@ -99,7 +100,7 @@ public class ClientFtpDataService implements Runnable {
             exception = ex;
         } finally {
             close();
-            notifier.enableSynchornizer();
+            notifier.enableSynchronizer();
         }
     }
 
