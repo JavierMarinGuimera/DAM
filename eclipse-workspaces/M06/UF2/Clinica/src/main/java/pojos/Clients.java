@@ -19,10 +19,12 @@ public class Clients implements java.io.Serializable {
 	public Clients() {
 	}
 
-	public Clients(String nom, String cognoms, String telefon) {
+	public Clients(Integer idClient, String nom, String cognoms, String telefon, String correu) {
+		this.idClient = idClient;
 		this.nom = nom;
 		this.cognoms = cognoms;
 		this.telefon = telefon;
+		this.correu = correu;
 	}
 
 	public Clients(String nom, String cognoms, String telefon, String correu, Set<Assistencies> assistencieses) {
@@ -79,6 +81,12 @@ public class Clients implements java.io.Serializable {
 
 	public void setAssistencieses(Set<Assistencies> assistencieses) {
 		this.assistencieses = assistencieses;
+	}
+
+	@Override
+	public String toString() {
+		return "Client:  cognoms=" + cognoms + ", correu=" + correu
+				+ ", idClient=" + idClient + ", nom=" + nom + ", telefon=" + telefon + "]";
 	}
 
 }

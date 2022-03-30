@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playGameButton">Jugar</string>
+    <string name="resultsButton">Mostrar resultados</string>
+    <string name="exitButton">Salir del juego</string>
+</resources>

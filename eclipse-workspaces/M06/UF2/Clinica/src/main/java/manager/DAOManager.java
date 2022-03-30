@@ -22,11 +22,6 @@ public class DAOManager {
     private static AttendanceService attendanceService;
     private static ProfilesService profilesService;
 
-    /**
-     * 
-     * @param option
-     * @return
-     */
     public static UsersService getUsersService(int option) {
         if (usersService == null) {
             switch (option) {

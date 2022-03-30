@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "tcp"
+		},
+		{
+			"path": "ftpClient"
 		}
 	],
 	"settings": {}

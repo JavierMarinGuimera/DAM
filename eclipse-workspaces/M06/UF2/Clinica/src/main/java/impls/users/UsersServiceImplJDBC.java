@@ -4,14 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLType;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import connection.DBConnectionJDBC;
+import manager.DAOManager;
+import pojos.Assistencies;
 import pojos.Perfils;
 import pojos.Usuaris;
+import services.AttendanceService;
+import services.ProfilesService;
 import services.UsersService;
 
 public class UsersServiceImplJDBC implements UsersService {
@@ -102,23 +106,18 @@ public class UsersServiceImplJDBC implements UsersService {
 
             // This will have every user obtained:
             while (resultUser.next()) {
-                // Getting de Profile from the current user here:
-                String sqlProfile = "SELECT * FROM perfils WHERE codi  = ?";
-                PreparedStatement stProfile = con.prepareStatement(sqlProfile);
-                stProfile.setInt(1, resultUser.getInt(2));
-                ResultSet resultProfile = stProfile.executeQuery();
+                ProfilesService ps = DAOManager.getProfilesService(DAOManager.HIBERNATE);
+                Perfils perfil = ps.readOne(resultUser.getInt(2));
 
-                Perfils perfil = null;
-                // This will have every profile obtained:
-                while (resultProfile.next()) {
-                    perfil = new Perfils(resultProfile.getInt(1), resultProfile.getString(2));
-                }
-
-                resultProfile.close();
-                stProfile.close();
+                AttendanceService as = DAOManager.getAttendanceService(DAOManager.HIBERNATE);
+                List<Assistencies> attendances = as.readAllById(resultUser.getString(1));
 
                 Usuaris user = new Usuaris(resultUser.getString(1), perfil, resultUser.getString(3),
                         resultUser.getString(4), resultUser.getString(5), resultUser.getString(6));
+
+                if (attendances != null && attendances.size() > 0) {
+                    user.setAssistencieses((Set) attendances);
+                }
 
                 return user;
             }

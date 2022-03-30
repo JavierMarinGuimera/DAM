@@ -15,4 +15,7 @@ public interface AttendanceService {
     public boolean updateOne(Assistencies attendance);
 
     public boolean deleteOne(int id);
+
+    // Custom methods:
+    public List<Assistencies> readAllById(String clientId);
 }

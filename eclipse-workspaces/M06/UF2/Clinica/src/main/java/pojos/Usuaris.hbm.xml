@@ -28,7 +28,7 @@
         <property name="especialitat" type="string">
             <column length="50" name="especialitat" />
         </property>
-        <set fetch="join" inverse="true" lazy="true" name="assistencieses" table="assistencies">
+        <set fetch="join" inverse="true" lazy="true" name="assistencieses" table="assistencies" cascade="delete">
             <key>
                 <column length="15" name="assistent" not-null="true" />
             </key>

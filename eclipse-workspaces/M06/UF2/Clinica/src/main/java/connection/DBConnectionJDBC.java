@@ -11,8 +11,17 @@ public class DBConnectionJDBC {
     private static String user;
     private static String passwd;
 
+    /**
+     * Simple constructor to modify the class attributtes.
+     * 
+     */
+    public DBConnectionJDBC(String url, String user, String passwd) {
+        DBConnectionJDBC.url = url;
+        DBConnectionJDBC.user = user;
+        DBConnectionJDBC.passwd = passwd;
+    }
+
     static {
-        System.out.println();
         url = "jdbc:mysql://localhost/bdclinica";
         user = "root";
         passwd = "";
@@ -27,6 +36,11 @@ public class DBConnectionJDBC {
         }
     }
 
+    /**
+     * This method will give you the metadata of the current database.
+     * 
+     * @throws SQLException
+     */
     public static void DBData() throws SQLException {
         Connection con = getConnection();
         DatabaseMetaData estructuraBD = con.getMetaData();

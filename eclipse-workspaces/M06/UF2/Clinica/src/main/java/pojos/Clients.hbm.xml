@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 mar. 2022 18:50:50 by Hibernate Tools 5.6.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class catalog="bdclinica" name="pojos.Clients" optimistic-lock="none" table="clients">
         <id name="idClient" type="java.lang.Integer">
-            <column name="idClient"/>
-            <generator class="identity"/>
+            <column name="idClient" />
+            <generator class="identity" />
         </id>
         <property name="nom" type="string">
-            <column length="25" name="nom" not-null="true"/>
+            <column length="25" name="nom" not-null="true" />
         </property>
         <property name="cognoms" type="string">
-            <column length="50" name="cognoms" not-null="true"/>
+            <column length="50" name="cognoms" not-null="true" />
         </property>
         <property name="telefon" type="string">
-            <column length="15" name="telefon" not-null="true"/>
+            <column length="15" name="telefon" not-null="true" />
         </property>
         <property name="correu" type="string">
-            <column length="50" name="correu"/>
+            <column length="50" name="correu" />
         </property>
-        <set fetch="select" inverse="true" lazy="true" name="assistencieses" table="assistencies">
+        <set fetch="select" inverse="true" lazy="true" name="assistencieses" table="assistencies" cascade="delete, save-update">
             <key>
-                <column name="client" not-null="true"/>
+                <column name="client" not-null="false" />
             </key>
-            <one-to-many class="pojos.Assistencies"/>
+            <one-to-many class="pojos.Assistencies" />
         </set>
     </class>
 </hibernate-mapping>
