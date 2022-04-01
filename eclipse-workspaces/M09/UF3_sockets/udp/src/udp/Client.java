@@ -47,6 +47,7 @@ public class Client {
 			packet = new DatagramPacket(new byte[BUFFER_SIZE], BUFFER_SIZE);
 			socket.receive(packet);
 
+			System.out.println(packet.getLength());
 			// Once we get the packet, we can handle it with our Repsonse class.
 			Response rs = new Response(Arrays.copyOfRange(packet.getData(), 0, packet.getLength()));
 			processData(rs);

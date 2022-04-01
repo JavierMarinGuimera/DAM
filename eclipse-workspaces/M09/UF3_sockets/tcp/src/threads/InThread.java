@@ -30,17 +30,17 @@ public class InThread extends Thread {
             while (!MainManager.end && !socket.isClosed()) {
                 try {
                     incomingMessage = in.readLine();
+                    
+                    if (MainManager.isFarewellMessage(incomingMessage)) {
+                        MainManager.end = true;
+                        MainManager.closeSocket(socket);
+                    }
                 } catch (Exception e) {
                     if (MainManager.end) {
                         break;
                     } else {
                         continue;
                     }
-                }
-
-                if (MainManager.isFarewellMessage(incomingMessage)) {
-                    MainManager.end = true;
-                    MainManager.closeSocket(socket);
                 }
 
                 MainManager.printMessage(MainManager.CLIENT_SENDER, incomingMessage);

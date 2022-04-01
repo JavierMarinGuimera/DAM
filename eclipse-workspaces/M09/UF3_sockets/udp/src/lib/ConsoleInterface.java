@@ -63,6 +63,9 @@ public class ConsoleInterface {
 		do {
 			System.out.print(message);
 			try {
+				synchronized (this) {
+					
+				}
 				line = reader.readLine();
 				return Short.parseShort(line);
 			} catch (NumberFormatException | IOException e) {

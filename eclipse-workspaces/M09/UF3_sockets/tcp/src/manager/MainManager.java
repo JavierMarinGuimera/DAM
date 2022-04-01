@@ -77,10 +77,10 @@ public class MainManager {
     public static void closeSocket(Socket socket) {
         try {
             if (socket != null && !socket.isClosed()) {
-                if (!socket.isInputShutdown()) {
+                if (!socket.isClosed() && !socket.isInputShutdown()) {
                     socket.shutdownInput();
                 }
-                if (!socket.isOutputShutdown()) {
+                if (!socket.isClosed() && !socket.isOutputShutdown()) {
                     socket.shutdownOutput();
                 }
                 socket.close();

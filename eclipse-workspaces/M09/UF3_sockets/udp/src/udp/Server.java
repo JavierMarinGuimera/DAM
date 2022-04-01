@@ -39,12 +39,22 @@ public class Server {
 		byte[] bufferOutData;
 		InetAddress clientAddress;
 		int clientPort;
+		boolean mustContinue;
+
+		socket.setSoTimeout(1000);
 
 		while (!finish) {
 			// Receive
 			DatagramPacket packet = new DatagramPacket(bufferIn, BUFFER_SIZE);
 
-			socket.receive(packet);
+			try {
+				// This will throw exception if the timeout comes.
+				socket.receive(packet);
+			} catch (Exception e) {
+				System.out.println("again");
+				// Here should be a method to ask the user to continue the connection.
+				continue;
+			}
 
 			bufferInData = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
 			System.out.println("Datos recibidos: " + Arrays.toString(bufferInData));
@@ -82,24 +92,24 @@ public class Server {
 			}
 
 			switch (op) {
-			case Request.OP_ADD:
-				response = new Response(Response.OK, request.getOp1() + request.getOp2());
-				break;
-			case Request.OP_SUB:
-				response = new Response(Response.OK, request.getOp1() - request.getOp2());
-				break;
-			case Request.OP_MUL:
-				response = new Response(Response.OK, request.getOp1() * request.getOp2());
-				break;
-			case Request.OP_DIV:
-				if (request.getOp2() != 0) {
-					response = new Response(Response.OK, request.getOp1() / request.getOp2());
-				} else {
-					response = new Response(Response.ERROR_DIV_0, 0);
-				}
-				break;
-			default:
-				response = new Response(Response.ERROR, 0);
+				case Request.OP_ADD:
+					response = new Response(Response.OK, request.getOp1() + request.getOp2());
+					break;
+				case Request.OP_SUB:
+					response = new Response(Response.OK, request.getOp1() - request.getOp2());
+					break;
+				case Request.OP_MUL:
+					response = new Response(Response.OK, request.getOp1() * request.getOp2());
+					break;
+				case Request.OP_DIV:
+					if (request.getOp2() != 0) {
+						response = new Response(Response.OK, request.getOp1() / request.getOp2());
+					} else {
+						response = new Response(Response.ERROR_DIV_0, 0);
+					}
+					break;
+				default:
+					response = new Response(Response.ERROR, 0);
 			}
 			return response.getBytes();
 		} catch (IOException e) {
