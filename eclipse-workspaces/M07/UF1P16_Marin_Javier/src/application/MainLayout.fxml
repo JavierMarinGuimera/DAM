@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +14,7 @@
 
 <SplitPane dividerPositions="0.5" minHeight="600.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <items>
-      <GridPane>
+      <GridPane fx:id="gpTable">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,6 +31,9 @@
                <image>
                   <Image url="@../../resources/img/img_off.jpg" />
                </image>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="2000.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
@@ -91,7 +95,7 @@
       <VBox alignment="CENTER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="181.0">
          <children>
             <Label text="Puntos" />
-            <TextField fx:id="tf_points" editable="false" maxWidth="-Infinity" />
+            <TextField fx:id="tf_points" editable="false" focusTraversable="false" maxWidth="-Infinity" text="0" />
             <ImageView fx:id="iv_button" fitHeight="90.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../resources/img/img_new.png" />
