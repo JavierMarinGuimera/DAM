@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 6 abr. 2022 16:44:48 by Hibernate Tools 5.6.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="bdautors" name="pojos.Autors" optimistic-lock="none" table="autors">
+        <id name="codiAutor" type="int">
+            <column name="codiAutor" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column length="50" name="nom" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column length="30" name="pais" />
+        </property>
+        <property name="estil" type="string">
+            <column length="50" name="estil" />
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="llibreses" table="llibres" cascade="save-update delete">
+            <key>
+                <column name="autor" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Llibres" />
+        </set>
+    </class>
+</hibernate-mapping>

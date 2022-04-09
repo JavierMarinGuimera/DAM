@@ -742,3 +742,101 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact antlr:antlr:j
 2022-03-28 19:47:33,627 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2022-03-28 19:47:33,629 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-03-28 19:47:33,629 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:24:19,172 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-04-06 16:34:24,263 [Worker-22: Creating project "grades"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:grades:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\grades\pom.xml.
+2022-04-06 16:34:25,071 [Worker-22: Creating project "grades"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /grades/src/main/java
+2022-04-06 16:34:25,072 [Worker-22: Creating project "grades"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /grades/src/main/resources
+2022-04-06 16:34:25,073 [Worker-22: Creating project "grades"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /grades/src/test/java
+2022-04-06 16:34:25,073 [Worker-22: Creating project "grades"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /grades/src/test/resources
+2022-04-06 16:36:03,072 [Worker-21: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2022-04-06 16:36:04,508 [Worker-21: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:grades:1 @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\grades\pom.xml.
+2022-04-06 16:36:05,057 [Worker-21: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /grades/src/main/java
+2022-04-06 16:36:05,057 [Worker-21: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /grades/src/main/resources
+2022-04-06 16:36:05,074 [Worker-21: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /grades/src/test/java
+2022-04-06 16:36:05,075 [Worker-21: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /grades/src/test/resources
+2022-04-06 16:36:05,498 [Worker-21: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 2 sec
+2022-04-06 16:38:34,929 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:grades:1 @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\autors\pom.xml.
+2022-04-06 16:38:35,672 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,677 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:38:35,679 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,679 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:38:35,775 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,775 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:38:35,777 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,777 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:38:35,870 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,870 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\main\resources
+2022-04-06 16:38:35,872 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:38:35,872 [Worker-23: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\test\resources
+2022-04-06 16:39:31,957 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:31,957 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:39:31,957 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:31,957 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:39:32,490 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:32,491 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:39:32,494 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:32,494 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:39:32,889 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:32,889 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\main\resources
+2022-04-06 16:39:32,889 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:39:32,889 [Worker-27: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\test\resources
+2022-04-06 16:40:45,551 [Worker-25: Creating project "autors"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:autors:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\autors\pom.xml.
+2022-04-06 16:40:45,731 [Worker-25: Creating project "autors"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /autors/src/main/java
+2022-04-06 16:40:45,731 [Worker-25: Creating project "autors"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /autors/src/main/resources
+2022-04-06 16:40:45,731 [Worker-25: Creating project "autors"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /autors/src/test/java
+2022-04-06 16:40:45,732 [Worker-25: Creating project "autors"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /autors/src/test/resources
+2022-04-06 16:41:23,991 [Worker-26: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2022-04-06 16:41:24,150 [Worker-26: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:autors:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\autors\pom.xml.
+2022-04-06 16:41:24,237 [Worker-26: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /autors/src/main/java
+2022-04-06 16:41:24,238 [Worker-26: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /autors/src/main/resources
+2022-04-06 16:41:24,243 [Worker-26: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /autors/src/test/java
+2022-04-06 16:41:24,244 [Worker-26: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /autors/src/test/resources
+2022-04-06 16:41:24,329 [Worker-26: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 0 sec
+2022-04-06 16:44:48,188 [Worker-22: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:44:48,189 [Worker-22: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 16:44:48,190 [Worker-22: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-06 16:44:48,190 [Worker-22: Launching New_configuration] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-06 18:01:43,448 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2022-04-06 18:02:09,603 [Worker-4: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:autors:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\Autors\pom.xml.
+2022-04-07 17:36:34,310 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-04-07 17:37:44,340 [Worker-5: Creating project "mongodbexample"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:mongodbexample:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\mongodbexample\pom.xml.
+2022-04-07 17:37:45,487 [Worker-5: Creating project "mongodbexample"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /mongodbexample/src/main/java
+2022-04-07 17:37:45,489 [Worker-5: Creating project "mongodbexample"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /mongodbexample/src/main/resources
+2022-04-07 17:37:45,491 [Worker-5: Creating project "mongodbexample"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /mongodbexample/src/test/java
+2022-04-07 17:37:45,491 [Worker-5: Creating project "mongodbexample"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /mongodbexample/src/test/resources
+2022-04-07 17:38:09,300 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:09,305 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:09,307 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:09,308 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:09,957 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:09,958 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:09,959 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:09,959 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:10,071 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:10,071 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\main\resources
+2022-04-07 17:38:10,073 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-04-07 17:38:10,073 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF2\hibernate\src\test\resources
+2022-04-07 17:38:10,126 [Worker-9: Building Workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-04-07 17:38:10,128 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:10,130 [Worker-9: Building Workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-04-07 17:38:10,133 [Worker-9: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:38:19,241 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2022-04-07 17:38:19,540 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: javiermarin:mongodbexample:0.0.1-SNAPSHOT @ C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\mongodbexample\pom.xml.
+2022-04-07 17:38:19,678 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /mongodbexample/src/main/java
+2022-04-07 17:38:19,678 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /mongodbexample/src/main/resources
+2022-04-07 17:38:19,679 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /mongodbexample/src/test/java
+2022-04-07 17:38:19,679 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /mongodbexample/src/test/resources
+2022-04-07 17:38:20,127 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 0 sec
+2022-04-07 17:38:20,752 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/mongodb/mongodb-driver-sync/4.5.0/mongodb-driver-sync-4.5.0-sources.jar
+2022-04-07 17:38:20,835 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/mongodb/mongodb-driver-sync/4.5.0/mongodb-driver-sync-4.5.0-sources.jar
+2022-04-07 17:38:20,839 [Worker-14: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.mongodb:mongodb-driver-sync:4.5.0
+2022-04-07 17:38:20,918 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/mongodb/bson/4.5.0/bson-4.5.0-sources.jar
+2022-04-07 17:38:21,011 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/mongodb/bson/4.5.0/bson-4.5.0-sources.jar
+2022-04-07 17:38:21,014 [Worker-14: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.mongodb:bson:4.5.0
+2022-04-07 17:38:21,103 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/mongodb/mongodb-driver-core/4.5.0/mongodb-driver-core-4.5.0-sources.jar
+2022-04-07 17:38:21,267 [Worker-14: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/mongodb/mongodb-driver-core/4.5.0/mongodb-driver-core-4.5.0-sources.jar
+2022-04-07 17:38:21,271 [Worker-14: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.mongodb:mongodb-driver-core:4.5.0
+2022-04-07 17:41:35,166 [Worker-14: Launching HelloMongoDB] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-04-07 17:41:35,169 [Worker-14: Launching HelloMongoDB] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-07 17:41:35,173 [Worker-14: Launching HelloMongoDB] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-04-07 17:41:35,175 [Worker-14: Launching HelloMongoDB] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

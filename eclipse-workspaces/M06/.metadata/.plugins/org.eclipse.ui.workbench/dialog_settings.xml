@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="NewWizardAction">
-		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.hibernate.eclipse.console.wizards.NewReverseEngineeringFileWizard"/>
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.NewClassCreationWizard"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="hibernatewizards"/>
+			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.eclipse.fx.ide"/>
+			<item value="org.eclipse.fx.ide/org.eclipse.fx.ide.clazz"/>
+			<item value="org.eclipse.jpt.jaxb"/>
+			<item value="org.eclipse.xtend.ide.wizards"/>
 		</list>
 	</section>
 	<section name="ImportExportAction">
@@ -20,6 +24,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF2\ExamenUF2_MarinJavier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF1\UF2PF_Marin_Javier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF1\UF1PE_Marin_Javier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\eclipse-workspaces\M06\UF1P2_Marín_Javier.zip"/>

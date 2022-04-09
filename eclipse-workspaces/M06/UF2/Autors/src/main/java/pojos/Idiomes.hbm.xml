@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 6 abr. 2022 16:44:48 by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="bdautors" name="pojos.Idiomes" optimistic-lock="none" table="idiomes">
+        <id name="codi" type="int">
+            <column name="codi"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="descripcio" type="string">
+            <column length="50" name="descripcio" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="llibreses" table="llibres">
+            <key>
+                <column name="idioma" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Llibres"/>
+        </set>
+    </class>
+</hibernate-mapping>
