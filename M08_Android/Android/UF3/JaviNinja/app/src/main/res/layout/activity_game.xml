@@ -16,12 +16,43 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.javiermarin.javininja.game.GameView
-            android:id="@+id/VistaJoc"
+            android:id="@+id/gameView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:focusable="true"
-            android:background="@drawable/game_background" />
+            android:background="@drawable/game_background"
+            android:focusable="true" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#80000000"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/scoreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:text="@string/scoreTitle"
+            android:textAlignment="textEnd"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/scorePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:text="0"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

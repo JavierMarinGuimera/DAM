@@ -4,4 +4,13 @@
     <string name="resultsButton">Show results</string>
     <string name="exitButton">Leave game</string>
     <string name="playGameButton">Play game</string>
+    <string name="scoreTitle">Score:</string>
+    <string name="endGameTitle">Ended game</string>
+    <string name="endGameText">You ended the game with this score:</string>
+    <string name="userNameDialogTitle">User name</string>
+    <string name="userNameDialogText">Enter your user name here:</string>
+    <string name="dialogAccept">Accept</string>
+    <string name="dialogCancel">Cancel</string>
+    <string name="scoresTitle">Scores</string>
+    <string name="backButton">Return</string>
 </resources>

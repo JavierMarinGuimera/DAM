@@ -3,4 +3,13 @@
     <string name="playGameButton">Jugar</string>
     <string name="resultsButton">Mostrar resultados</string>
     <string name="exitButton">Salir del juego</string>
+    <string name="scoreTitle">Puntuación:</string>
+    <string name="endGameTitle">Juego finalizado</string>
+    <string name="endGameText">Has terminado el juego con la siguiente puntuación:</string>
+    <string name="userNameDialogTitle">Nombre usuario</string>
+    <string name="userNameDialogText">Introduce tu nombre de usuario aquí:</string>
+    <string name="dialogAccept">Aceptar</string>
+    <string name="dialogCancel">Cancelar</string>
+    <string name="scoresTitle">Puntuaciones</string>
+    <string name="backButton">Volver</string>
 </resources>

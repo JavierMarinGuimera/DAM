@@ -2,26 +2,76 @@ package com.javiermarin.javininja.songs;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.provider.MediaStore;
+import android.widget.Toast;
 
 import com.javiermarin.javininja.R;
+import com.javiermarin.javininja.game.GameView;
 
 public class SongManager extends Thread {
 
-    private int song;
-    private Context context;
+    private final Context context;
+    private final int song;
+    private boolean loop = false;
+    private float volume = 100;
 
-    public SongManager(int song, Context context) {
-        this.song = song;
+    private MediaPlayer mp;
+    private boolean playing = false;
+
+    public SongManager(Context context, int song) {
         this.context = context;
+        this.song = song;
     }
 
+    public SongManager(Context context, int song, boolean loop) {
+        this.context = context;
+        this.song = song;
+        this.loop = loop;
+    }
+
+    public void startSong() {
+        mp.start();
+    }
+
+    public void restartSong() {
+        mp.seekTo(0);
+        mp.start();
+    }
+
+    public void pauseSong() {
+        mp.pause();
+    }
+
+    public void stopPlaying() {
+        mp.stop();
+        mp.release();
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void muteVolume() {
+        mp.setVolume(0, 0);
+    }
+
+    /**
+     * Thread:
+     */
     @Override
     public void run() {
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.lanzamiento);
+        mp = MediaPlayer.create(this.context, this.song);
         mp.start();
 
-        while (mp.isPlaying()) {}
+        this.playing = true;
 
-        mp.release();
+        if (loop) {
+            mp.setLooping(loop);
+        } else {
+            mp.setOnCompletionListener(mediaPlayer -> {
+                mediaPlayer.reset();
+                mediaPlayer.release();
+            });
+        }
     }
 }

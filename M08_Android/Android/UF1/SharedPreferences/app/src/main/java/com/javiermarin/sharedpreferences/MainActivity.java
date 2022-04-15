@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         if ("".equals(inputName.getText().toString())) {
             Toast.makeText(this, "The name cannot be empty", Toast.LENGTH_SHORT).show();
         } else {
-            boolean confirm = true;
             SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
 

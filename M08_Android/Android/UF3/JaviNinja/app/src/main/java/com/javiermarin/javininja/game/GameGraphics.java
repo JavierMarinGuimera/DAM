@@ -26,7 +26,7 @@ public class GameGraphics {
         radiColisio = (altura + amplada) / 4;
     }
 
-    public void dibuixaGrafic(Canvas canvas) {
+    public void dibujaGrafico(Canvas canvas) {
         canvas.save();
         int x = (int) (posX + amplada / 2);
         int y = (int) (posY + altura / 2);
@@ -157,7 +157,7 @@ public class GameGraphics {
         this.view = view;
     }
 
-    public static int getMaxVelocitat() {
+    public static int getMaxVelocidad() {
         return MAX_VELOCITAT;
     }
 }
