@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TwoLineListItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,8 +73,9 @@ public class ResultsActivity extends AppCompatActivity {
             values.add(Integer.toString(entry.getValue()));
         }
 
+
         // TODO - No muestra valores. :(
-        scoresListNames.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names));
-        scoresListValues.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values));
+//        scoresListNames.setAdapter(new SimpleAdapter(this, lista, android.R.layout.simple_list_item_2, String[]{}, int[]{android.R.id.} lastScores));
+//        scoresListValues.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values));
     }
 }

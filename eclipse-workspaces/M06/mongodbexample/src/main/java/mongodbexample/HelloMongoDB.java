@@ -10,7 +10,6 @@ import com.mongodb.client.MongoClients;
 
 public class HelloMongoDB {
 	public static void main(String[] args) {
-		System.out.println();
 		/**
 		 * Create sense paràmetres connecta a localhost. Si volem connectar a un altre
 		 * se li ha de passar per paràmetres el string de connexió.:

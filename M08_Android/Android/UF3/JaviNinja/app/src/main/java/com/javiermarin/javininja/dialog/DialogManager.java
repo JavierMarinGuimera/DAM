@@ -1,5 +1,6 @@
 package com.javiermarin.javininja.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,7 +17,7 @@ public class DialogManager {
     public static void inputDialog(Context context) {
         Handler h = new Handler(Looper.getMainLooper());
         h.post(() -> {
-            AlertDialog.Builder dialog= new AlertDialog.Builder(context);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 
             dialog.setTitle(context.getResources().getString(R.string.userNameDialogTitle));
             dialog.setMessage(context.getResources().getString(R.string.userNameDialogText));
@@ -36,7 +37,7 @@ public class DialogManager {
         });
     }
 
-    public static void confirmDialog(Context context, int score) {
+    public static void confirmDialog(Context context, int score, Activity gameActivity) {
         Handler h = new Handler(Looper.getMainLooper());
         h.post(() -> {
             AlertDialog.Builder dialog = new AlertDialog.Builder(context);
@@ -46,7 +47,9 @@ public class DialogManager {
             dialog.setCancelable(false);
 
             dialog.setNeutralButton(R.string.dialogAccept, (dialogToConfirm, id) -> {
-                GameView.confirmed = true;
+                if (gameActivity != null) {
+                    gameActivity.finish();
+                }
             });
 
             dialog.show();

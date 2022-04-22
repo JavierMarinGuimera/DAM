@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.javiermarin.javininja.MainActivity;
 import com.javiermarin.javininja.R;
@@ -76,6 +77,7 @@ public class GameView extends View {
     private int score = 0;
     private TextView scorePoints;
     public static boolean confirmed = false;
+    private Drawable drawableNinja, drawableCuchillo, drawableEnemigo;
 
     /**
      * Definiciones de la clase:
@@ -83,7 +85,6 @@ public class GameView extends View {
     @SuppressLint("UseCompatLoadingForDrawables")
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Drawable drawableNinja, drawableCuchillo, drawableEnemigo;
         // Obtenemos referéncia al recurso ninja_enemic guardado en carpeta Res
         drawableEnemigo = context.getResources().
                 getDrawable(R.drawable.ninja_enemigo, null);
@@ -335,19 +336,16 @@ public class GameView extends View {
     private void destruyeObjetivo(int i) {
         int numPartes = 3;
 
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawableEnemigo = this.getResources().
-                getDrawable(R.drawable.ninja_enemigo, null);
-
         if (objetivos.get(i).getDrawable() == drawableEnemigo) {
             for (int n = 0; n < numPartes; n++) {
-                GameGraphics objetivo = new GameGraphics(this, partesObjetivo[n]);
-                objetivo.setPosX(objetivos.get(i).getPosX());
-                objetivo.setPosY(objetivos.get(i).getPosY());
-                objetivo.setIncX(Math.random() * 7 - 3);
-                objetivo.setIncY(Math.random() * 7 - 3);
-                objetivo.setAngle((int) (Math.random() * 360));
-                objetivo.setRotacio((int) (Math.random() * 8 - 4));
-                objetivos.add(objetivo);
+                GameGraphics parteObjetivo = new GameGraphics(this, partesObjetivo[n]);
+                parteObjetivo.setPosX(objetivos.get(i).getPosX());
+                parteObjetivo.setPosY(objetivos.get(i).getPosY());
+                parteObjetivo.setIncX(Math.random() * 7 - 3);
+                parteObjetivo.setIncY(Math.random() * 7 - 3);
+                parteObjetivo.setAngle((int) (Math.random() * 360));
+                parteObjetivo.setRotacio((int) (Math.random() * 8 - 4));
+                objetivos.add(parteObjetivo);
             }
         }
         objetivos.remove(i);
@@ -377,8 +375,8 @@ public class GameView extends View {
     }
 
     private void endGame() {
-        DialogManager.confirmDialog(this.getContext(), score);
-        this.gameActivity.finish();
+        DialogManager.confirmDialog(this.getContext(), score, gameActivity);
+        // TODO - Necesito que se haga finish SOLO cuando el usuario acepta el dialog
     }
 
     public void saveResults() {
@@ -386,6 +384,6 @@ public class GameView extends View {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putInt(MainActivity.userName, score);
-        editor.commit();
+        editor.apply();
     }
 }
