@@ -5,9 +5,9 @@ import models.Company;
 public interface CompaniesMongoService {
 	public boolean createOne(Company company);
 	
-	public Company readOne(int id);
+	public Company readOne(String name);
 	
-	public boolean updateOne(Company company);
+	public boolean updateOne(String name);
 	
-	public boolean deleteOne(int id);
+	public boolean deleteOne(String name);
 }

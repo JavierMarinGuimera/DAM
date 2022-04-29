@@ -20,6 +20,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF3\UF3P1_Marin_Javier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF2\ExamenUF2_MarinJavier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF1\UF2PF_Marin_Javier.zip"/>
 			<item value="C:\Users\Javier\Desktop\DAM\M06_Acceso_datos\UF1\UF1PE_Marin_Javier.zip"/>

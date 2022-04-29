@@ -1,4 +1,4 @@
-package models;
+ package models;
 
 import java.util.List;
 
@@ -22,16 +22,20 @@ public class Company {
     private int foundedYear;
     
     @BsonProperty(value = "description")
-    private int description;
+    private String description;
     
     @BsonProperty(value = "relationships")
     private List<Relationship> relationships;
     
     @BsonProperty(value = "total_money_raised")
-    private double totalMoney;
+    private String totalMoney;
 
 	@BsonProperty(value = "countries")
     private List<String> countries;
+	
+	public Company() {
+		
+	}
 	
 	/**
 	 * Main constructor
@@ -46,10 +50,9 @@ public class Company {
 	 * @param totalMoney
 	 * @param countries
 	 */
-	public Company(ObjectId id, String companyName, String categoryCode, int numberEmployees, int foundedYear,
-			int description, List<Relationship> relationships, double totalMoney, List<String> countries) {
+	public Company(String companyName, String categoryCode, int numberEmployees, int foundedYear,
+			String description, List<Relationship> relationships, String totalMoney, List<String> countries) {
 		super();
-		this.id = id;
 		this.companyName = companyName;
 		this.categoryCode = categoryCode;
 		this.numberEmployees = numberEmployees;
@@ -103,11 +106,11 @@ public class Company {
 		this.foundedYear = foundedYear;
 	}
 
-	public int getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(int description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -119,11 +122,11 @@ public class Company {
 		this.relationships = relationships;
 	}
 
-	public double getTotalMoney() {
+	public String getTotalMoney() {
 		return totalMoney;
 	}
 
-	public void setTotalMoney(double totalMoney) {
+	public void setTotalMoney(String totalMoney) {
 		this.totalMoney = totalMoney;
 	}
 
@@ -133,5 +136,13 @@ public class Company {
 
 	public void setCountries(List<String> countries) {
 		this.countries = countries;
+	}
+	
+	@Override
+	public String toString() {
+		return "Company [id=" + id + ", companyName=" + companyName + ", categoryCode=" + categoryCode
+				+ ", numberEmployees=" + numberEmployees + ", foundedYear=" + foundedYear + ", description="
+				+ description + ", relationships=" + relationships + ", totalMoney=" + totalMoney + ", countries="
+				+ countries + "]";
 	}
 }
