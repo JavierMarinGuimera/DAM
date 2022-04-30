@@ -97,13 +97,16 @@ public class MyCipher {
 				System.out.println("The password used to decrypt the file is not correct.");
 				hasToDeleteOutputFile = true;
 			} finally {
+				System.out.println("");
 				os.close();
 				is.close();
 			}
 			
 			if (hasToDeleteOutputFile) {
+				System.out.println("Something went wrong. The result file gonna be deleted.");
 				wipeFile(outputFile);
 			} else {
+				System.out.println("The file used to " + (encrypt ? "encrypt".toUpperCase() : "decrypt".toUpperCase()) + " gonna be deleted.");
 				wipeFile(inputFile);
 			}
 			
@@ -124,18 +127,19 @@ public class MyCipher {
 			    byte[] data = new byte[64];
 			    int pos = 0;
 			    while (pos < length) {
+			    	System.out.print(".");
 			        random.nextBytes(data);
 			        raf.write(data);
 			        pos += data.length;
 			    }
 			    raf.close();
-			    System.out.println("Deleting file");
+			    System.out.println(".\nDeleted\n");
 			    file.delete();
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Tried to delete a file that wasnt encountered");
+			System.out.println("Tried to delete a file that wasn't encountered");
 		} catch (IOException e) {
-			System.out.println("Error sobrescribiendo en el archivo");
+			System.err.println("Error overwriting on the file!");
 		}
 	}
 }

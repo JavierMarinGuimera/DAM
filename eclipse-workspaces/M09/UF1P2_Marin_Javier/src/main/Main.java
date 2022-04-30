@@ -41,17 +41,15 @@ public class Main {
 			
 			if (!file.exists()) {
 				System.err.println("The file does not exist!");
-				return;
+			} else {
+				String password = askForX(sc, PASSWORD);
+				
+				MyCipher.encryptOrDecryptFile(MyCipher.passwordKeyGeneration(password, MyCipher.BITS_192), MyCipher.AES_CBC, file);
 			}
-			
-			String password = askForX(sc, PASSWORD);
-
-			MyCipher.encryptOrDecryptFile(MyCipher.passwordKeyGeneration(password, MyCipher.BITS_192), MyCipher.AES_CBC, file);
 			
 			if (askForX(sc, EXIT).toLowerCase().equals("n")) {
 				break;
 			}
-			
 		}
 		
 		sc.close();
@@ -68,11 +66,11 @@ public class Main {
 			return sc.nextLine();
 			
 		case EXIT:
-			System.out.print("\nDo you want to encrypt or decryptp again?(y/n)");
+			System.out.print("\nDo you want to encrypt or decrypt again?(y/n)");
 			return sc.nextLine();
 
 		default:
-			System.err.println("Ha ocurrido algo estraño en 'askForX");
+			System.err.println("Wrong option on 'askForX");
 			break;
 		}
 
