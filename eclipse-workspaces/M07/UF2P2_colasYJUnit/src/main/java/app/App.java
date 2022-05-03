@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class App {
-	public static final int MAX_LOOPS = 100000;
+	public static final int MAX_LOOPS = 1000000;
 	
 	static final String ARRAY_LIST = "ArrayList";
 	static final String LINKED_LIST = "LinkedList";

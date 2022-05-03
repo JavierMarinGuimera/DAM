@@ -1,0 +1,132 @@
+Apartado 1:
+1:
+cd receptes/
+
+2:
+git init
+
+3:
+touch pastis.txt
+
+4:
+git add pastis.txt
+git status
+
+5:
+git commit -m "Pastis.txt"
+
+6:
+echo "Primer paso: Coger leche" > pastis.txt
+
+7:
+git add pastis.txt
+git status
+
+8:
+echo "Segundo paso: Coger harina" > pastis.txt
+
+9:
+git status
+git diff pastis.txt
+
+10:
+git add pastis.txt
+git commit -m "Pastis.txt modificado"
+
+11:
+touch pastis.tmp crema.txt brioix.txt
+
+12:
+code .gitignore
+cat .gitignore
+*.tmp
+
+13:
+git add -f *.tmp
+
+14:
+git log --oneline
+
+15:
+git show 07f2264
+
+-----------------------------------------------------------------------------
+
+Apartado 2:
+1.
+Repositorio remoto creado.
+
+2.
+git add .
+git commit -m "Todo añadido"
+
+3.
+git push -u https://github.com/JavierMarinGuimera/receptes master
+
+4.
+Archivo modificado en repositorio remoto.
+
+5.
+Modifico pastis.txt desde VSCode.
+
+6.
+git add .
+git commit -m "Pastis.txt modificado en local"
+$ git push 
+To https://github.com/JavierMarinGuimera/receptes 
+! [rejected]        master -> master (fetch first) 
+error: failed to push some refs to 'https://github.com/JavierMarinGuimera/receptes' 
+hint: Updates were rejected because the remote contains work that you do 
+hint: not have locally. This is usually caused by another repository pushing 
+hint: to the same ref. You may want to first integrate the remote changes 
+hint: (e.g., 'git pull ...') before pushing again. 
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.  
+
+7.
+git pull
+code pastis
+[Accept both changes]
+
+8.
+git add .
+git commit -m "Conflicto resuelto"
+
+-------------------------------------------------------------------------------
+
+Apartado 3:
+1.
+git log --oneline
+
+2.
+git checkout 83147c
+
+3.
+git branch fix-pastis
+git checkout fix-pastis
+
+4.
+code pastis.txt
+[pastel de manzana]
+git add .
+git commit -m "Modificacion pastel"
+
+5.
+git push --set-upstream https://github.com/JavierMarinGuimera/receptes fix-pastis
+
+6.
+git checkout master
+git merge fix-pastis master
+code pastis.txt
+[Accept both changes]
+
+7.
+git add .
+git commit -m "Conflicto pastel solucionado"
+git push
+
+8.
+git branch -d fix-pastis
+
+9.
+git push --delete https://github.com/JavierMarinGuimera/receptes fix-pastis
+

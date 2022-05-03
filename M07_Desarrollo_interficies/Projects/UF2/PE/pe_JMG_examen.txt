@@ -1,0 +1,188 @@
+E1A.
+private static void ejercicioE1A(Cua cua) {
+		try {
+			cua.encuar(0);
+			cua.encuar(0);
+			cua.encuar(0);
+			cua.encuar(82);
+			cua.encuar(60);
+			cua.desencuar();
+			cua.desencuar();
+			cua.desencuar();
+			cua.encuar(52);
+			cua.encuar(42);
+			cua.encuar(14);
+		} catch (Exception e) {
+			System.out.println("Algo ha salido mal");
+		}
+	}
+
+E1B.
+Sabemos que la cola tiene el número máximo de elementos porque está llena y porque primero y último están en la misma posición.
+Al hacer el último comando la cola tiene el máximo de elementos.
+
+E1C.
+El ArrayList es mucho más rápido que las LinkedList puesto que estas últimas siempre guardan una referencia de su posición anterior y siguiente; esto hace que tarde más en desencolar porque hay un cálculo detrás.
+
+-------------------------------------------------------------------------------------
+
+E2A.
+public class Pila {
+	final int MIDA_MAX;
+	int mida;
+	public int elements[];
+
+	public Pila(int midaMax) {
+		MIDA_MAX = midaMax;
+		mida = 0;
+		elements = new int[MIDA_MAX];
+	}
+
+	public boolean esBuida() {
+		return mida == 0;
+	}
+
+	public boolean esPlena() {
+		return mida == MIDA_MAX;
+	}
+
+	public void apilar(int element) throws Exception {
+		if (this.mida == MIDA_MAX) {
+			throw new Exception("La pila és plena");
+		}
+		this.elements[mida] = element;
+		System.out.println(this.mida);
+		this.mida++;
+	}
+
+	public int desapilar() throws Exception {
+		if (this.mida == 0) {
+			throw new Exception("La cua és buida");
+		}
+		int element = this.elements[this.mida - 1];
+		this.mida--;
+		return element;
+	}
+}
+
+E2B.
+import static org.junit.Assert.*;
+
+public class Test {
+
+	@org.junit.Test
+	public void test() {
+		Pila pila = new Pila(5);
+		
+		assertEquals(true, pila.esBuida());
+		assertEquals(false, pila.esPlena());
+		
+		assertThrows(Exception.class, () -> {
+			pila.desapilar();
+		});
+		
+		try {
+			pila.apilar(0);
+			pila.apilar(1);
+			pila.apilar(2);
+			pila.apilar(3);
+			pila.apilar(4);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertThrows(Exception.class, () -> {
+			pila.apilar(0);
+		});
+		
+		try {
+			assertEquals(4, pila.desapilar());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+----------------------------------------------------
+
+E4.1.
+git init
+touch materials.txt proces.txt personal.txt
+
+E4.2.
+git add .
+git commit -m "Primer commit"
+git push -u https://github.com/JavierMarinGuimera/construccio master
+
+E4.3.
+echo sorra >  materials.txt
+git add .
+git commit -m "Segundo commit"
+
+E4.4.
+Seleccionar archivos > "Enviar a -> Archivo comprimido en ZIP".
+
+E4.5.
+echo *.zip > .gitignore
+Creamos un fichero llamado ".gitignore" que es el que se encarga de ignorar los tipos de archivos que le pongamos dentro.
+Escribimos dentro de este el texto "*.zip" que lo que hará es que todos los archivos acabados en ".zip" los ignorará y nos los añadirá al repositorio por defecto (se pueden añadir de manera forzada con el parámetro "-f").
+
+E4.6.
+echo retirar l’excés d’aigua > proces.txt
+echo peó d’obres > personal.txt
+
+E4.7.
+Acceso al archivo desde el repositorio, escribir dentro del fichero, dirigirse abajo del todo, tramitar el commit directamente en la rama master.
+
+E4.8.
+$ git push
+To https://github.com/JavierMarinGuimera/construccio
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/JavierMarinGuimera/construccio'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+E4.9.
+Javier@DESKTOP-7A0B5V6 MINGW64 ~/Desktop/construccio (master)
+$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 692 bytes | 57.00 KiB/s, done.
+From https://github.com/JavierMarinGuimera/construccio
+ * branch            master     -> FETCH_HEAD
+Auto-merging proces.txt
+CONFLICT (content): Merge conflict in proces.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Javier@DESKTOP-7A0B5V6 MINGW64 ~/Desktop/construccio (master|MERGING)
+$ code proces.txt 
+
+[
+    Al acceder a un IDE con este archivo veremos algo como esto:
+    <<<<<<< HEAD
+    retirar l’excés d’aigua
+    =======
+    remenar 5 minuts
+    >>>>>>> fafb40489a7a9f4c995b00d0c2f0b2aaab7dbd47
+
+    Para resolver el conflicto basta con eliminar las lineas que no queramos que estén (Incluyendo, evidentemente, las línea <<<...HEAD y >>>>... kdbfgkdf) o también nos saldrá en VSCode al menos una opción en la parte superior donde podremos elegir que cambios queremos guardar. Opciones:
+        - Aceptar nuestros cambios.
+        - Aceptar los cambios del repositorio remoto.
+        - Aceptar ambos cambios.
+        - Comparar cambios.
+]
+
+Javier@DESKTOP-7A0B5V6 MINGW64 ~/Desktop/construccio (master|MERGING)
+$ git add .
+warning: LF will be replaced by CRLF in proces.txt.
+The file will have its original line endings in your working directory
+
+Javier@DESKTOP-7A0B5V6 MINGW64 ~/Desktop/construccio (master|MERGING)
+$ git commit -m "Cuarto commit"
+[master 3334357] Cuarto commit
