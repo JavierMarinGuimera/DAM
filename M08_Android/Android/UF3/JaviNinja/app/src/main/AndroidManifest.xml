@@ -10,11 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JaviNinja">
         <activity
-            android:name=".ResultsActivity"
+            android:name=".InfoActivity"
             android:exported="false"
             android:screenOrientation="userLandscape"/>
         <activity
+            android:name=".ResultsActivity"
+            android:exported="false"
+            android:screenOrientation="userLandscape" />
+        <activity
             android:name=".game.Game"
+            android:exported="true"
+            android:screenOrientation="userLandscape" />
+        <activity
+            android:name=".preferences.PreferenciasActivity"
             android:exported="true"
             android:screenOrientation="userLandscape" />
         <activity

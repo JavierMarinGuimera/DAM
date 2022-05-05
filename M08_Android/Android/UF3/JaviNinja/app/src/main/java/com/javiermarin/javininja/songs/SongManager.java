@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import com.javiermarin.javininja.MainActivity;
 import com.javiermarin.javininja.R;
 import com.javiermarin.javininja.game.GameView;
 
@@ -13,7 +14,6 @@ public class SongManager extends Thread {
     private final Context context;
     private final int song;
     private boolean loop = false;
-    private float volume = 100;
 
     private MediaPlayer mp;
     private boolean playing = false;
@@ -24,8 +24,7 @@ public class SongManager extends Thread {
     }
 
     public SongManager(Context context, int song, boolean loop) {
-        this.context = context;
-        this.song = song;
+        this(context, song);
         this.loop = loop;
     }
 
@@ -51,8 +50,12 @@ public class SongManager extends Thread {
         return playing;
     }
 
-    public void muteVolume() {
-        mp.setVolume(0, 0);
+    public void setVolume(boolean isMuted) {
+        if (isMuted) {
+            mp.setVolume(0, 0);
+        } else {
+            mp.setVolume(100, 100);
+        }
     }
 
     /**
@@ -62,6 +65,8 @@ public class SongManager extends Thread {
     public void run() {
         mp = MediaPlayer.create(this.context, this.song);
         mp.start();
+
+        setVolume(MainActivity.sp.getBoolean("musicMuted", false));
 
         this.playing = true;
 

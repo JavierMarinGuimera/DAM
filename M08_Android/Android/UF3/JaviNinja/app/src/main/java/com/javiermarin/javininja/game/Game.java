@@ -36,7 +36,6 @@ public class Game extends AppCompatActivity {
         } else {
             gameSongManager.restartSong();
         }
-
     }
 
     @Override

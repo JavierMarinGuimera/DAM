@@ -18,6 +18,7 @@ import com.javiermarin.javininja.R;
 import com.javiermarin.javininja.dialog.DialogManager;
 import com.javiermarin.javininja.songs.SongManager;
 
+import java.util.HashSet;
 import java.util.Vector;
 
 public class GameView extends View {
@@ -25,7 +26,7 @@ public class GameView extends View {
      * Variables:
      */
     public Vector<GameGraphics> objetivos;
-    public int numObjetivos = 2;
+    public int numObjetivos = Integer.parseInt(MainActivity.sp.getString("totalEnemies", "2"));
 
     /**
      * Ninja:
@@ -102,8 +103,10 @@ public class GameView extends View {
         }
 
         // Inicializamos el ninja:
+        String pathNinja = MainActivity.sp.getString("ninjas", "ninja02");
+        int id = getResources().getIdentifier(pathNinja, "drawable", context.getPackageName());
         drawableNinja = context.getResources().
-                getDrawable(R.drawable.ninja01, null);
+                getDrawable(id, null);
         ninja = new GameGraphics(this, drawableNinja);
 
         // Inicializamos el cuchillo:
@@ -354,13 +357,6 @@ public class GameView extends View {
 
         score += 5;
 
-        if (scorePoints == null) {
-            scorePoints = gameActivity.findViewById(R.id.scorePoints);
-        } else {
-            // TODO - No consigo recoger el textview para los puntos. Siempre es null. :(
-//            scorePoints.setText(Integer.toString(score));
-        }
-
         if (objetivos.size() == 0) {
             endGame();
         }
@@ -376,14 +372,11 @@ public class GameView extends View {
 
     private void endGame() {
         DialogManager.confirmDialog(this.getContext(), score, gameActivity);
-        // TODO - Necesito que se haga finish SOLO cuando el usuario acepta el dialog
     }
 
     public void saveResults() {
-        SharedPreferences sharedPref = this.getContext().getSharedPreferences(MainActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        editor.putInt(MainActivity.userName, score);
-        editor.apply();
+        HashSet<String> set = (HashSet<String>) MainActivity.sp.getStringSet("scores", new HashSet<>());
+        set.add(Integer.toString(score));
+        MainActivity.sp.edit().putStringSet("scores", set).commit();
     }
 }

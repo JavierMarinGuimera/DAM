@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:key="preferencias_principal"
+    android:layout="@layout/config_layout"
+    android:title="Categoría 1">
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="musicMuted"
+        android:summary="Mute music on the entire app."
+        android:title="Mute music" />
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="Select ninja"
+        android:entries="@array/ninjasNames"
+        android:entryValues="@array/ninjasUris"
+        android:key="ninjas"
+        android:summary="This will be your ninja skin on the game"
+        android:title="Choose your ninja skin" />
+    <EditTextPreference
+        android:defaultValue=""
+        android:dialogTitle="Enter a value"
+        android:inputType="text"
+        android:key="totalEnemies"
+        android:summary="Enter the enemies count"
+        android:title="Enemies" />
+    <EditTextPreference
+        android:defaultValue="3"
+        android:dialogTitle="Enter a value"
+        android:inputType="text"
+        android:key="username"
+        android:summary="Enter your player's name"
+        android:title="Name" />
+</PreferenceScreen>

@@ -26,11 +26,11 @@ public class DialogManager {
             dialog.setView(userName);
 
             dialog.setPositiveButton(R.string.dialogAccept, (dialogInterface, i) -> {
-                MainActivity.userName = userName.getText().toString();
+                MainActivity.sp.edit().putString(userName.getText().toString(), "").commit();
             });
 
             dialog.setNegativeButton(R.string.dialogCancel, (dialogInterface, i) -> {
-                MainActivity.userName = "";
+                MainActivity.sp.edit().putString("", "").commit();
             });
 
             dialog.show();

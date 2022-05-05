@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ninjasNames">
+        <item>Ninja 1</item>
+        <item>Ninja 2</item>
+        <item>Ninja 3</item>
+    </string-array>
+    <string-array name="ninjasUris">
+        <item>ninja01</item>
+        <item>ninja02</item>
+        <item>ninja03</item>
+    </string-array>
+</resources>

@@ -8,13 +8,18 @@
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/background_background.xml" value="0.3796875" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/ic_arrow_left_icon.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/ic_arrow_right_icon.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/ic_crossicon.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/ic_menuicon.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/drawable/rounded_button.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_game.xml" value="0.3385416666666667" />
-        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_results.xml" value="0.5161458333333333" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_info.xml" value="0.33" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/activity_results.xml" value="0.33" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/layout/config_layout.xml" value="0.36354166666666665" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/Javier/Desktop/DAM/M08_Android/Android/UF3/JaviNinja/app/src/main/res/xml/preferences.xml" value="0.36354166666666665" />
       </map>
     </option>
   </component>

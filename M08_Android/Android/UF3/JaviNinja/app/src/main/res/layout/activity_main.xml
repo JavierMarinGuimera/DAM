@@ -75,19 +75,22 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menuLayout"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="horizontal"
+        android:translationX="-500px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="180dp"
+            android:layout_width="500px"
             android:layout_height="match_parent"
             android:background="#40000000"
             android:orientation="vertical"
             android:padding="20dp"
+            android:translationX="0px"
             android:visibility="visible">
 
             <TextView
@@ -100,13 +103,13 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/infoButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Información" />
+                android:text="Information" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/configButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Configuración" />
@@ -121,11 +124,13 @@
             android:paddingTop="20dp">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/openCloseButton"
                 android:layout_width="47dp"
                 android:layout_height="45dp"
-                android:backgroundTint="#00FFFFFF"
-                app:srcCompat="@drawable/ic_arrow_right_icon" />
+                android:background="#00FFFFFF"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:srcCompat="@drawable/ic_menuicon" />
         </LinearLayout>
 
     </LinearLayout>
