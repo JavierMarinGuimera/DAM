@@ -15,14 +15,5 @@ public class PreferenciasActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new
                         PreferenciasFragment()).commit();
-
-        sp.registerOnSharedPreferenceChangeListener((sharedPreferences, s) -> {
-            try {
-                Integer.parseInt(sp.getString("totalEnemies", "0"));
-            } catch (Exception e) {
-                Toast.makeText(getBaseContext(), "The number of enemies must to be a number!", Toast.LENGTH_SHORT).show();
-                sp.edit().putString("totalEnemies", "0").commit();
-            }
-        });
     }
 }

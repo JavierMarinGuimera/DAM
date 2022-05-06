@@ -10,7 +10,7 @@
         android:summary="Mute music on the entire app."
         android:title="Mute music" />
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="ninja01"
         android:dialogTitle="Select ninja"
         android:entries="@array/ninjasNames"
         android:entryValues="@array/ninjasUris"
@@ -18,14 +18,14 @@
         android:summary="This will be your ninja skin on the game"
         android:title="Choose your ninja skin" />
     <EditTextPreference
-        android:defaultValue=""
+        android:defaultValue="2"
         android:dialogTitle="Enter a value"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:key="totalEnemies"
-        android:summary="Enter the enemies count"
+        android:summary="Enter the count of enemies"
         android:title="Enemies" />
     <EditTextPreference
-        android:defaultValue="3"
+        android:defaultValue=""
         android:dialogTitle="Enter a value"
         android:inputType="text"
         android:key="username"

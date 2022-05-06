@@ -2,6 +2,8 @@ package com.javiermarin.javininja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -21,7 +24,6 @@ import com.javiermarin.javininja.preferences.PreferenciasActivity;
 import com.javiermarin.javininja.songs.SongManager;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String SHARED_PREFERENCES = "com.javiermarin.javininja_preferences";
     public static SharedPreferences sp;
     private static boolean isPreferenceActivityLoading = false;
 
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (isPreferenceActivityLoading) {
-            Toast.makeText(this, "Vengo de preferencias", Toast.LENGTH_SHORT).show();
             isPreferenceActivityLoading = false;
             checkPreferences();
             return;
@@ -105,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void startGame() {
         if (!sp.getString("username", "").equals("")) {
-            Intent gameIntent = new Intent(this, Game.class);
-            startActivity(gameIntent);
+            startActivity(new Intent(this, Game.class));
         } else {
-            DialogManager.inputDialog(this);
+            Toast.makeText(this, "Introduce your username", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, PreferenciasActivity.class));
         }
     }
 

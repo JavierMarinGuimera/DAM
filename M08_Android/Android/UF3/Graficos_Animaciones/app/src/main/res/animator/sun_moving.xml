@@ -7,7 +7,7 @@
         android:duration="7500"
         android:propertyName="x"
         android:valueFrom="1200"
-        android:valueTo="-200"
+        android:valueTo="@android:dimen/thumbnail_width"
         android:valueType="floatType" />
     <objectAnimator
         android:duration="7500"

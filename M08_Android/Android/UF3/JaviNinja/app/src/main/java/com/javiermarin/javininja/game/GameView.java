@@ -22,11 +22,12 @@ import java.util.HashSet;
 import java.util.Vector;
 
 public class GameView extends View {
+    public static final int MAX_PARTES_OBJETIVO = 7;
     /**
      * Variables:
      */
     public Vector<GameGraphics> objetivos;
-    public int numObjetivos = Integer.parseInt(MainActivity.sp.getString("totalEnemies", "2"));
+    public int numObjetivos = (!MainActivity.sp.getString("totalEnemies", "2").equals("") ? Integer.parseInt(MainActivity.sp.getString("totalEnemies", "2")) : 2);
 
     /**
      * Ninja:
@@ -51,6 +52,7 @@ public class GameView extends View {
     private final static int PERIODO_PROCESO = 50;
     // Cuándo se realizó el último proceso
     private long ultimoProceso = 0;
+    private boolean ended = false;
 
     /**
      * Posicionamiento:
@@ -69,15 +71,13 @@ public class GameView extends View {
     /**
      * Partes objetivo aniquilado:
      */
-    private final Drawable[] partesObjetivo = new Drawable[7];
+    private final Drawable[] partesObjetivo = new Drawable[MAX_PARTES_OBJETIVO];
 
     /**
      * Game Over
      */
     private Activity gameActivity;
     private int score = 0;
-    private TextView scorePoints;
-    public static boolean confirmed = false;
     private Drawable drawableNinja, drawableCuchillo, drawableEnemigo;
 
     /**
@@ -104,6 +104,7 @@ public class GameView extends View {
 
         // Inicializamos el ninja:
         String pathNinja = MainActivity.sp.getString("ninjas", "ninja02");
+        System.out.println(pathNinja);
         int id = getResources().getIdentifier(pathNinja, "drawable", context.getPackageName());
         drawableNinja = context.getResources().
                 getDrawable(id, null);
@@ -278,7 +279,12 @@ public class GameView extends View {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     synchronized protected void actualizaMovimiento() {
+        if (ended) {
+            return;
+        }
+
         long instant_actual = System.currentTimeMillis();
         // No facis res si el període de procés no s'ha complert.
         if (ultimoProceso + PERIODO_PROCESO > instant_actual) {
@@ -303,6 +309,10 @@ public class GameView extends View {
         ninja.incrementaPos(retardo);
         for (GameGraphics objectiu : objetivos) {
             objectiu.incrementaPos(retardo);
+            if (ninja.verificaColision(objectiu)) {
+                ended = true;
+                endGame();
+            }
         }
 
         // Actualitzem posició de ganivet
@@ -337,10 +347,8 @@ public class GameView extends View {
 
     @SuppressLint("SetTextI18n")
     private void destruyeObjetivo(int i) {
-        int numPartes = 3;
-
         if (objetivos.get(i).getDrawable() == drawableEnemigo) {
-            for (int n = 0; n < numPartes; n++) {
+            for (int n = 0; n < MAX_PARTES_OBJETIVO; n++) {
                 GameGraphics parteObjetivo = new GameGraphics(this, partesObjetivo[n]);
                 parteObjetivo.setPosX(objetivos.get(i).getPosX());
                 parteObjetivo.setPosY(objetivos.get(i).getPosY());
