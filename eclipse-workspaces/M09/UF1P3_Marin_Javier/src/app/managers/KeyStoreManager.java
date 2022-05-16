@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.util.Base64;
 
@@ -61,13 +62,15 @@ public class KeyStoreManager {
         try {
             File outputFile = new File(KEY_STORE_FILE_SOLVED);
 
-            FileInputStream fis = new FileInputStream(inputFile);
+            // 
+            InputStream fis = Base64.getDecoder().wrap(new FileInputStream(inputFile));
             FileOutputStream fos = new FileOutputStream(outputFile);
 
             byte[] buffer = new byte[256];
+            int readed = -1;
 
-            while (fis.read(buffer) != -1) {
-                fos.write(Base64.getEncoder().encode(buffer));
+            while ((readed = fis.read(buffer)) != -1) {
+                fos.write(buffer, 0, readed);
             }
 
             fis.close();

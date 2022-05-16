@@ -48,7 +48,7 @@ public class Validator {
 
             PublicKey pk = (PublicKey) ks.getCertificate(KeyStoreManager.KEY_STORE_ALIAS);
 
-            System.out.println(file.getAbsolutePath() + " is being signed.");
+            System.out.println(file.getAbsolutePath() + " is being validated.");
             System.out.println("Result sign: " + SignManager.validateSignature(file, sign.getBytes(), pk));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
